@@ -6,9 +6,14 @@ on:
     tags:
       - '*'
 
+permissions:
+  contents: write
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
 
     steps:
       # Step 1: Check out your code
