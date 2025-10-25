@@ -1,0 +1,220 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathrsfs}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[italian]{babel}
+
+\setlength{\parindent}{0pt}
+
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Zp}{\Z/p\Z}
+\newcommand{\Zq}{\Z/q\Z}
+\newcommand{\Zn}{\Z/n\Z}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Fp}{\F_p}
+\newcommand{\Fq}{\F_q}
+\newcommand{\Fpn}{\F_{p^n}}
+\newcommand{\Fpm}{\F_{p^m}}
+
+\newcommand{\tri}{\vartriangleleft}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\grp}[1]{\langle #1 \rangle}
+
+\renewcommand{\ker}{\text{Ker}}
+\newcommand{\imm}{\text{Im}}
+\newcommand{\Inn}{\text{Inn}}
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\ord}{\text{ord}}
+\renewcommand{\char}{\text{char}}
+\newcommand{\sgn}{\text{sgn}}
+% ancora da sostituire:
+\newcommand{\Gal}{\text{Gal}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\id}{\text{id}}
+\newcommand{\Fix}{\text{Fix}}
+\newcommand{\orb}{\text{orb}}
+\newcommand{\stab}{\text{stab}}
+\newcommand{\GL}{\text{GL}}
+
+% siamo consistenti e usiamo le frecce corte
+\renewcommand{\iff}{\Leftrightarrow}
+\renewcommand{\implies}{\Rightarrow}
+\renewcommand{\impliedby}{\Leftarrow}
+
+% per la divisibilità usiamo | o \mid ?
+
+% c'è un TODO nella proposizione "(*) automorfismi", i.e. Aut(Sn) = Sn
+
+% soluzione ottima per gestire eventuali proposizioni senza titolo (i.e. con argomento opzionale):
+% % Define the 'definition' environment
+% \newenvironment{definition}[1][Definition] % Optional argument for custom title
+% {
+%     \par\vspace{1em} % Start with some vertical space
+%     \noindent % Suppress indentation
+%     \textbf{#1.} \itshape % Bold title and italic content
+% }
+% {
+%     \par\vspace{1em} % End with vertical space
+% }
+% soluzione che funziona: "proposition2"
+
+\theoremstyle{plain}
+
+\newenvironment{definition}[1]{\par \textbf{Definizione - #1:}}{\par}
+\newenvironment{proposition}[1]{\par \textbf{Proposizione - #1:}}{\par}
+\newenvironment{proposition2}{\par \textbf{Proposizione:}}{\par}
+\newenvironment{theorem}[1]{\par \textbf{Teorema - #1:}}{\par}
+\newenvironment{lemma}[1]{\par \textbf{Lemma - #1:}}{\par}
+\newenvironment{lemma2}{\par \textbf{Lemma:}}{\par}
+\newenvironment{corollary}[1]{\par \textbf{Corollario - #1:}}{\par}
+\newenvironment{corollary2}{\par \textbf{Corollario:}}{\par}
+\newenvironment{observation}[1]{\par \textbf{Osservazione - #1:}}{\par}
+\newenvironment{example}{\par \textbf{Esempio:}}{\par}
+\newenvironment{example2}[1]{\par \textbf{Esempio - #1:}}{\par}
+\newenvironment{exercise}{\par \textbf{Esercizio:}}{\par}
+\newenvironment{solution}{\par \begin{changemargin}{0.5cm}{0cm} \underline{Soluzione:} }{\end{changemargin}}
+\renewenvironment{proof}{\par \begin{changemargin}{0.5cm}{0cm} \underline{dim.} }{\end{changemargin}}
+\newenvironment{bdef}{\par \begin{changemargin}{0.5cm}{0cm} \underline{buona def.} }{\end{changemargin}}
+
+
+\newtheorem*{theorem*}{Teorema}
+
+
+\setstretch{1.2}
+\geometry{
+    textheight=9in,
+    textwidth=6.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ------------------------------------------------------------------------------
+\begin{titlepage}
+    \begin{center}
+        {\bfseries
+        \textbf{}
+        \vspace{2.0cm}
+        
+		{ \LARGE
+        \HRule{1.5pt} \\
+		Dispense di Algebra 1
+		\HRule{2.0pt} \\
+        }
+        
+        \large
+        \vspace{0.6cm} Università di Pisa \\
+        \vspace{0.6cm} Basate sui corsi tenuti dai professori \\ 
+        Ilaria Del Corso e Davide Lombardo (a.a 2023/2024)\\
+        Ilaria Del Corso e Leonardo Patimo (a.a. 2024/2025)
+        }
+		 \vspace*{7\baselineskip} 
+
+
+        \vfill
+        { \large \textbf{Daria Pasqualetti, Lorenzo Ferrari} }
+
+        \vspace{0.8cm}
+
+        {\normalsize Le dispense che avete in mano nascono dagli appunti di Daria dell'a.a. 2023/2024, l'anno successivo Lorenzo le ha integrate sulla base del nuovo corso. I due programmi erano di fatto identici.
+        Sono inclusi tutti$\pm \varepsilon$ i fatti di teoria, gli esercizi lunghi o interessanti svolti a esercitazione e qualche fatto proveniente da esami o dal libro ``Esercizi scelti di Algebra. Volume 2.'' di  R. Chirivì, I. Del Corso, R. Dvornicich.
+
+        \smallbreak
+        Per segnalare typo:
+        \href{mailto:d.pasqualetti3@studenti.unipi.it}{d.pasqualetti3@studenti.unipi.it}
+        $ \lor $
+        \href{mailto:l.ferrari41@studenti.unipi.it}{l.ferrari41@studenti.unipi.it}.}
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+
+\input{src/gruppi}
+\newpage
+\input{src/anelli}
+\newpage
+\input{src/campi}
+
+\end{document}
+
+\subsection{Costruzioni con riga e compasso}
+
+\newpage
+\begin{minipage}{0.5\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&&LF\ar{dl}\ar{dr}\\
+&L \ar{dr} & & F \ar{dl}\\
+&& K
+\end{tikzcd}  
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+\textbf{Teorema - composto di estensioni finite:} dato il diagramma a lato, vale $L/K$ finita  e $F/K$ finita $\Rightarrow LF/F$ finita.
+\end{minipage}\hfill
+ \begin{proof}
+ TODO
+\end{proof}
+
+
+\begin{tikzcd}[every arrow/.append style={dash}]
+&&D_4\ar[d]\ar[dl]\ar[dr]\\
+&\langle r^2,f \rangle \ar[d]\ar[dl]\ar[dr]&\langle r\rangle\ar[d] &\langle r^2,rf\rangle\ar[d]\ar[dl]\ar[dr]\\
+\langle f\rangle\ar[rrd]&\langle r^2,f\rangle\ar[rd]&\langle r^2\rangle\ar[d]&\langle rf\rangle\ar[ld]&\langle r^3f\rangle\ar[lld]\\
+&&\langle e\rangle
+\end{tikzcd}
+
+\begin{minipage}{0.2\textwidth}  
+\begin{tikzcd}
+G \arrow{r}{\varphi} \arrow{d}{\pi_N} & G'\\
+G/N \arrow{ur}[swap]{f}
+\end{tikzcd}
+\end{minipage}\hfill
+\begin{minipage}{0.8\textwidth}  
+\end{minipage}\hfill
+
+
+% ------------------------------------------------------------------------------
+% Reference and Cited Works
+% ------------------------------------------------------------------------------
+
+%\bibliographystyle{IEEEtran}
+%\bibliography{References.bib}
+
+% ------------------------------------------------------------------------------
+
+

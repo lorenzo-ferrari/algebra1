@@ -1,0 +1,840 @@
+\section{Teoria dei campi}
+Dove non diversamente specificato $\Omega$ è un campo qualsiasi con operazioni $+$ e $\cdot$ (il cui simbolo verrà omesso). L'elemento neutro della somma sarà indicato con $0$, quello del prodotto con $1$. $K,L,F,E$ saranno sempre sottocampi del campo ambiente $\Omega$. 
+
+\subsection{Definizioni e richiami di Aritmetica}
+\begin{definition}{estensione di campo}
+    Si dice che $\Omega/K$ è un'estensione di campo (o semplicemente ``estensione'') di $K$ se $K$ è un sottocampo di $\Omega$. Si indica con $[\Omega : K] = \dim_K \Omega$ la dimensione di $\Omega$ come spazio vettoriale su $K$. L'estensione si dice finita se $[\Omega : K] < +\infty$.
+\end{definition}
+\begin{definition}{estensione semplice}
+    dato $\alpha \in \Omega$ si indica con $K(\alpha)$ il sottocampo di $\Omega$ minimo per inclusione che contiene sia $K$ che $\alpha$.
+\end{definition}
+\begin{definition}{estensione generata}
+    dato $S\subseteq \Omega$, si indica con $K(S) = \bigcap_{\substack{K \subseteq K' \subseteq \Omega \\ K' \text{campo}}} F$ l'estensione generata da S su K.
+\end{definition}
+\begin{definition}{composto di campi}
+    dati $L,F$, si indica con $LF$ il minimo campo che li contiene entrambi, ossia $L(F) = F(L)$. Si dimostra
+    \[
+        F(L) = \left\{ \frac{p(\ell_1, \dots, \ell_n)}{q(\ell_1, \dots, \ell_n)} : \ell_i \in L, n \in \N, p,q \in F[x_1, \dots, x_n], q(\ell_1, \dots, \ell_n) \neq 0 \right\}.
+    \]
+\end{definition}
+
+\begin{minipage}{0.7\textwidth}
+    Sia $\alpha \in \Omega$. Indichiamo con $\varphi_{\alpha}$ l'omomorfismo di valutazione in $\alpha$, ossia $\varphi_{\alpha}: K[x] \rightarrow K[\alpha]$ tale che $\varphi_{\alpha}(f(x) \mapsto f(\alpha))$. Poiché $K[x]$ è un PID, $\ker(\varphi_\alpha)$ è principale, ossia $\exists \mu_{\alpha}(x) \in K[x]$ tale che $\ker(\varphi_\alpha) = (\mu_\alpha(x))$.
+\end{minipage}\hfill
+\begin{minipage}{0.3\textwidth}  
+    \begin{center}
+    \begin{tikzcd}
+    K[x] \arrow{r}{\varphi_{\alpha}} \arrow{d}{\pi} & K(\alpha)\\
+    \frac{K[x]}{\ker(\varphi_\alpha)} \arrow{ur}[swap]{\sim}
+    \end{tikzcd}
+    \end{center}
+\end{minipage}\hfill
+
+\begin{definition}{trascendente}
+    se $\mu_{\alpha}(x)$ definito sopra è il polinomio nullo, $\alpha$ si dice trascendente su $K$.
+    In questo caso $K(\alpha) \cong K[x]$ e $\alpha$ si comporta come un'indeterminata: un elemento che non si ``combina'' con nessun elemento diverso da se stessa.
+    L'indeterminata $x$ è un elemento trascendente su qualsiasi campo.
+\end{definition}
+\begin{definition}{algebrico}
+    se $\mu_{\alpha}(x)$ non è il polinomio nullo, $\alpha$ si dice algebrico su $K$.
+\end{definition}
+\begin{definition}{polinomio minimo}
+    se $\alpha$ è algebrico, indichiamo con $\mu_{\alpha}(x)$ il generatore monico di $\ker(\varphi_\alpha)$. Esso coincide con l'unico polinomio $(i)$ monico, $(ii)$ irriducibile che $(iii)$ si annulla in $\alpha$.
+    $\mu_{\alpha}(x)$ così definito è detto il polinomio minimo di $\alpha$ su $K$. Vale che $\deg \mu_\alpha(x) = \dim_K \frac{K[x]}{(\mu_{\alpha}(x))} = [K(\alpha) : K]$
+\end{definition}
+\begin{definition}{indipendenza algebrica}
+    Un sottoinsieme $S \subset \Omega$ si dice algebricamente indipendente sul campo $K \subset \Omega$ se gli elementi di $S$ non soddisfano nessuna equazione polinomiale non banale a coefficienti in $K$. Dunque un singolo elemento $\alpha$ è algebricamente indipendente su $K$ sse è trascendente.
+\end{definition}
+\begin{definition}{estensione algebrica}
+    $L/K$ si dice algebrica se ogni elemento di $L$ è algebrico su $K$.
+\end{definition}
+\begin{proposition}{estensione finita è algebrica}
+    se $L/K$ è finita di grado $n$, dato $\alpha \in L$ gli elementi $1,\alpha,\dots,\alpha^n$ sono linearmente dipendenti, dunque esiste un polinomio di grado al più $n$ che si annulla in $\alpha$ (la combinazione lineare delle potenze di $\alpha$ fino a $n$ che dà come risultato $0$).
+\end{proposition}
+
+\subsection{Proprietà delle estensioni di campo}
+\begin{minipage}{0.9\textwidth}
+\begin{theorem}{torri di estensioni finite}
+    dato il diagramma a lato, vale $L/K$ finita $\iff L/F$ e $F/K$ sono finite. Inoltre in questo caso $[L:K] = [L:F][F:K]$.
+\end{theorem}
+\end{minipage}\hfill
+\begin{minipage}{0.1\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&L\ar{d}\\
+&F\ar{d}\\
+&K
+\end{tikzcd}  
+\end{minipage}\hfill
+\begin{proof}
+    Se $L/K$ è finita, poiché $F \subseteq L$ anche $F/K$ è finita. Inoltre una qualsiasi $K$-base per $L/K$ è un $F$-insieme di generatori per $L/F$, quindi anche $L/F$ finita. Nell'altro verso, date $L/F$ e $F/K$ entrambe finite consideriamo due basi $\alpha_1,\dots, \alpha_n \in L$ e $\beta_1, \dots, \beta_m \in F$ tali che $L = F(\alpha_1,\dots, \alpha_n)$ e $F = K(\beta_1, \dots, \beta_m)$. Mostriamo che $\{\alpha_i \beta_j : 1 \le i \le n, 1 \le j \le m \}$ è una base di $L/K$.
+    \begin{itemize}
+        \item generano: sia $\gamma \in L$; per $\{\alpha_i\}$ base $\exists f_1,\dots,f_n \in F \ \gamma = \sum_{i=1}^n f_i \alpha_i$; analogamente per $\{\beta_i\}$ base $\forall f_i \ \exists k_{i,1},\dots,k_{i,m} \in K \ f_i =\sum_{j=1}^m k_{i,j} \beta_j$. Mettendo insieme le varie espressioni: $\gamma = \sum_{i=1}^n \alpha_i\sum_{j=1}^m k_{i,j} \beta_j = \sum_{i=1}^n\sum_{j=1}^m k_{i,j}\alpha_i\beta_j$ e quindi $\alpha_i\beta_j$ generano
+        \item lineare indipendenza: se $0 = \sum_{i=1}^n\sum_{j=1}^m k_{i,j}\alpha_i\beta_j = \sum_{i=1}^n \alpha_i\sum_{j=1}^m k_{i,j} \beta_j$ si ha per lineare indipendenza degli $\alpha_i$ che $\forall i = 1,\dots, n \ \sum_{j=1}^m k_{i,j} \beta_j = 0$ e allora per lineare indipendenza dei $\beta_j \ \forall i=1,\dots,n \ \forall j = 1,\dots, m \ k_{i,j} = 0$.
+    \end{itemize}
+    Questo dimostra che l'estensione è finita e la moltiplicatività.
+\end{proof}
+\begin{minipage}{0.7\textwidth}
+\begin{theorem}{shift di estensioni finite}
+    dato il diagramma a lato, vale $L/K$ finita $\Rightarrow LF/F$ finita. Inoltre,  $[LF : F] \leq  [L:K]$.
+\end{theorem}
+\begin{proof}
+    Se $\alpha_1,\dots, \alpha_n$ è una base per $L/K$, allora genera $LF/F$.
+\end{proof}
+\end{minipage}\hfill
+\begin{minipage}{0.3\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&&LF\ar{dl}\ar{dr}\\
+&L \ar{dr} & & F \ar{dl}\\
+&& K
+\end{tikzcd}  
+\end{minipage}\hfill
+\begin{minipage}{0.7\textwidth}
+\begin{theorem}{composto di estensioni finite}
+    dato il diagramma a lato, vale $L/K$ finita  e $F/K$ finita $\Rightarrow LF/F$ finita. Inoltre, $[LF : K] \leq [L:K][L:F]$.
+\end{theorem}
+\begin{proof}
+    Per shift, da $L/K$ finita, segue $LF/F$ finita e $[LF:F]\leq [L:K]$. Allora per torri da $LF/F$ e $F/K$ finite segue $LF/K$ finita e $[LF:K] = [LF:F][F:K] \leq [L:K][F:K]$.
+\end{proof}
+\end{minipage}\hfill
+\begin{minipage}{0.3\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&&LF\ar{dl}\ar{dd}\ar{dr}\\
+&L \ar{dr} & & F \ar{dl}\\
+&& K
+\end{tikzcd}
+\end{minipage}\hfill
+
+\vspace{0.5cm}
+
+\begin{proposition2}
+    Un'estensione finitamente generata da elementi algebrici è algebrica.
+\end{proposition2}
+\begin{proof}
+    Basta notare che gli elementi algebrici hanno grado finito sul campo base e quindi un'estensione generata da un numero finito di essi ha grado finito (al più il prodotto dei gradi). L'estensione è finita, dunque algebrica.
+\end{proof}
+
+\begin{minipage}{0.9\textwidth}  
+\begin{theorem}{torri di estensioni algebriche}
+    dato il diagramma a lato, vale $L/K$ algebrica $\iff L/F$ e $F/K$ sono algebriche.
+\end{theorem}
+\end{minipage}\hfill
+\begin{minipage}{0.1\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&L\ar{d}\\
+&F\ar{d}\\
+&K
+\end{tikzcd}  
+\end{minipage}\hfill
+\begin{proof}
+    Se $L/K$ è algebrica e $\alpha \in L$ allora $\alpha$ algebrico su $K$, quindi anche su $F$ perché almeno un polinomio in $F[x]$ (il polinomio minimo di $\alpha$ su $K$) si annulla in $\alpha$. Quindi $L/F$ algebrica. $F/K$ è algebrica poiché $F \subseteq L$ e $L/K$ è algebrica.
+    
+    Nel verso opposto, dato $\alpha \in L$ algebrico su $F$ sia $f(x) = \sum_{i=0}^n a_ix^i$ il suo polinomio minimo su $F$. Allora $\alpha$ è algebrico su $K(a_0,\dots, a_n) \subseteq F$, cioè $K(\alpha, a_0, \dots, a_n)/K(a_0, \dots, a_n)$ finita. Ma $K(a_0,\dots, a_n)$ è un'estensione di $K$ finitamente generata da elementi algebrici, quindi finita. Per torri allora anche $K(\alpha, a_0, \dots, a_n)/K$ è finita, quindi algebrica. In particolare $\alpha$ è algebrico su $K$.
+\end{proof}
+\begin{minipage}{0.7\textwidth}
+\begin{theorem}{shift di estensioni algebriche}
+    dato il diagramma a lato, vale $L/K$ algebrica $\Rightarrow LF/F$ algebrica.
+\end{theorem}
+\begin{proof}
+    Dato $\ell \in L$, se $f(x) \in K[x]$ è il polinomio minimo di $\ell$ su $K$, esso è un polinomio di $F[x]$ che si annulla in $\ell$, quindi $\ell$ è algebrico su $F$. Ogni elemento $\alpha \in F(L)$ è rapporto di funzioni razionali di finiti elementi $\ell_1, \dots, \ell_n \in L$ a coefficienti in $F$, dunque $\alpha \in F(\ell_1, \dots, \ell_n)$, che è algebrica poiché gli $\ell_i$ sono algebrici, dunque $\alpha$ è algebrico su $F$ e $F(L) = LF$ è un'estensione algebrica di $F$.
+\end{proof}
+\end{minipage}\hfill
+\begin{minipage}{0.3\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&&LF\ar{dl}\ar{dr}\\
+&L \ar{dr} & & F \ar{dl}\\
+&& K
+\end{tikzcd}  
+\end{minipage}\hfill
+
+\begin{minipage}{0.7\textwidth}
+\begin{theorem}{composto di estensioni algebriche}
+    dato il diagramma a lato, vale $L/K$ algebrica  e $F/K$ algebrica $\Rightarrow LF/K$ algebrica.
+\end{theorem}
+\begin{proof}
+    Per shift da $L/K$ algebrica segue $LF/F$ algebrica. Per torri da $LF/F$ e $F/K$ algebriche segue $LF/K$ algebrica.
+\end{proof}
+\end{minipage}\hfill
+\begin{minipage}{0.3\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&&LF\ar{dl}\ar{dd}\ar{dr}\\
+&L \ar{dr} & & F \ar{dl}\\
+&& K
+\end{tikzcd}  
+\end{minipage}\hfill
+
+\begin{definition}{campo algebricamente chiuso}
+    $K$ si dice algebricamente chiuso se ogni polinomio non costante in $K[x]$ ha una radice in $K$. Si verifica $K$ algebricamente chiuso sse gli unici irriducibili di $K[x]$ sono i polinomi di grado 1 e sse ogni polinomio in $K[x]$ si spezza nel prodotto di fattori di grado 1.
+\end{definition}
+\begin{definition}{chiusura algebrica}
+    Un campo algebricamente chiuso $\overline K$ si dice una chiusura algebrica di $K$ se $K \subseteq \overline K$ e $\overline K/K$ è algebrica.
+\end{definition}
+\begin{theorem}{esistenza e unicità della chiusura algebrica}
+    Per ogni campo $K$ esiste una chiusura algebrica, unica a meno di isomorfismo (cioè date due chiusure algebriche esiste tra esse un isomorfismo che ristretto a $K$ sia l'identità).
+\end{theorem}
+\begin{proof}
+    Ad algebra 2.
+\end{proof}
+\begin{theorem}{algebrici su un campo}
+     Gli elementi algebrici su un campo $K$ formano a loro volta un campo.
+\end{theorem}
+\begin{proof}
+    Sia $K' = \{ \alpha \in \overline K : \alpha \text{ algebrico su } K\}$. Presi $\alpha, \beta \in K'$, $K(\alpha, \beta)$ è finita, $\alpha + \beta, \alpha\beta, \frac{\alpha}{\beta}$ appartengono a $K(\alpha, \beta)$, quindi hanno grado finito su $K$, quindi sono algebrici e appartengono a $K'$, che quindi è un campo.
+\end{proof}
+\begin{theorem}{chiusura algebrica di $\Q$}
+    $\overline{\Q} = \{ \alpha \in \C : \alpha \text{ algebrico su } \Q\}$
+\end{theorem}
+\begin{proof}
+    $\overline{\Q}$ è un campo per il teorema precedente, $\overline{\Q}/\Q$ algebrica segue dalla definizione. Mostriamo che $\overline \Q$ è algebricamente chiuso. Siano $f(x) \in \overline{\Q}[x]$ e $\alpha$ una sua radice nella chiusura algebrica di $\overline{\Q}$. Per definzione $\overline{\Q}(\alpha)/\overline{\Q}$ è algebrica, quindi per torri anche $\overline{\Q}(\alpha) / \Q$ è algebrica, cioè $\alpha$ algebrico su $\Q$ e $\alpha \in \overline{\Q}$.
+\end{proof}
+\begin{definition}{campo di spezzamento}
+    sia $\mathscr{F} = \{f_i : i \in I\}$ una famiglia di polinomi in $K[x]$. Il campo di spezzamento di $\mathscr{F}$ su $K$ è il minimo sottocampo di $\overline{K}$ che contiene tutte le radici di tutti i polinomi in $\mathscr{F}$.
+\end{definition}
+
+\subsection{Criterio della derivata e campi finiti}
+
+\begin{proposition}{criterio della derivata}
+    $f(x) \in K[x]$ ha radici multiple in $\overline{K}$ $\Leftrightarrow$ $(f(x),f'(x)) \neq 1$.
+\end{proposition}
+\begin{proof}
+    ($\Leftarrow$) Il caso $f = 0$ non ha bisogno di ulteriore analisi. Se $f \neq 0$, $(f(x), f'(x))$ ha grado positivo, sia allora $\alpha \in \overline{K}$ una sua radice. Scriviamo $f(x) = (x - \alpha)g(x) \in \overline{K}[x]$ e deriviamo $f$ con la regola di Leibniz, valutando $f'$ in $\alpha$ si ha $0 = f'(\alpha) = g(\alpha) + (\alpha - \alpha)g'(x)$, da cui $g(\alpha) = 0$, cioè $g(x) = (x - \alpha)h(x)$ e quindi $f(x) = (x - \alpha)^2 h(x)$.
+    
+    ($\Rightarrow$) Sia $f(x) = (x - \alpha)^2g(x) \in \overline{K}[x]$, allora $f'(x) = 2(x - \alpha)g(x) + (x - \alpha)^2g'(x)$, in particolare $(x - \alpha) \mid f'(x)$. Poiché $f,f' \in K[x]$ e $f(\alpha) = f'(\alpha) = 0$, detto $\mu_\alpha(x) \in K[x]$ il polinomio minimo di $\alpha$ su $K$ si ha $\mu_\alpha(x) \mid f(x), f'(x)$ e dunque $\mu_\alpha \mid (f(x), f'(x))$ che quindi è nullo o ha grado positivo: in particolare $(f(x), f'(x)) \neq 1$.
+\end{proof}
+
+\begin{corollary}{derivata di irriducibili}
+    Sia $f(x) \in K[x]$ irriducibile.  $f$ ha radici multiple $\Leftrightarrow$ $f'(x) = 0$.
+\end{corollary}
+\begin{proof}
+    Notiamo $(f(x),f'(x)) \mid f(x)$ e $f(x)$ irriducibile, dunque $(f(x),f'(x)) \in \{1,f(x)\}$. Per il criterio della derivata allora $f$ ha radici multiple $\Leftrightarrow$ $(f(x),f'(x)) = f(x)$. Ma $\deg f'(x) \leq \deg f(x)$ e $f(x) \mid f'(x)$ implicano necessariamente $f'(x)=0$.
+\end{proof}
+\begin{proposition}{omomorfismo di Frobenius}
+    Sia $K$ un campo a caratteristica $p$. Allora la mappa $\Phi: K \rightarrow K$ tale che $\Phi(a \mapsto a^p)$ è un omomorfismo iniettivo (detto \textit{di Frobenius}). Se $K$ è finito quindi $\Phi$ è un automorfismo.
+\end{proposition}
+\begin{proof}
+    Notiamo che $\Phi(0)=0$, $\Phi(1)=1$ e $\Phi(a)\Phi(b) = \Phi(ab)$ perché un campo è commutativo. Manca solo $\Phi(a) + \Phi(b) = \Phi(a+b)$, ma sviluppando il binomio di Newton, $(a+b)^p = \sum_{k=0}^p \binom{p}{k}a^kb^{p-k} = a^p+b^p$, infatti $k\neq0,p \Rightarrow p \mid \binom{p}{k}$. (Quest'ultima identità viene talvolta chiamata ``binomio ingenuo''.) Chiaramente $\ker(\Phi) = \{0\}$, quindi l'omomorfismo è iniettivo. Se $K$ è finito, tanto basta a dire che $\Phi$ è un automorfismo.
+\end{proof}
+\begin{definition}{campo perfetto}
+    $K$ si dice perfetto se ogni polinomio irriducibile $f(x) \in K[x]$ ha radici tutte distinte in $\overline{K}$.
+\end{definition}
+\begin{proposition}{due classi di campi perfetti}
+    Se $K$ è un campo finito o di caratteristica 0, allora è perfetto.
+\end{proposition}
+\begin{proof}
+    Sia $f\in K[x]$ irriducibile, $f(x) = \sum_{i=0}^n a_ix^i$, $f'(x) = \sum_{i = 1}^{n}{i a_i x^{i-1}}$. Sappiamo che $f$ ha radici multiple $\iff f'(x) = 0$, cioè se $\forall i = 1 \dots n$ vale  $i a_i = 0$.
+    
+    Se $K$ è a caratteristica 0, allora $(\forall i = 1 \dots n \ i a_i = 0) \implies f(x) = a_0$ costante. In questo caso $f$ non ha radici oppure è il polinomio nullo.
+    
+    Se $K$ è finito e a caratteristica $p$, allora $f'(x) = 0$ se e solo se per tutti gli indici $i = 1 \dots n$ non multipli di $p$ vale $a_i = 0$. Ma allora $f(x) = \sum_{i=0}^m a_{pi}x^{pi} = g(x^p)$ con $g(t) = \sum_{i=0}^{m} a_{pi}t^i \in K[x]$. Per l'omomorfismo di Frobenius $f(x) = g(x^p) = g(x)^p$: assurdo poiché $f$ è irriducibile.
+\end{proof}
+
+\begin{theorem}{(*) $K$ perfetto sse l'omomorfismo di Frobenius è surgettivo}
+    Sia $K$ campo con $\char K = p$, allora $F$ è perfetto $\iff$ $\Phi: x \mapsto x^p$ è surgettivo.
+\end{theorem}
+\begin{proof}
+    $(\impliedby)$ Bisogna mostrare che ogni $f \in K[x]$ con $f' = 0$ è riducibile. Un tale polinomio si scrive nella forma $f(x) = \sum_{k=0}^{n} a_k x^{pk}$. Usiamo l'ipotesi e siano $b_1, \dots, b_n$ tali che $b_k^p = a_k$. Allora $f(x) = (\sum_{k=0}^{n} b_k x^{k})^p$, dunque $f$ riducibile.
+    $(\implies)$ Dato un generico $a \in K$ consideriamo il polinomio $f(x) = x^p - a \in K[x]$. Data $b \in \overline{K}$ con $b^p = a$ per il binomio ingenuo si ha $f(x) = (x - b)^p$. Poiché $K$ è perfetto, il polinomio minimo $\mu_b(x) \in K[x]$ di $b$ su $K$ ha tutte le radici distinte. Ma allora $\mu_b(x) ^ p \mid f(x)$, quindi necessariamente $\mu_b(x)$ ha grado 1, cioè $b \in K$. Dunque $\Phi : x \mapsto x^p$ è surgettivo.
+\end{proof}
+
+\begin{theorem}{esistenza e unicità di $\F_{p^n}$}
+    Per ogni primo $p$ e intero $n \ge 1$, esiste un unico campo $F$ con $p^n$ elementi all'interno di una fissata chiusura algebrica di $\F_p$.
+\end{theorem}
+\begin{proof}
+    Se $F$ esiste, allora $\#F^\times = p^n - 1$, dunque per Lagrange gli elementi di $F^\times$ sono radici in $\overline{\F_p}$ di $x^{p^n - 1} - 1$ e gli elementi di $F$ sono radici di $f(x) = x^{p^n} - x$. Per il criterio della derivata queste radici sono tutte distinte, infatti $f'(x) = p^n x^{p^n - 1} - 1 = -1$ in caratteristica $p$. Ma allora $F = \{ \alpha \in \overline{\F_p} : \alpha^{p^n} - \alpha = 0 \}$ è l'unico candidato $p^n$-campo (unicità). Si verifica che $F$ così definito contiene 0, 1, è chiuso per somma, prodotto, opposti e inversi (esercizio), dunque è un campo (esistenza).
+\end{proof}
+
+Dunque $\F_{p^n}$ è il campo di spezzamento su $\F_p$ di $x^{p^n} - x = 0$ e $\F_{p^n}^\times$ sono tutte e sole le $p^n-1$-esime radici dell'unità.
+
+\begin{theorem}{Sottogruppi moltiplicativi di un campo}
+    Sia $K$ campo e $G < K^\times$ un sottogruppo moltiplicativo. Se $G$ è finito, allora è ciclico.
+\end{theorem}
+\begin{proof}
+    Sia $\#G = n$, $\forall g \in G \ g^n = 1$. Definiamo $f_d(x) = x^d - 1 \in K[x]$. Per Ruffini $f_d$ ha al più $d$ radici in $G$. Sia $G_d = \{ \alpha \in G : \alpha^d - 1 = 0 \}$, vale $\#G_d \le d$. Sia $k_d = \#\{ \alpha \in G : \ord g = d \}$. Se $d \nmid n$, allora $k_d = 0$, se invece $d \mid n$ e $k_d > 0$, dato $g \in G \ \ord g = d$ si ha $\grp{g} \subseteq G_d$, ma allora per cardinalità $\grp{g} = G_d$, dunque $k_d = \varphi(d)$. Si ha
+    \[
+        n = \#G = \sum_{d | n} k_d \le \sum_{d | n} \varphi(d) = n,
+    \]
+    che quindi sono tutte uguaglianze e $k_n = \varphi(n) \ge 1$, cioè $\exists g \in G \ \ord g = n$, vale a dire $G$ ciclico.
+\end{proof}
+\begin{corollary2}
+    $\F_{p^n}^\times$ è ciclico. Inoltre $\F_{p^n} = \F_p(\alpha)$ per qualche $\alpha \in \overline{\F_p}$.
+\end{corollary2}
+\begin{proof}
+    $\Fpn^\times = \grp{\alpha} \land \Fp(\alpha) \subseteq \Fpn \implies \Fpn = \Fp(\alpha)$.
+\end{proof}
+\begin{observation}{non vale l'implicazione inversa}
+    $\Fpn = \Fp(\alpha) \nRightarrow \grp{\alpha} = \Fpn^\times$.
+\end{observation}
+\begin{proof}
+    Funziona più o meno qualunque controesempio con $p^n - 1$ non primo. Consideriamo $\F_9 \cong \frac{\F_3[x]}{(x^2 + 1)} = \{ 0, 1, 2, x, x+1, x+2, 2x, 2x+1, 2x+2 \}$: ogni elemento $\alpha \in \F_9 \setminus \F_3$ ha necessariamente polinomio minimo di grado 2 su $\F_3$, dunque $\F_3(\alpha) = \F_9$. Tuttavia $\grp{x} = \{x, -1, x, 1\} \neq \F_9^\times$.
+\end{proof}
+\begin{corollary}{polinomi irriducibili su $\Fp$}
+    Per ogni $p$ primo, $n \ge 1$ naturale esistono in $\Fp[x]$ polinomi irriducibili di grado $n$.
+\end{corollary}
+\begin{proof}
+    Sia $\Fpn = \Fp(\alpha)$ per qualche $\alpha \in \overline{\Fp}$, allora $[\Fp(\alpha) : \Fp] = n = \deg \mu_\alpha(x)$ irriducibile.
+\end{proof}
+\begin{proposition}{inclusioni tra sottocampi}
+    $\Fpm \subseteq \Fpn \iff m | n$.
+\end{proposition}
+\begin{proof}
+    ($\Rightarrow$) Per torri $n = [\Fpn : \Fp] = [\Fpn : \Fpm][\Fpm : \Fp] = [\Fpn : \Fpm]m$. ($\Leftarrow$) Ricordiamo il prodotto notevole $(x^m)^\lambda - 1 = (x^m - 1)((x^m)^{\lambda - 1} + \dots + 1)$, in particolare per $x = p$ si ha $p^n - 1 = a(p^m - 1)$ per un opportuno $a$ intero. Allora $\forall \alpha \in \Fpm^\times \ \alpha^{p^m - 1} = 1$, ma allora anche $\alpha^{p^n - 1} = (\alpha^{p^m - 1}) ^ a = 1^a = 1$, cioè $\alpha \in \Fpn^\times$.
+\end{proof}
+
+% potenziale TODO: includere il reticolo di sottocampi (per esempio) di \F_{p^12}
+
+\begin{observation}{radici di irriducibili}
+    Sia $f(x) \in \Fp[x]$ irriducibile di grado $n$ e siano $\{\alpha_1, \dots, \alpha_n\} \subseteq \overline{\Fp}$ le sue radici (che sappiamo essere distinte). $f$ è il polinomio minimo degli $\alpha_i$ su $\Fp$, quindi $\Fpn = \Fp(\alpha_1) = \dots = \Fp(\alpha_n) \cong \frac{\Fp[x]}{f(x)}$.
+    Si noti che l'estensione semplice con una radice di $f$ ha automaticamente incluso tutte le radici di tutti gli irriducibili di grado (esattamente) $n$.
+\end{observation}
+
+\begin{proposition}{Campo di spezzamento su $\Fq$ $(q = p^n)$}
+    Sia $f \in \Fq[x] \ f(x) = f_1^{e_1}(x) \dots f_r^{e_r}(x)$ con gli $f_i(x)$ irriducibili e $\deg f_i = d_i$. Allora, detto $d = [d_1, \dots, d_r]$ l'mcm dei gradi, il campo di spezzamento di $f$ su $\Fq$ è $\F_{q^d}$
+\end{proposition}
+\begin{proof}
+    Il campo di spezzamento (in seguito, cds) di $f$ su $\Fq$ è il composto dei cds degli $f_i$ su $\Fq$. Il cds di $f_i$ su $\Fq$ è $\F_{q^{d_i}}$. Sia allora $\F_{q^c}$ il cds $f$ su $\Fq$. Vale $\F_{q^{d_i}} \subset \F_{q^c}$ se e solo se $d_i | c$, dunque $d = [d_1, \dots, d_r] \mid c$. $\F_{q^d}$ è il più piccolo campo che contiene tutti gli $\F_{q^{d_i}}$, vale a dire il cds.
+\end{proof}
+
+\begin{theorem}{Campo di spezzamento su $\Fp$ di $x^n - 1$}
+    Sia $n = p^a m$ con $(m, p) = 1$. Allora il campo di spezzamento di $x^n - 1$ su $\Fp$ coincide con il cds di $x^m - 1$ su $\Fp$ ed è uguale a $\F_{p^d}$ con $d = \ord_{\Zn^\times}p$.
+\end{theorem}
+\begin{proof}
+    $x^{p^a m} - 1 = (x^m - 1)^{p^a}$ per il binomio ingenuo, dunque moltiplicare $m$ per una potenza di $p$ cambia solo la molteplicità delle radici di $x^m - 1$. Sia $G_n = \{ \alpha \in \overline{\Fp} : \alpha^n = 1 \} = G_m = \{ \alpha \in \overline{\Fp} : \alpha^m = 1 \}$. $\# G_m = m$ per il criterio della derivata, infatti $(x^m - 1, mx^{m-1}) = 1$. Sappiamo che il campo di spezzamento $\Fp(G_m)$ è un'estensione finita, quindi uguale a $\F_{p^d}$ per qualche $d$: ci chiediamo chi è $d$.
+
+    \textbf{Lemma:} $G_m = \{ \alpha \in \overline{\Fp} : \alpha^m = 1 \} \le \F_{p^d}^\times = \{ \alpha \in \overline{\Fp} : \alpha^{p^d - 1} = 1 \}$ se e solo se $m \mid p^d - 1$.
+    \begin{proof}
+        $(\implies)$ Per Lagrange $m = \#G_m | \#\F_{p^d}^\times = p^d - 1$.
+        $(\impliedby)$ Sia $p^d - 1 = m l$. Allora per ogni $\alpha \in G_m$ si ha $\alpha^{p^d - 1} = (\alpha^m)^l = 1^l = 1$, cioè $\alpha \in \F_{p^d}^\times$.
+    \end{proof}
+    
+    Per il lemma, $d = \min \{ k : m | p^k - 1 \} = \min \{ k : p^k \equiv 1 \pmod{m} \} = \ord_{\Zn^\times}p$.
+\end{proof}
+
+\begin{theorem}{Automorfismi di $\Fpn$}
+    L'omomorfismo di Frobenius genera tutti gli automorfismi di $\Fpn$, in particolare $\Aut(\Fpn) = \grp{\Phi: x \mapsto x^p} \cong \Zn$.
+\end{theorem}
+\begin{proof}
+    Ogni automorfismo $\varphi \in \Aut(\Fpn)$ manda $1$ in sé, dunque fissa puntualmente $\Fp$. Sia $\alpha \in \Fpn$ tale che $\Fpn = \Fp(\alpha)$ e $\mu_\alpha \in \Fp[x]$ il suo polinomio minimo, che ricordiamo ha grado $n$. Ogni $\varphi \in \Aut(\Fpn)$ è univocamente determinata dall'immagine di $\alpha$. Poiché $\mu_\alpha(\alpha) = 0$ e $\varphi(\mu_\alpha(x)) = \mu_\alpha(\varphi(x))$, $\varphi(\alpha)$ è una radice di $\mu_\alpha$, dunque $\#\Aut(\Fpn) \le n$. Consideriamo $\{ \alpha, \alpha^p, \dots, \alpha^{p^n - 1} \}$ le immagini di $\alpha$ tramite $\Phi^0, \Phi^1, \dots, \Phi^{n - 1}$: se queste sono tutte distinte i $\Phi^k$ sono $n$ automorfismi distinti di $\Fpn$, dunque tutti gli automorfismi di $\Fpn$. Se per assurdo fosse $\alpha^{p^i} = \alpha^{p^j}$ con $0 \le i < j < n$, allora $\alpha^{p^j - p^i} - 1 = 0$, da cui $(\alpha^{p^{j - i} - 1} - 1)^{p^i} = 0$, quindi $\alpha$ sarebbe una radice $p^{j-i} - 1$-esima dell'unità e dunque $\Fp(\alpha) \subseteq \Fp^{j - i}$: assurdo poiché $j - i < n$ e $\alpha$ è un generatore di $\Fpn^\times$. Quindi tutte le immagini di $\alpha$ tramite $\Phi^0, \dots, \Phi^{n-1}$ sono tutte distinte e questi sono tutti e soli gli automorfismi di $\Fpn$.
+\end{proof}
+
+\subsection{Estensioni normali}
+
+Con ``immersione'' intenderemo sempre un omomorfismo di anelli (quindi anche di campi) iniettivo.
+    
+Notiamo primariamente che un omomorfismo di campi diverso dall'omomorfismo banale è necessariamente iniettivo (basta notare che gli unici ideali, quindi possibili nuclei dell'omomorfismo, $(0)$ e il campo stesso). Da ora fino alla fine delle dispense escluderemo l'omomorfismo banale da tutti i ragionamenti, in modo che un omomorfismo di campi sia sempre un'immersione.
+
+\begin{proposition}{immersioni con estensioni semplici}
+    Dato $\alpha \in \overline{K}$, le immersioni $\varphi: K(\alpha) \rightarrow \overline{K}$ tali che $\varphi|_K = id$ sono tante quante le radici distinte di $\mu_{\alpha}(x)$ in $\overline{K}$.
+\end{proposition}    
+\begin{proof}
+    Per il $1^{\circ}$ teorema di omomorfismo costruire una tale $\varphi$ equivale a costruire una $\tilde \varphi: K[x] \rightarrow \overline{K}$ per cui $\tilde \varphi |_K = id$ e $(\mu_{\alpha}(x)) \subseteq \ker(\tilde \varphi)$. Notiamo ora che se $x \overset{\tilde \varphi}{\mapsto} \beta$, allora $\tilde \varphi$ è l'omomorfismo di valutazione in $\beta$. Ma $\varphi(\mu_{\alpha}(x)) = \mu_{\alpha}(\varphi(x))$ e $\mu_{\alpha}(x) \in  \ker(\tilde \varphi) \iff \mu_{\alpha}(\beta) = 0$. Quindi gli omomorfismi che vanno bene sono tutti e soli quelli per cui $\beta$ è una radice di $\mu_{\alpha}(x)$.
+
+    Si noti che per l'iniettività di $\varphi$ si ha necessariamente $\ker(\tilde \varphi) = (\mu_\alpha(x))$.
+\end{proof}
+
+\begin{proposition}{estensione a un'estensione semplice}
+    Sia $K$ un campo perfetto, $\alpha \in \overline{K}$, $[K(\alpha):K] = n$. Allora ogni immersione $\varphi: K \hookrightarrow \overline{K}$ ammette $n$ estensioni distinte $\varphi_1,\dots,\varphi_n: K(\alpha) \hookrightarrow \overline{K}$ tali che $\varphi_i|_K = \varphi$.
+\end{proposition}
+\begin{proof}
+    Già visto nella Proposizione 1 nel caso in cui $\varphi = id$: occorre solo generalizzare.
+    Per il primo teorema di omomorfismo costruire tale immersione equivale a costruire una $\tilde \varphi: K[x] \rightarrow \overline{K}$ tale che $(\mu_{\alpha}(x)) \subseteq \ker(\tilde \varphi)$. Come sopra se $\tilde \varphi(x \mapsto \beta)$ allora $\tilde \varphi$ è l'omomorfismo di valutazione in $\beta$ e quindi $\mu_{\alpha}(x) \in \ker(\tilde \varphi) \iff \varphi\mu_{\alpha}(\beta) = 0$, dove $\varphi\mu_{\alpha}$ è il polinomio i cui coefficienti sono le immagini secondo $\varphi$ dei coefficienti di $\mu_{\alpha}(x)$. Usando che $\varphi(K) \cong K \Rightarrow \varphi K[x] \cong K[x] \Rightarrow \varphi$ preserva l'irriducibilità $\varphi\mu_{\alpha}(x)$ è irriducibile. Allora, essendo $K$ perfetto, ha $n$ radici distinte. Le possibili scelte per $\beta$ sono quindi tutte e sole le $n$ radici di $\varphi\mu_{\alpha}(x)$.
+\end{proof}
+\begin{proposition}{estensione a un'estensione finita}
+    Sia $E/K$ finita, con $[E:K] = n$. Allora ogni immersione $\varphi: K \hookrightarrow \overline{K}$ ammette $n$ estensioni distinte a $E$.
+\end{proposition}
+\begin{proof}
+    Notiamo intanto che $E/K$ finita $\Rightarrow E/K$ algebrica $\Rightarrow E \subseteq \overline{K}$ e quindi sarà tutto ben definito. Procediamo per induzione su $n$. Il passo base $n=1$ è ovvio.
+
+    Consideriamo ora $\alpha \in E \setminus K$. Allora $[K(\alpha) : K] = m \geq 1$, $[E : K(\alpha)] = d = \frac{n}{m}$ (per torri). Se $d=1$ la tesi segue dalla proposizione precedente. Se invece $n >d>1$ usiamo la proposizione precedente per costruire $m$ estensioni di $\varphi$, $\varphi_1,\dots, \varphi_m$ a $K(\alpha)$. Per ipotesi induttiva, ciascun $\varphi_i:K(\alpha) \rightarrow \overline{K}$ ammette esattamente $d$ estensioni $\varphi_{i,1},\dots,\varphi_{i,d}$ a $E$ tali che $\varphi_{i,j}|_K = \varphi_i|_K = \varphi|_K$. Allora le $\varphi_{i,j}$ così costruite sono le estensioni cercate e sono tutte distinte.
+    
+    Dimostriamo che non ve ne sono altre. Sia $\psi: E \rightarrow \overline{K}$ un'estensione di $\varphi$. Allora $\psi|_{K(\alpha)}: K(\alpha) \rightarrow \overline{K}$ e quindi per la proposizione precedente, essendo le $\varphi_i$ le uniche estensioni deve valere $\psi|_{K(\alpha)} = \varphi_i$ per un qualche $i$. Ma allora $\psi$ estende un $\varphi_i$ e per ipotesi induttiva, essendo le $\varphi_{i,j}$ le uniche possibili estensioni, $\psi = \varphi_{i,j}$ per un qualche $j$. Questo conclude la dimostrazione. 
+\end{proof}
+\begin{proposition}{generalizzazione}
+    In generale, data $E/K$ algebrica e $\psi : K \to \overline{K}$ esiste almeno un'estensione $\varphi : E \to \overline{K}$ tale che $\varphi|_K = \psi$. (La dimostrazione, omessa nel corso, è un'applicazione di Zorn.)
+\end{proposition}
+\begin{definition}{coniugati}
+    Si dicono coniugati su $K$ di $\alpha \in \overline{K}$ le radici del polinomio minimo $\mu_{\alpha}(x) \in K[x]$ di $\alpha$ su $K$.
+\end{definition}
+\begin{proposition}{immersioni e coniugati}
+    Data $E/K$ algebrica e $\alpha \in E$, le immersioni $\varphi: E \rightarrow \overline{K}$ tali che $\varphi|_K = id$ mandano necessariamente $\alpha$ in un suo coniugato su $K$.
+\end{proposition}
+\begin{proof}
+ Basta osservare che, poiché $\varphi|_K = id$, $\varphi(\mu_{\alpha}(x)) =\mu_{\alpha}(\varphi(x)) $ e quindi, sostituendo $x = \alpha$, $0 = \mu_{\alpha}(\varphi(\alpha))$.
+\end{proof}
+\begin{definition}{estensione normale}
+    $F/K$ algebrica si dice normale se $\forall \varphi: F \rightarrow \overline{K}$ tale che $\varphi|_K = id$ si ha $\varphi(F)=F$.
+\end{definition}
+\begin{proposition2}
+    Le estensioni di grado $2$ sono normali.
+\end{proposition2}
+\begin{proof}
+    Assumiamo per ora $\char K \neq 2$. Sia $F/K$ di grado 2 e $\alpha \in F \setminus K$. Allora $[K(\alpha):K] = 2$ e $F = K(\alpha)$. Sia quindi $p(x) = x^2 + ax+b$ il polinomio minimo di $\alpha$ su $K$. Allora i coniugati di $\alpha$ sono $\frac{-a\pm\sqrt{\Delta}}{2}$ e quindi $F = K(\alpha) = K(\sqrt{\Delta})$. I coniugati di $\sqrt{\Delta}$ sono $\pm\sqrt{\Delta}$, quindi da $\varphi|_K = id$ si ha $\varphi(K(\sqrt{\Delta})) = K(\pm\sqrt{\Delta}) = K(\sqrt{\Delta})$ come voluto.
+
+    Con la caratterizzazione delle estensioni normali che segue possiamo abbandonare l'ipotesi $\char K \neq 2$, infatti il termine noto di un polinomio (in questo caso di secondo grado) è prodotto delle radici.
+\end{proof}
+\begin{theorem}{caratterizzazione delle estensioni normali}
+    Sia $F/K$ algebrica. Sono equivalenti: 
+    \begin{itemize}
+        \item[(i)] $F/K$ normale;
+        \item[(ii)] $\forall f \in K[x]$ irriducibile se $f$ ha una radice in $F$ allora ha tutte le radici in $F$;
+        \item[(iii)] $F$ è campo di spezzamento di una famiglia di polinomi.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    $(i) \Rightarrow (ii)$ Sia $f \in K[x]$ irriducibile, $\alpha$ una radice di $f$. Allora per irriducibilità $f(x) = u\mu_{\alpha}(x)$ con $u \in K^\times$. Quindi senza perdita di generalità supponiamo $f(x) = \mu_{\alpha}(x)$. Siano $\alpha_1, \dots, \alpha_n$ le radici di $f$. Consideriamo le $n$ immersioni $\varphi_i: K(\alpha) \rightarrow F$ tali che $\varphi_i(\alpha) = \alpha_i$ e $\varphi_i|_K = id$ (esistono per le proposizioni precedenti). Dai fatti sopra dimostrati sappiamo che ciascuno di questi $\varphi_i$ si estende a $F$ (in realtà lo abbiamo dimostrato per estensioni finite); chiamiamo $\tilde \varphi_i$ l'estensione. Da $F/K$ normale sappiamo $\tilde \varphi_i (F) = F$ $\forall i = 1,\dots,n$ e quindi $\tilde \varphi_i(\alpha) = \varphi_i(\alpha) = \alpha_i \in F$.
+    
+    $(ii) \Rightarrow (iii)$ Consideriamo come famiglia di polinomi l'insieme dei polinomi minimi di tutti gli $\alpha \in F$. Sia $F_0$ il suo campo di spezzamento. Chiaramente $F \subseteq F_0$. Ma per l'ipotesi, $(ii)$ poiché per costruzione ciascuno di questi polinomi ha almeno una radice in $F$, ciascuno di questi polinomi si fattorizza completamente in $F$, e quindi $F_0 \subseteq F$.
+    
+    $(iii) \Rightarrow (i)$ Sia $F$ campo di spezzamento di $\mathscr{F} = \{f_i(x) : i \in I\}$ con $f_i \in K[x]$ e  $\Lambda_i$ l'insieme contentente tutte le radici di $f_i$. Allora $F = K\big( \bigcup_{i \in I} \Lambda_i \big)$ e inoltre $\forall \varphi: F \rightarrow \overline{K}$ poiché le immersioni mandano coniugati in coniugati si ha $\forall i \in I \ \varphi(K(\Lambda_i)) = K(\Lambda_i)$ ($\varphi$ agisce sulle radici permutandole, perché è iniettiva e fissa le radici di $f_i$) e quindi $\varphi(F) = \varphi(K\big( \bigcup_{i \in I} \Lambda_i \big))= K\big( \bigcup_{i \in I} \Lambda_i \big) = F$.
+\end{proof}
+\begin{minipage}{0.9\textwidth}  
+\begin{theorem}{torri di estensioni normali}
+    dato il diagramma a lato, vale $L/K$ normale $\Rightarrow L/F$ normale.
+\end{theorem}
+\begin{proof}
+    L'algebricità di $L/F$ segue dalle torri di estensioni algebriche. Sia $\varphi: L \rightarrow \overline{K}$ tale che $\varphi|_F = id$. Allora si ha $\varphi|_K = id$ perché $K \subseteq F$ e quindi per normalità di $L/K$ si ha $\varphi(L) = L$, come voluto.
+\end{proof}
+\end{minipage}\hfill
+\begin{minipage}{0.1\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&L\ar{d}\\
+&F\ar{d}\\
+&K
+\end{tikzcd}  
+\end{minipage}\hfill
+\begin{minipage}{0.7\textwidth}
+\begin{theorem}{shift di estensioni normali}
+    dato il diagramma a lato, vale $L/K$ normale e $F/K$ algebrica $\Rightarrow LF/F$ normale.
+\end{theorem}
+\begin{proof}
+    L'algebricità di $F/K$ serve per la buona definizione. L'algebricità di $LF/F$ segue dallo shift di estensioni algebriche con $L/K$. Per la normalità, consideriamo $\varphi: LF \rightarrow \overline{K}$ tale che $\varphi|_F = id$. Allora si ha che $\varphi|_K =  (\varphi|_F)|_K = id$. Consideriamo $\varphi|_L : L \rightarrow \overline{K}$. Vale $(\varphi|_L)|_K = id$ per quanto detto prima; allora per normalità di $L/K$, $\varphi(L) = \varphi|_L(L) = L$. Quindi, poiché $\varphi(F)= F$, $\varphi(LF) = LF$.
+\end{proof}
+\end{minipage}\hfill
+\begin{minipage}{0.3\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&&LF\ar{dl}\ar{dr}\\
+&L \ar{dr} & & F \ar{dl}\\
+&& K
+\end{tikzcd}  
+\end{minipage}\hfill
+\vspace{0.5cm}
+\begin{minipage}{0.7\textwidth}
+\begin{theorem}{composto di estensioni normali}
+    dato il diagramma a lato, vale $L/K$ normale e $F/K$ normale $\Rightarrow LF/K$ normale.
+\end{theorem}
+\begin{proof}
+    L'algebricità segue dal composto di estensioni algebriche.  Per la normalità, consideriamo come prima $\varphi: LF \rightarrow \overline{K}$. Allora per normalità di $L/K$, $\varphi(L) = \varphi|_L(L) = L$. Analogamente $\varphi(F) = F$ e quindi $\varphi(LF) = LF$.
+\end{proof}
+\end{minipage}\hfill
+\begin{minipage}{0.3\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&&LF\ar{dl}\ar{dd}\ar{dr}\\
+&L \ar{dr} & & F \ar{dl}\\
+&& K
+\end{tikzcd}  
+\end{minipage}\hfill
+\begin{minipage}{0.65\textwidth}
+\begin{theorem}{implicazione di normalità}
+    dato il diagramma a lato, vale $L/K$ normale e $F/K$ normale $\Rightarrow (L\cap F)/K$ normale.
+\end{theorem}
+\begin{proof}
+    L'algebricità è ovvia ($K \subseteq L \cap F \subseteq L$ e $L/K$ algebrica $\Rightarrow (L\cap F)/K$ algebrica). Per la normalità, consideriamo $\varphi: L\cap F\rightarrow \overline{K}$ tale che $\varphi|_K = id$. Poiché $LF/(L\cap F)$ è algebrica, $\varphi$ può essere estesa a $\tilde \varphi : LF \rightarrow \overline{K}$. Allora, poiché $L/K$ è normale, si ha $\tilde \varphi(L)  = L$ e analogamente $\tilde \varphi(F) = F$. Quindi $\tilde \varphi(L\cap F)  = \varphi(L\cap F) = L\cap F$.
+\end{proof}
+\end{minipage}\hfill
+\begin{minipage}{0.35\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&&LF\ar{dl}\ar{dd}\ar{dr}\\
+&L \ar{dr}\ar{ddr} & & F \ar{dl}\ar{ddl}\\
+&&L\cap F\ar{d}\\
+&& K
+\end{tikzcd} 
+\end{minipage}\hfill
+
+\subsection{Corrispondenza di Galois}
+\begin{definition}{estensione separabile}
+    $L/K$ si dice separabile se $\forall \alpha \in L \ \mu_{\alpha}(x)$ ha derivata non nulla. Osserviamo che ciò è certamente vero se il campo $K$ è perfetto.
+\end{definition}
+
+\begin{definition}{estensione di Galois}
+    $L/K$ si dice di Galois se è normale e separabile. Osserviamo che se il campo $K$ è finito o a caratteristica 0 (campi con cui lavoreremo per ora) per quanto detto allora ``di Galois'' e ``normale'' si equivalgono.
+\end{definition}
+\begin{definition}{gruppo di Galois}
+    Se $L/K$ è di Galois $\Aut_K(L) = \{\varphi : L \rightarrow \overline K : \varphi|_K = id\}$ per quanto detto finora è un gruppo con la composizione. $\Aut_K(L)$ si indica anche con $\Gal(L/K)$ (gruppo di Galois di $L$ su $K$). Inoltre se $L/K$ è anche finita $\#\Aut_K(L) = [L:K]$.
+\end{definition}
+
+\begin{theorem}{Galois di un campo di spezzamento}
+    Sia $f \in K[x]$ irriducibile di grado $n$, e sia $L$ il campo di spezzamento di $f$ su $K$. Allora $n \mid [L:K] \mid n!$ e inoltre $\Gal(L/K) \hookrightarrow S_n$.
+\end{theorem}
+\begin{proof}
+    Sia $\alpha \in \overline{K}$ una radice di $f$. Allora per irriducibilità $f(x) = u \mu_{\alpha}(x)$ con $u \in K^\times$. Poiché allora $K \subseteq K(\alpha) \subseteq L$ e $[K(\alpha) : K] = n$, si ha $n | [L:K]$ per torri.
+
+    Siano ora $\alpha_1,\dots,\alpha_n$ le radici di $f$. Per quanto detto finora $\forall \varphi \in \Gal(L/K)$  $\varphi(\{\alpha_1,\dots,\alpha_n\}) = \{\alpha_1,\dots,\alpha_n\}$ e quindi possiamo considerare l'azione di $\Gal(L/K)$ su $\{\alpha_1,\dots,\alpha_n\}$ data da $\varphi \mapsto \varphi_{\{\alpha_1,\dots,\alpha_n\}}$. Questa mappa è chiaramente un omomorfismo iniettivo e quindi $\Gal(L/K) \hookrightarrow S(\{\alpha_1,\dots,\alpha_n\}) \cong S_n$, da cui segue $[L:K] = \#\Gal(L/K) \mid \#S_n = n!$
+\end{proof}
+\begin{proposition}{irriducibilità e orbite}
+    Sia $f \in K[x]$ di grado $n$, con radici $\alpha_1,\dots,\alpha_n$ e sia $L$ il campo di spezzamento di $f$ su $K$. $\Gal(L/K)$ agisce sulle radici di $f$ per permutazione e l'azione è transitiva $\iff$ $f$ è irriducibile.
+\end{proposition}
+\begin{proof}
+    Consideriamo l'azione della dimostrazione precedente (è analoga anche se abbiamo tolto l'ipotesi di irriducibilità). In modo analogo a prima agisce per permutazione su $\{ \text{radici di } f(x)\}$. Sappiamo poi dalle proposizioni dimostrate sopra che con questa azione $\text{orb}(\alpha) = \{ \text{radici di } \mu_{\alpha}(x)\}$. Se $\alpha$ è radice di $f(x)$, allora si ha $\mu_{\alpha} \mid f$ e di conseguenza $f$ irriducibile $\iff$ $f(x) = u\mu_{\alpha}(x)$ con $u \in K^\times$ $\iff$ $\{ \text{radici di } f(x)\} =  \{ \text{radici di } \mu_{\alpha}(x)\} =\text{orb}(\alpha)$ ovvero l'azione è transitiva.
+\end{proof}
+\begin{theorem}{dell'elemento primitivo}
+        Sia $L/K$ finita e separabile. Allora $L/K$ è semplice, ovvero $\exists \alpha \in L$ tale che $L = K(\alpha)$. 
+\end{theorem}
+\begin{proof}
+    Se $K$ è un campo finito allora anche $L$ finito poiché $L/K$ finita. Sappiamo che $L^\times = L \setminus \{0\}$ è un gruppo moltiplicativo ciclico, dunque la tesi.
+
+    Se $K$ è infinito notiamo che $L/K$ finita implica che è finitamente generata e quindi esistono $\alpha_1, \dots,\alpha_n$ tali che $L = K(\alpha_1, \dots,\alpha_n)$. Procediamo invece per induzione su $n$, trattando prima di tutto il caso $n=2$ e poi passando al caso generale.
+    
+    Sia $L = K(\alpha, \beta)$ e sia $d = [L:K]$. Allora per un teorema dimostrato precedentemente esistono esattamente $d$ immersioni $\varphi_1, \dots, \varphi_d : L \rightarrow \overline{K}$ tali che $\varphi_i |_K = id$. Consideriamo il polinomio
+    \[
+        F(x) = \prod_{1\leq i < j \leq d} ((\varphi_i(\alpha) + x\varphi_i(\beta)) - (\varphi_j(\alpha) + x\varphi_j(\beta))).
+    \]
+    $F$ è certamente non nullo perché prodotto di fattori non nulli: $(\varphi_i(\alpha) + x\varphi_i(\beta)) - (\varphi_j(\alpha) + x\varphi_j(\beta)) = 0 \iff \varphi_i(\alpha) + x\varphi_i(\beta) = \varphi_j(\alpha) + x\varphi_j(\beta) \iff \varphi_i(\alpha)=\varphi_j(\alpha) \text{ e } \varphi_i(\beta) = \varphi_j(\beta) \iff \varphi_i = \varphi_j$, ma vale sempre $i \neq j$.
+    
+    Poiché il campo $K$ è infinito, sicuramente esiste un $t \in K$ tale che $F(t) \neq 0$, e quindi i $\varphi_i(\alpha) + t\varphi_i(\beta)$ sono tutti distinti. Sia $\gamma = \alpha + t\beta \in L$ per questo fissato $t$. Per omomorfismo $\varphi_i(\gamma) = \varphi_i(\alpha) + t\varphi_i(\beta)$ e quindi si ha che $\varphi_1(\gamma),\dots, \varphi_n(\gamma)$ sono tutti distinti. Ciò implica che $[K(\gamma) : K] \geq d$ (sappiamo che il grado dell'estensione è il grado del polinomio minimo di $\gamma$ su $K$ e che le immagini di $\gamma $ secondo questi omomorfismi sono radici di tale polinomio minimo; ne abbiamo trovate $d$ distinte quindi il grado è almeno $d$). Ma da $K(\gamma) \subseteq L$ segue allora che $[K(\gamma) : K]=d$ e $L = K(\gamma)$. \\
+A questo punto possiamo svolgere l'induzione. Per il passo base $n=1$ la tesi è ovvia. Per il passo induttivo, notiamo che per ipotesi induttiva $L = K(\alpha_1, \dots,\alpha_n) = K(\beta, \alpha_n)$ e per quanto detto nel caso $n=2$ esiste allora $\gamma \in L$ tale che $L = K(\beta, \alpha_n) = K(\gamma)$. 
+\end{proof}
+\begin{definition}{campo fissato da un sottogruppo}
+    Sia $L/K$ di Galois, e $H \leq \Gal(L/K)$. Indichiamo con $L^H = \Fix(H) = \{ \alpha \in L : \sigma(\alpha) = \alpha \ \forall \sigma \in H\}$ il campo fissato da tutti gli elementi di $H$ (è chiaramente un campo e poiché $H$ è contenuto nel Galois si ha $K \subseteq L^H$).
+\end{definition}
+\begin{theorem}{corrispondenza di Galois}
+    Sia $L/K$ di Galois finita. Allora c'è una corrispondenza tra i sottocampi di $L$ che contengono $K$ e i sottogruppi di $ \Gal(L/K)$, che associa il sottogruppo $H$ al campo fissato $L^H$ (e viceversa un campo al sottogruppo che lo fissa). Inoltre $H \tri \Gal(L/K) \iff L^H/K$ è normale e in tal caso $\Gal(L^H/K) \cong \frac{\Gal(L/K)}{\Gal(L/L^H)}$.
+\end{theorem}
+\begin{proof}
+    Sia $\mathscr{E} = \{ F \text{ campo} : K \subseteq F \subseteq L\}$ e $\mathscr{G}_{L/K} = \{ H \leq \Gal(L/K)\}$. Per torri $L$ è un'estensione normale di tutti i campi in $\mathscr{E}$, che a loro volta sono estensioni di $K$. Quindi gli oggetti sono ben definiti.
+    
+    Definiamo $\alpha: \mathscr{E} \rightarrow \mathscr{G}$ $\alpha(F \mapsto \Gal(L/F))$ e $\beta: \mathscr{G} \rightarrow \mathscr{E}$ $\beta(H \mapsto L^H)$.
+
+    \begin{lemma2}
+        Sia $H \leq \Gal(L/K)$. Allora $M = L^H \iff H = \Gal(L/M)$.
+    \end{lemma2}
+    \begin{proof}
+        Sia $M$ un campo con $K \subseteq M \subseteq L$. Per torri $L/K$ di Galois $\Rightarrow$ $L/M$ di Galois.
+    
+        Sia $M = L^H$. Chiaramente $H \subseteq \Gal(L/M)$. Allora per il teorema dell'elemento primitivo (stiamo lavorando con estensioni finite) si ha $L = M(\alpha)$ per un qualche $\alpha \in L$. Consideriamo $f(x) = \prod_{\sigma \in H} (x - \sigma(\alpha)) \in L[x]$. Notiamo che  $\forall \rho \in H$, indicando di nuovo con $ \rho f$ il polinomio applicando $\rho $ ai coefficienti di $f$, si ha $\rho f(x) = \prod_{\sigma \in H} (x - \rho\circ\sigma(\alpha)) =  \prod_{\tau \in H} (x - \tau(\alpha)) = f(x)$ e quindi $f(x) \in L^H[x] = M[x]$ (i suoi coefficienti restano invariati applicando $\rho \in H$). D'altra parte si ha $f(\alpha) = 0$ (basta prendere $\sigma = id$) e $\text{deg}(f) = \#H$, da cui segue $\#\Gal(L/M) = [L:M] = \text{deg}(\mu_{\alpha}) \leq \text{deg}(f(x)) = \#H$. Quindi $\#\Gal(L/M) = \#H$ (avevamo la disuguaglianza inversa per contenimento) e quindi $\Gal(L/M) = H$.
+    
+        Per l'altra freccia sia ora $H = \Gal(L/M)$. $M \subseteq L^H$ segue dalle definizioni. Supponiamo ora per assurdo che $M \neq L^H$. Allora per teoria precedente $\exists \varphi : L^H \rightarrow \overline{M}$ tale che $\varphi \neq id$ ma $\varphi|_M = id$. Possiamo estendere $\varphi$ a $L$ ottenendo $\tilde \varphi : L \rightarrow \overline{M}$ tale che di nuovo $\tilde \varphi \neq id$ ma $\tilde \varphi|_M = id$. Quindi $\tilde \varphi \in \Gal(L/M) = H$. Allora per definizione $\tilde \varphi|_{L^H} = \varphi  = id$ che è assurdo. 
+    \end{proof}
+    Usando il lemma appena dimostrato si ha da una parte $\alpha \circ \beta (H) = \Gal(L/L^H) = H$ e quindi $\beta \circ \alpha = id$ e dall'altra $\beta \circ \alpha (F) = L^{\Gal(L/F)} = F$ e quindi $\beta \circ \alpha = id$  (stiamo usando le due frecce della coimplicazione separatamente). Quindi $\alpha$ e $\beta$ sono entrambe bigettive, e sono una l'inversa dell'altra.
+    
+    \textbf{Lemma 2:} Sia $H \leq \Gal(L/K)$, $\sigma \in \Gal(L/K)$. Allora $L^{\sigma H \sigma^{-1}}=\sigma(L^H)$.
+    \begin{proof}
+         Basta notare che $\sigma(L^H) = \{ \sigma(\alpha) \in L : \forall \varphi \in H \ \varphi(\alpha) = \alpha\} =  \{ \beta \in L : \forall \varphi \in H \ \varphi(\sigma^{-1}(\beta)) = \sigma^{-1}(\beta)\} = \{ \beta \in L : \forall \varphi \in H \ \sigma \circ \varphi \circ \sigma^{-1}(\beta) = \beta \} = L^{\sigma H \sigma^{-1}}$.
+    \end{proof}
+    Usando il lemma appena dimostrato si ha: $H \tri \Gal(L/K) \iff \forall \sigma \in \Gal(L/K) \ \sigma H \sigma^{-1} = H$ Ma per il lemma 1 questo equivale a $ \forall \sigma \in \Gal(L/K) \ L^{\sigma H \sigma^{-1}}=L^H \iff  \forall \sigma \in \Gal(L/K) \ \sigma(L^H)=L^H \iff L^H/K$ è normale.
+    
+    Infine mostriamo l'isomorfismo di gruppi. Sia $res : \Gal(L/K) \rightarrow \Gal(L^H/K)$ la restrizione a $L^H$. $res$ è suriettivo perché $L/K$ algebrica $\Rightarrow$ $L/L^H$ algebrica e quindi ciascun omomorfismo in $\Gal(L^H/K)$ si estende a uno in $\Gal(L/K)$. \\ $\ker(res) = \{ \sigma \in \Gal(L/K) : \sigma|_{L^H} = id\} = \Gal(L/L^H) = H$ per il lemma 1. Allora per il $1^{\circ}$ teorema di omomorfismo si ha $\Gal(L^H/K) \cong \frac{\Gal(L/K)}{\Gal(L/L^H)}$.
+\end{proof}
+
+\begin{theorem}{Galois in campi finiti}
+    $\Gal(\Fpn / \Fpm) = \grp{\Phi^m} \cong \Z/(n/m)\Z$, dove $\Phi : x \mapsto x^p$ è l'omomorfismo di Frobenius.
+\end{theorem}
+\begin{proof}
+    Segue direttamente dalla caratterizzazione di $\Aut(\Fpn) = \grp{\Phi} \cong \Zn$, infatti $\#\Gal(\Fpn / \Fpm) = [\Fpn : \Fpm] = n / m$ e $\Gal(\Fpn / \Fpm) \le \Aut(\Fpn) \cong \Zn$, che ha un unico sottogruppo di ordine $n / m$. Si noti che effettivamente $\Phi^m : x \mapsto x^{p^m}$ ristretto a $\Fpm$ è l'identità.
+\end{proof}
+
+\subsection{Fatti sui gruppi di Galois}
+%isomorfismi dei galois con le operazioni
+\begin{minipage}{0.5\textwidth}  
+\begin{tikzcd}[every arrow/.append style={dash}]
+&&LF\ar{dl}\ar{dr}\\
+&L \ar{dr} & & F \ar{dl}\\
+&& K = L \cap F
+\end{tikzcd}  
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+\begin{theorem}{del traslato}
+    Siano $K = L\cap F$, $F/K$ di Galois e $L/K$ algebrica. Allora $LF/L$ è di Galois e $\Gal(LF/L) \cong \Gal(F/K)$.
+\end{theorem}
+\end{minipage}\hfill
+\begin{proof}
+    $LF/L$ è di Galois per shift di estensioni normali.
+    Consideriamo l'omomorfismo $res: \Gal(LF/L) \rightarrow \Gal(F/K)$ dato dalla restrizione a $F$. Esso è chiaramente un omomorfismo e $\ker(res) = \{ \varphi \in \Gal(LF/L) : \varphi|_F = id \} $. Ma $\forall \varphi \in \Gal(LF/L) \varphi|_L = id$ per definizione e quindi $\varphi \in \ker(res) \iff \varphi|_LF = id \iff \varphi = id$ essendo $LF$ il dominio di $\varphi$.
+    
+    Per dimostrare la suriettività, sia $I = \imm(res)$.
+    Il suo campo fissato è $F^I = \{\alpha \in F : \forall \sigma \in I \ \sigma(\alpha) = \alpha \} = \{\alpha \in F : \forall \varphi \in \Gal(LF/L) \ \varphi|_F(\alpha) = \alpha \} = F \cap \{\alpha \in LF : \forall \varphi \in \Gal(LF/L) \ \varphi(\alpha) = \alpha \} = F \cap L = K$. Allora per corrispondenza di Galois $ \imm(res) = I = \Gal(F/K)$. 
+\end{proof}
+\begin{corollary}{moltiplicatività del composto}
+    Siano come prima $K = L\cap F$, $F/K$ di Galois e $L/K$ algebrica. Allora $[LF:K] = [F:K][L:K]$.
+\end{corollary}
+\begin{proof}
+    Per il teorema, $\Gal(LF/L) \cong \Gal(F/K) \Rightarrow [LF:L] = [F:K]$. Ma per torri si ha allora $[LF:L]=[LF:L][L:K] = [F:K][L:K]$. 
+\end{proof}
+\begin{theorem}{campi fissati e operazioni}
+    Sia $L/K$ di Galois finita, e $H,S \leq \Gal(L/K)$. Allora valgono le seguenti:
+    \begin{enumerate}[label=($\roman*$)]
+        \item $L^H \subseteq L^S \iff H \supseteq S$
+        \item $L^{H\cap S} = L^HL^S$
+        \item $L^{\langle H, S \rangle} = L^H \cap L^S$
+    \end{enumerate}
+    \begin{minipage}{0.5\textwidth}  
+    \begin{tikzcd}[every arrow/.append style={dash}]
+    && L\ar{d} \\
+    && L^HL^S\ar{dl}\ar{dr}\\
+    &L^H \ar{dr} & & L^S \ar{dl}\\
+    && L^H \cap L^S \ar{d}\\
+    && K 
+    \end{tikzcd}  
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}  
+    \begin{tikzcd}[every arrow/.append style={dash}]
+    && \{id\}\ar{d} \\
+    && H \cap S \ar{dl}\ar{dr}\\
+    &H \ar{dr} & & S \ar{dl}\\
+    && \langle H, S \rangle \ar{d}\\
+    && \Gal(L/K)
+    \end{tikzcd}  
+    \end{minipage}\hfill
+\end{theorem}
+\begin{proof}
+ Per $(i)$ basta notare che $H \supseteq S \Rightarrow L^H \subseteq L^S$ segue direttamente dalla definizione, mentre sempre per definizione  $L^H \subseteq L^S \Rightarrow \Gal(L/L^H) \supseteq \Gal(L/L^S)$ e per uno dei lemmi visti a lezione $H = \Gal(L/L^H), S = \Gal(L/L^S)$. \\
+Per $(ii)$ notiamo intanto che per $(i)$ $L^H \subseteq L^{H\cap S}$ e analogamente $L^S$, quindi $L^HL^S \subseteq L^{H\cap S}$. Per corrispondenza di Galois $L^HL^S = L^N$ per $N = \Gal(L/L^HL^S)$. Ma allora $N = \Gal(L/L^H) \cap \Gal(L/L^S) = H \cap S$. Infatti si ha $\Gal(L/L^HL^S) =  \{\varphi : L \rightarrow \overline{K} : \varphi \text{ omomorfismo e } \varphi_{L^HL^S} = id\} = \{\varphi : L \rightarrow \overline{K} : \varphi \text{ omomorfismo e }\varphi_{L^H} = id, \varphi_{L^H} = id\} = \Gal(L/L^H) \cap \Gal(L/L^S)$.\\
+Per $(iii)$ come prima notiamo intanto che per $(i)$ $L^H \supseteq L^{\langle H, S \rangle}$ e analogamente $L^S$. Quindi $L^H \cap L^S \supseteq L^{\langle H, S \rangle}$. Notiamo ora che $\alpha \in L^H \cap L^S \Rightarrow \forall \ni \in H, \psi \in S, \ \ni(\alpha)=\alpha = \psi(\alpha) \Rightarrow \forall \varphi \in \langle H, S \rangle, \ \varphi(\alpha)=\alpha \Rightarrow \alpha \in L^{\langle H, S \rangle}$  quindi $L^H \cap L^S \subseteq L^{\langle H, S \rangle}$.
+\end{proof}
+
+\begin{theorem}{estensioni con radici quadrate}
+    Sia $\char(K) \neq 2$. Allora dati $\alpha, \beta \in K$, $K(\sqrt{\alpha}) = K(\sqrt{\beta}) \iff \alpha\beta \text{ è un quadrato in } K \iff \frac{\alpha}{\beta} \text{ è un quadrato in } K$.
+\end{theorem}
+\begin{proof}
+    $\alpha\beta \text{ è un quadrato in } K \iff \frac{\alpha}{\beta} \text{ è un quadrato in } K$ è ovvia (basta moltiplicare/dividere per $\beta^2$).
+    
+    $K(\sqrt{\alpha}) = K(\sqrt{\beta}) \iff \exists x,y \in K \ \sqrt{\alpha} = x+y \sqrt{\beta}$, i.e. $\sqrt{\alpha} - y \sqrt{\beta} = x$. Se $x=0$ si ha $\sqrt{\frac{\alpha}{\beta}} \in K$ e la tesi è ovvia. Se $y=0$ si ha $\sqrt{\alpha} \in K$, e allora $\alpha\beta \text{ quadrato in } K \iff  \beta$ è un quadrato in $K$, quindi $\iff K(\beta) = K = K(\alpha)$. Altrimenti elevando al quadrato
+    $\alpha + y^2 \beta - 2y\sqrt{\alpha \beta} = x^2 \iff \sqrt{\alpha\beta} = \frac{\alpha + y^2\beta - x^2}{2y} \in K \iff \frac{\alpha}{\beta} \text{ è un quadrato in } K$. 
+\end{proof}
+
+\begin{theorem}{Galois di una biquadratica}
+    Siano $p(x) = x^4 + ax^2 + b \in \Q[x]$ irriducibile e $L$ il suo campo di spezzamento. Sia $\Delta = a^2 - 4b$. Allora $G = \Gal(L / Q)$ è isomorfo a:
+    \begin{itemize}
+        \item $\Z/2\Z \times \Z/2\Z$ se $b$ è un quadrato in $\Q$;
+        \item $\Z/4\Z$ se $b\Delta$ è un quadrato in $\Q$;
+        \item $D_4$ se né $b$ né $b\Delta$ sono quadrati in $\Q$.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Teniamo a mente $G \hookrightarrow S_4$.
+    Ponendo $t = x^2$ le soluzioni di $p$ sono $t_{\pm} = \frac{-a \pm \sqrt{\Delta}}{2}$. Siano allora $x_1 = \sqrt{t_+}, x_2 = \sqrt{t_-}, x_3 = -x_1, x_4=-x_3$ le radici della biquadratica. Si ha $L = \Q(x_1,x_2,x_3,x_4)=\Q(x_1,x_3)$.
+
+    \begin{minipage}{0.55\textwidth}  
+    Consideriamo il diagramma a lato. Notiamo che $t_+ \in \Q(x_1)$ e quindi $\Q(\sqrt{\Delta}) \subseteq \Q(x_1)$ e analogamente $\Q(\sqrt{\Delta}) \subseteq \Q(x_2)$. $p$ non si spezza in fattori di grado due, quindi $\sqrt{\Delta} \notin \Q$, da cui $[\Q(\sqrt{\Delta}) : \Q] = 2$. Per irriducibilità di $p$ seguono anche $[\Q(x_1): \Q] = [\Q(x_2) :  \Q] = 4$. Per torri e shift $[\Q(x_1) : \Q(\sqrt{\Delta})] = 2$ e $[L : \Q(x_2)] \leq 2$, da cui $[L : \Q] = \in \{4, 8\}$.
+    \end{minipage}\hfill
+    \begin{minipage}{0.4\textwidth}  
+    \begin{tikzcd}[every arrow/.append style={dash}]
+    &L\arrow{dl}[swap]{\leq 2}\arrow{dr}{\leq 2}\\
+    \Q(x_1)\arrow{dr}{2}\arrow{ddr}[swap]{4} &&\Q(x_2)\arrow{dl}[swap]{2}\arrow{ddl}{4}\\
+    & \Q(\sqrt{\Delta}) \arrow{d}{2}\\
+    & \Q
+    \end{tikzcd}  
+    \end{minipage}\hfill
+
+    Notiamo $[L : \Q] = 4 \iff \Q(x_1) = \Q(x_2)$. $\Q(x_1) = \Q(\sqrt{\Delta}, \sqrt{t_+})$ e $\Q(x_2) = \Q(\sqrt{\Delta}, \sqrt{t_-})$: per un teorema precedente queste coincidono sse $\sqrt{t_+ t_-} \in \Q(\sqrt{\Delta})$. Ma $x_1x_2 = \sqrt{t_+ t_-} = \sqrt{b}$.
+    
+    \begin{minipage}{0.5\textwidth}
+    Studiamo quindi quest'altro diagramma. Per quanto detto finora $[L : \Q] = 4 \iff [\Q(\sqrt{\Delta}, \sqrt{b}) : \Q] = 2$. Ma allora, poiché $[\Q(\sqrt{\Delta}) : \Q] = 2$ per torri $[\Q(\sqrt{\Delta}, \sqrt{b}) : \Q(\sqrt{\Delta})] = 1$, che si verifica quando 
+    \begin{itemize}
+        \item $b$ è quadrato in $\Q \Rightarrow [\Q(\sqrt{b}) : \Q] = 1$;
+        \item $b$ non è un quadrato in $\Q$ e $\Q(\sqrt{\Delta}) = \Q(\sqrt{b})$, che accade sse $b\Delta$ è quadrato.
+    \end{itemize}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}  
+    \begin{tikzcd}[every arrow/.append style={dash}]
+    &\Q(\sqrt{\Delta}, \sqrt{b})\ar{dl}\ar{dr}\\
+    \Q(\sqrt{\Delta}) \arrow{dr}{2} & & \Q(\sqrt{b}) \arrow{dl}{2 \text{ o } 1}\\
+    & \Q
+    \end{tikzcd} 
+    \end{minipage}\hfill
+    
+    Studiamo le strutture dei gruppi nei due casi. Gli unici strutture possibili di un gruppo di ordine 4 sono $\Z/4\Z$ e $\Z/2\Z \times \Z/2\Z$. Una caratteristica che li distingue certamente è la presenza o meno di un elemento di ordine $4$. Ricordiamo che per irriducibilità di $p$ $G$ agisce transitivamente sull'insieme delle radici. Chiamiamo $f_i \in G$ l'elemento del Galois tale che $f(x_1) = x_i$ per $i = 1, \dots, 4$. È chiaro che $f_1 = id$ e $\ord(f_3) = 2$. Gli altri elementi sono o entrambi di ordine $4$ o entrambi di ordine $2$. Studiamo l'ordine di $f_2$. $f_2^2(x_1) = f_2(x_2) = f_2(\frac{\sqrt{b}}{x_1}) = \frac{f_2(\sqrt{b})}{x_2}$. 
+    \begin{itemize}
+        \item Se $b$ è un quadrato in $\Q$, allora $\frac{f_2(\sqrt{b})}{x_2} = \frac{\sqrt{b}}{x_2} = x_1$ e quindi $f_2$ ha ordine 2, da cui segue che $G \cong \Z/2\Z \times \Z/2\Z$. 
+        \item Se invece $b$ non è un quadrato in $\Q$ allora $\sqrt{b} = \frac{c}{\sqrt{\Delta}}$ per qualche $c \in \Q$. Allora $\frac{f_2(\sqrt{b})}{x_2} = \frac{c}{f_2(\sqrt{\Delta}) x_2}$. Notando che $\sqrt{\Delta} = 2x_1^2 + a = -(2x_2^2 + a)$ si ha $f_2(\sqrt{\Delta}) = 2f_2(x_1)^2 + a = 2x_2^2 + a = -\sqrt{\Delta}$, quindi $f_2^2(x_1) = -x_1 = x_3$ e $f_2$ ha ordine $4$, da cui segue $G \cong \Z/4\Z$.
+    \end{itemize}
+    Se invece $[L : \Q] = 8$ allora $G$ è isomorfo a un $2$-Sylow di $S_4$, quindi $D_4$.
+\end{proof}
+\begin{theorem}{Galois delle radici dell'unità}
+     Sia $\zeta_n = e^{\frac{i \pi}{n}}$ una radice $n$-esima dell'unità. Allora $\Q(\zeta_n)/\Q$ è di Galois e $\Gal(\Q(\zeta_n)/\Q) \cong (\Zn)^\times$.
+\end{theorem}
+\begin{proof}
+    L'estensione $\Q(\zeta_n) = \Q(\zeta_n^k \mid k = 0, \dots, n-1)$ è il campo di spezzamento di $x^n-1$ su $\Q$, dunque un'estensione normale di $\Q$.
+    Ogni elemento di $\Gal(\Q(\zeta_n)/\Q)$ è univocamente determinato dall'immagine di $\zeta_n$. Poiché gli omomorfismi iniettivi preservano gli ordini, $\psi(\zeta_n) = \zeta_n^k$ con $(n, k) = 1$, da cui $\#\Gal(\Q(\zeta_n)/\Q) \le \varphi(n)$.
+
+    \begin{lemma2}
+        Dato un primo $p$ che non divide $n$ e una radice primitiva $\zeta_n$, $\zeta_n$ e $\zeta_n^p$ sono coniugate.
+    \end{lemma2}
+    \begin{proof}
+        Dato $p \nmid n$, per il criterio della derivata $x^n - 1$ ha radici distinte in $\overline{\Fp}$.
+        
+        Siano $f(x)$ il polinomio minimo di $\zeta_n$ e $g(x)$ il polinomio minimo di $\zeta_n^p$ su $\Q$. $f(x)$ e $g(x)$ sono divisori monici di $x^n - 1$ in $\Q[x]$, quindi per il lemma di Gauss sono a coefficienti interi. $g(x^p)$ si annulla in $\zeta_n$, quindi $g(x^p) = f(x)h(x)$ in $\Z[x]$ per il lemma di Gauss.
+         
+        Se per assurdo fosse $f(x) \neq g(x)$, allora $(f(x), g(x)) = 1$ e quindi $f(x)g(x) \mid x^n - 1$, cioè $x^n - 1 = f(x)g(x)l(x)$ in $\Z[x]$. Proiettiamo questa relazione $\mod p$: $\overline{x^n - 1} = \overline{f(x)} \overline{g(x)} \overline{l(x)}$. D'altra parte $\overline{f(x)} \overline{h(x)} = \overline{g(x^p)} = \overline{g(x)}^p$, quindi ogni radice di $\overline{f(x)}$ in $\overline{\Fp}$ è anche una radice di $\overline{g(x)}$. Data allora $\alpha \in \overline{\Fp}$ radice di $\overline{f(x)}$, essa sarebbe radice di $x^n - 1$ in $\overline{\Fp}$ con molteplicità almeno due: assurdo.
+    \end{proof}
+    Per induzione allora $\zeta_n$ coniugata a $\zeta_n^k$ per ogni $k$ coprimo con $n$. Dunque anche $\deg f(x) \geq \varphi(n)$, da cui l'uguaglianza.
+
+    Consideriamo ora la funzione iniettiva $\Psi: \Gal(\Q(\zeta_n)/\Q) \rightarrow (\Zn)^\times$ definita da $\sigma(\zeta_n \mapsto \zeta_n^k) \mapsto k$.
+    Per quanto appena visto $\Psi$ è anche surgettiva. Inoltre, se $\sigma_1(\zeta_n \mapsto \zeta_n^{k_1})$ e $\sigma_2(\zeta_n \mapsto \zeta_n^{k_2})$, allora $\sigma_2 \circ \sigma_1(\zeta_n \mapsto (\zeta_n^{k_1})^{k_2} = \zeta_n^{k_1k_2})$, quindi $\Psi(\sigma_2 \circ \sigma_1) = k_1k_2 = \Psi(\sigma_1)\Psi(\sigma_2)$, cioè $\Psi$ è l'isomorfismo cercato.
+\end{proof}
+
+Il polinomio minimo di una radice $n$-esima primitiva dell'unità è detto ``$n$-esimo polinomio ciclotomico'' e si indica con $\Phi_n(x)$. Dalla dimostrazione precedente deduciamo $\deg \Phi_n(x) = \varphi(n)$. Vale inoltre
+\[
+    x^n - 1 = \prod_{d \mid n}{\Phi_d(n)},
+\]
+infatti entrambi i membri sono polinomi monici, con le stesse radici e privi di radici doppie. Prendendo i gradi ridimostriamo la nota identità $n = \sum_{d \mid n}{\varphi(n)}$, già incontrata durante il corso di aritmetica.
+
+\begin{theorem}{Galois con radici di primi}
+    Siano $p, q$ primi e $f(x) = x^p -  q \in \Q[x]$. Detto $L$ il campo di spezzamento di
+    $f$ vale
+    \[
+        \Gal(L/\Q) \cong \Zp \rtimes (\Zp)^\times
+    \]
+    dove $(\Zp)^\times$ agisce su $\Zp$ tramite moltiplicazione.
+\end{theorem}
+\begin{proof}
+    Con le tecniche già viste in questo capitolo dimostriamo che $L = \Q(\zeta_p, \sqrt[p](q))$ ha grado $p(p-1)$ su $\Q$. I coniugati di $\zeta_p$ sono gli $\zeta_p^j$ con $j = 1 \dots p-1$, quelli di $\sqrt[p]{q}$ sono gli $\zeta_p^k$ con $k = 0\dots p-1$. Un elemento del Galois manda coniugati in coniugati, quindi i $p(p-1)$ elementi di $G = \Gal(L/\Q)$ sono tutti e soli quelli che mappano $\zeta_p,\sqrt[p]{q}$ in rispettivi coniugati. Rimane da trovare una funzione bigettiva $\Psi : \Zp \rtimes (\Zp)^\times \to G$ e verificare che sia un'omomorfismo: quella a cui probabilmente stai pensando funziona.
+\end{proof}
+
+\begin{exercise}
+    Si completino i dettagli della dimostrazione precedente. Si dimostri poi che l'enunciato vale più in generale nel caso $f(x) = x^p - a$ con $a$ non potenza $p$-esima perfetta. Si dimostri in particolare che $x^p - a$ è irriducibile.
+
+    \tiny{HINT: tramite cambio di variabile, è sufficiente che in $a$ appaia un primo $q$ con esponente congruo a $1$ $\mod p$ per ottenere un polinomio $q$-Eisenstein.}
+
+    \tiny{HINT: sfruttare il fatto che ogni classe di resto nonzero $\mod p$ ammette un inverso e che $\Q(\sqrt[p]{a}^k) \subseteq \Q(\sqrt[p]{a})$}.
+\end{exercise}
+
+\begin{theorem}{(*) $\sqrt{\pm p} \in \Q(\zeta_p)$}
+    Se $p$ è un primo diverso da 2, allora $\sqrt{\pm p} \in \Q(\zeta_p)$, dove il segno $\pm$ dipende da $p$ modulo 4: è $-$ se $p \equiv 3 \pmod{4}$, $+$ se $p \equiv 1 \pmod{4}$.
+\end{theorem}
+\begin{proof}
+    (non fatta a lezione e non la dimostrazione canonica). Se il lettore ha seguito/sta seguendo il corso di Analisi numerica si sarà imbattuto nella matrice di Fourier, un tipo particolare di matrice di Vandermonde. Dati $(x_1. x_2, \dots, x_n)$ definiamo la Vandermonde (quadrata) come:
+\begin{equation*}
+V(x_0, x_1, x_2, \dots, x_m) = 
+\begin{bmatrix}
+1 & x_0 & x_0^2 & \dots & x_0^{n-1}\\
+1 & x_1 & x_1^2 & \dots & x_1^{n-1}\\
+1 & x_2 & x_2^2 & \dots & x_2^{n-1}\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\ 
+1 & x_{n-1} & x_{n-1}^2 & \dots & x_{n-1}^{n-1}\\
+\end{bmatrix}
+\end{equation*}
+E quella di Fourier con (detta $\zeta_n$ la radice $n$-esima dell'unità): $\Omega_n = V(1,\zeta_n,\zeta_n^2,\dots, \zeta_n^{n-1})$
+%\begin{equation*} \Omega_n = V(1,\zeta_n,\zeta_n^2,\dots, \zeta_n^{n-1}) =  \begin{bmatrix} 1 & 1 & 1 & \dots & 1\\ 1 & \zeta_n & \zeta_n^2 & \dots & \zeta_n^{n-1}\\ 1 & \zeta_n^2 & \zeta_n^4 & \dots & \zeta_n^{2n-2)}\\ \vdots & \vdots & \vdots & \ddots & \vdots \\  1 & \zeta_n^{n-1} & \zeta_n^{2(n-1)} & \dots & \zeta_n^{(n-1)^2}\\ \end{bmatrix} \end{equation*}
+Si richiamano alcune proprietà, seguendo le definizioni date sopra:
+\begin{itemize}
+    \item $\text{det}(V) = \prod_{1 \leq i < j \leq n} (x_j - x_i)$
+    \item $\Omega_n^2 = n \cdot
+    \begin{bmatrix}
+1 & 0 & 0 & \dots & 0 & 0\\
+0 & 0 & 0 & \dots & 0 & 1\\
+0 & 0 & 0 & \dots & 1 & 0\\
+\vdots & \vdots & \vdots  & \ddots & \vdots & \vdots \\ 
+0 & 0 & 1 & \dots & 0 & 0  \\
+0 & 1 & 0 & \dots & 0 & 0 
+\end{bmatrix}  \quad \Rightarrow \quad \text{det}(\Omega_n)^2 = n^n \cdot (-1)^{\frac{n(n+1)}{2} - 1}$
+\end{itemize}
+Sostituendo $n$ con $p \geq 3$ primo, $\Omega_n = V(1,\zeta_p,\zeta_p^2,\dots, \zeta_p^{p-1})$, quindi
+    \[
+        \sqrt{p^p \cdot (-1)^{\frac{p(p+1)}{2} - 1}} =  \text{det}(\Omega_n) = \prod_{1 \leq i < j \leq n} (\zeta_p^j - \zeta_p^i).
+    \]
+Il lato destro dell'equazione, si ottiene da $\zeta_p$ con somme e prodotti, quindi $\sqrt{p^p \cdot (-1)^{\frac{p(p+1)}{2} - 1}} \in \Q(\zeta_p)$. Ma poiché $p$ dispari $\sqrt{p^p}$ è un intero moltiplicato per $\sqrt{p}$. Quindi $\sqrt{\pm p} \in \Q(\zeta_p)$. Il segno $\pm$ è dato da $\frac{p(p+1)}{2} - 1$: si verifica che è $-1$ se $p \equiv 3 \pmod{4}$, $1$ se $p \equiv 1 \pmod{4}$.
+
+
+\end{proof}
+
+\subsection{Teorema fondamentale dell'algebra}
+
+% "Il primo teorema di omomorfismo?"
+% ~Max
+Non il primo teorema di omomorfismo, bensì ``$\C$ è algebricamente chiuso''.
+
+\begin{proof}
+    Sia $f(x) \in \C[x]$. Notiamo che $g(x) = f(x) \overline{f}(x) \in \R[x]$. Dimostriamo che il suo campo di spezzamento, che chiamiamo $K$, è $\R$ o $\C$.
+    Il campo di spezzamento di $f$ è contenuto in quello di $g$, quindi se $g$ si spezza in $\C$, anche $f$ si spezza.
+
+    \begin{minipage}{0.2\textwidth}  
+    \begin{tikzcd}[every arrow/.append style={dash}]
+    K\arrow{d}\\
+    K^{P_2} = \R(\alpha) \arrow{d}{d = 1}\\
+    \R
+    \end{tikzcd}  
+    \end{minipage}\hfill
+    \begin{minipage}{0.75\textwidth}  
+    Sia $G = \Gal(K/\R)$ (gruppo finito perché $K$ è campo di spezzamento di un unico polinomio) e sia $P_2$ un suo $2$-Sylow. Allora $d = [G : P_2]$ è un dispari. Per corrispondenza di Galois $K^{P_2}$ è un'estensione di $\R$ di grado $d$. Per il teorema dell'elemento primitivo essa è semplice, ossia $K^{P_2}=\R(\alpha)$ per un qualche $\alpha \in K$. 
+    \end{minipage}\hfill 
+    
+    Detto $\mu(x)\in \R[x]$ il polinomio minimo di $\alpha$, si ha $\deg(\mu(x)) = d$ dispari e quindi per il teorema dei valori intermedi $\mu(x)$ ha almeno una radice in $\R$. Ma allora, poiché $\mu(x)$ è irriducibile, deve valere per forza $d=1$.
+    
+    Quindi $\#G = 2^n$ per un qualche $n \in \N$ e allora per Sylow esiste una catena di sottogruppi $\{id\}=G_0 \subset G_1 \subset \dots \subset G_n = G$ tale che ciascun gruppo ha indice $2$ nel successivo. Per corrispondenza di Galois esiste allora una catena di campi $K=K_0 \supset K_1 \supset \dots \supset K_n = \R$ tale che ciascuna estensione ha grado $2$ sulla successiva. Ma l'unica estensione di grado $2$ di $\R$ è $\C$, e $\C$ non ha estensioni di grado $2$. Quindi l'unica possibilità è $K = \R$ o $\C$ come voluto.
+\end{proof}
+
+\subsection{Esercizi}
+
+\begin{exercise}
+    Si contino i polinomi monici irriducibili di grado 10 in $\F_p[x]$.
+\end{exercise}
+\begin{solution}
+    Lavoriamo in una chiusura algebrica $\overline{{\F_p}}$. Sia $f(x) \in \F_p[x]$ irriducibile di grado $n$ di radici $\alpha_1, \dots, \alpha_n$, allora $\F_{p^n} = \F_p(\alpha_i) \cong \frac{\F_p[x]}{(f(x))}$ per unicità di $\F_{p^{10}}$ in $\overline{\F_p}$. Identifichiamo ogni polinomio monico irriducibile con l'insieme delle sue 10 radici: per polinomi irriducibili distinti questi insiemi non si intersecano. $[\F_{p^{10}} : \F_p] = 10$, dunque ogni elemento $\alpha \in \F_{p^{10}}$ ha polinomio minimo di grado al più 10. Se $\deg \mu_\alpha(x) = d$, allora $\F_{p^d} = \F(\alpha) \subseteq \F_{p^{10}}$. Ma sappiamo che $\F_{p^m} \subseteq \F_{p^n} \iff m | n$, dunque i possibili $d$ sono 1,2,5,10. Gli elementi con polinomio minimo di grado 1 o 2 sono tutti e soli gli elementi di $\F_{p^2}$, così come gli elementi con polinomio minimo di grado 1 o 5 sono tutti e soli gli elementi d $\F_{p^5}$. Per il principio di inclusione-esclusione esistono $p^{10} - p^5 - p^2 + p$ elementi con polinomio minimo di grado 10, che corrispondono a $\frac{p^{10} - p^5 - p^2 + p}{10}$ polinomi monici irriducibili di grado 10.
+\end{solution}
+
+\begin{exercise}
+    Determinare il campo di spezzamento di $f_7(x) = x^7 - 1$ su $\F_5$ e su $\F_{11}$.
+\end{exercise}
+\begin{solution}
+    Si tratta di applicare il teorema sul cds di $x^n - 1$ su $\Fp$.
+    $\#(\Z/7\Z^\times) = 6$, dunque $d_5 = \ord_{\Z/7\Z^\times} 5$ e $d_{11} = \ord_{\Z/7\Z^\times} 11$ sono entrambi divisori di 6.
+
+    Si trova $d_5 = 6$ e $d_{11} = 3$, dunque il cds di $x^7 - 1$ su $\F_5$ e su $\F_{11}$ sono rispettivamente $\F_{5^6}$ e $\F_{{11}^3}$.
+\end{solution}
+
+\begin{exercise}
+    Determinare la forma della fattorizzazione di $x^8 - 1$ su $\Fp$.
+\end{exercise}
+\begin{solution}
+    Se $p = 2$, allora $x^8 - 1 = (x - 1)^8$. Assumiamo ora $p \neq 2$, quindi $(8, p) = 1$. Per quanto visto il campo di spezzamento di $x^8 - 1$ su $\Fp$ è $\F_{p^d}$ con $d = \ord_{{\Z/8\Z}^\times}p$. Ricordiamo $(\Z/8\Z)^\times \cong \Z/2\Z \times \Z/2\Z$, dunque $d \in \{ 1, 2 \}$.
+    Ma allora $x^8 - 1$ si spezza come prodotto di fattori di grado uno e due su ogni $\Fp$ e c'è almeno un fattore di grado due se e solo se $d = 2$.
+    Indipendentemente dal campo, $x^8 - 1 = (x^4 + 1)(x^2 + 1)(x + 1)(x - 1)$ \dots quindi $x^4 + 1$ è un irriducibile di $\Z[x]$ che per ogni $p$ \textit{non} è irriducibile su $\Fp$!
+
+    Da aritmetica sappiamo che dato $f(x) \in \Z[x]$, se, detta $\bar f(x)$ la proiezione di $f$ modulo $p$, $\bar f(x)$ è irriducibile su $\Fp[x]$, allora $f$ è irriducibile su $\Z[x]$. L'esercizio ci dice che non vale l'implicazione inversa, cioè esistono irriducibili di $\Z[x]$ che per ogni $p$ sono riducibili su $\Fp[x]$ e $x^4 + 1$ è uno di questi.
+\end{solution}
+
+\begin{exercise}
+    Sia $K$ un campo di caratteristica diversa da 2 e siano $a, b \in K^\times$. Dimostrare che $K(\sqrt{a}) = K(\sqrt{b})$ se e solo se $a/b = c^2$ è un quadrato in $K$.
+\end{exercise}
+\begin{solution}
+    $(\impliedby)$ $a = b c^2$ implica  $\sqrt{a} = c \sqrt{b}$ e $\sqrt{b} = \sqrt{a}/c$, da cui $K(\sqrt{a}) \subseteq K(\sqrt{b}) \subseteq K(\sqrt{a})$, quindi l'uguaglianza.
+    $(\implies)$ $\sqrt{b} \in K(\sqrt{a})$ significa $\sqrt{b} = x + y \sqrt{a}$, dunque $x = \sqrt{b} - y\sqrt{a}$ per opportuni $x, y \in K$, elevando al quadrato, isolando le radici e dividendo per $b$ si trova $\frac{x^2 - b - y^2 a}{2yb} = \frac{\sqrt{a}}{\sqrt{b}}$, da cui $a/b$ quadrato in $K$.
+\end{solution}
+
+\begin{exercise}
+    Siano $p, q \in \Z$ primi distinti. Si dimostri che $\sqrt{p} \in \Q(\sqrt p + \sqrt q)$ e si calcoli il polinomio minimo di $\sqrt p + \sqrt q$. Si dimostri inoltre che $\Q(\sqrt p + \sqrt q)$ è un'estensione normale di $\Q$.
+\end{exercise}
+\begin{solution}
+    Ogni automorfismo di un campo contenente $\Q$ fissa per definizione $1$, dunque fissa puntualmente tutto $\Q$. Per l'esercizio precedente $\sqrt p \notin \Q(\sqrt q)$, per torri e shift $[\Q(\sqrt p, \sqrt q) : \Q] = 4$, quindi esistono quattro immersioni di $\Q(\sqrt p, \sqrt q)$ in $\overline \Q$: tutte e sole le possibili scelte per $\sqrt p \mapsto \pm \sqrt p$ e $\sqrt q \mapsto \pm \sqrt q$. Le immagini di $\sqrt p + \sqrt q$ tramite queste immersioni sono tutte distinte, dunque $[\Q(\sqrt p + \sqrt q) : \Q] \ge 4$, ma poiché $\Q(\sqrt p + \sqrt q) \subseteq \Q(\sqrt p, \sqrt q)$, i due campi coincidono, in particolare quindi $\sqrt p \in \Q(\sqrt p + \sqrt q)$. Poiché $\sqrt p + \sqrt q$ ha grado $4$, i $\pm \sqrt p \pm \sqrt q$ sono tutti e soli i coniugati di $\sqrt p + \sqrt q$, quindi $\mu_{\sqrt p + \sqrt q}(x) = (x - \sqrt p - \sqrt q) \dots (x + \sqrt p + \sqrt q)$. $\Q(\sqrt p + \sqrt q)/\Q$ è normale poiché è il campo di spezzamento di $\mu_{\sqrt p + \sqrt q}(x)$ su $\Q$.
+\end{solution}
+
+\begin{exercise}
+    Siano $K$ campo e $f, g \in K[x]$ irriducibili con $\deg f = n$, $\deg g = m$, $(n, m) = 1$. Si dimostri che per ogni radice $\alpha$ di $f$ $g$ è irriducibile su $K(\alpha)$.
+\end{exercise}
+\begin{solution}
+    Sia $\beta \in \overline{K}$ una radice di $g$. $[K(\alpha) : K] = n$ e $[K(\beta) : K] = m$, per shift allora $[K(\alpha, \beta) : K(\alpha)] \le m$, per torri allora $[K(\alpha, \beta) : K] \le nm$. Per torri $n, m \mid [K(\alpha, \beta) : K]$, ma allora $[K(\alpha, \beta) : K] = nm$, da cui per torri $[K(\alpha, \beta) : K(\alpha)] = m$. Quindi il polinomio minimo di $\beta$ su $K(\alpha)$ ha grado $m$, cioè è proprio $g$, che quindi è irriducibile.
+\end{solution}
+
+\begin{exercise}
+    Determinare il polinomio minimo di $\alpha^2$ su un campo $K$ in funzione del polinomio minimo di $\alpha$ su $K$. Sia ora $\alpha = 2 + \sqrt{5 + \sqrt{-5}}$. Determinare il polinomio minimo di $\alpha^2$ su $\Q$.
+\end{exercise}
+\begin{solution}
+    Consideriamo $K \subseteq K(\alpha^2) \subseteq K(\alpha)$. Per torri $n = \deg \mu_\alpha = [K(\alpha) : K] = [K(\alpha) : K(\alpha^2)][K(\alpha^2) : K]$ con $[K(\alpha) : K(\alpha^2)] \le 2$. Scriviamo $\mu_\alpha(x) = p(x^2) + x d(x^2)$. Se $d \equiv 0$, allora $n$ è pari e $p$ è un polinomio di grado $n / 2$ che si annulla in $\alpha^2$, quindi $p = \mu_{\alpha^2}$ e $[K(\alpha) : K(\alpha^2)] = 2$. D'altro canto, se $[K(\alpha) : K(\alpha^2)] = 2$, allora $\deg \mu_\alpha \le 2 \deg \mu_{\alpha^2}$, ma allora $\mu_\alpha(x) = \mu_{\alpha^2}(x^2)$. Quindi $d \equiv 0 \iff [K(\alpha) : K(\alpha^2)] = 2$. Se invece $K(\alpha) = K(\alpha^2)$, allora $\deg \mu_\alpha = \deg \mu_{\alpha^2}$. Consideriamo il polinomio $s(x^2) = (p(x^2) + xd(x^2))(p(x^2) - xd(x)) = p^2(x) - x^2 d^2(x)$, che ha grado $2n$ nell'indeterminata $x$ e grado $n$ nell'indeterminata $x^2$. Abbiamo $s(\alpha^2) = 0$, dunque $s = \mu_{\alpha^2}$.
+
+    Cerchiamo ora $\mu_{\alpha^2}$ con $\alpha = 2 + \sqrt{5 + \sqrt{-5}}$. Per quanto sopra ci basta trovare $\mu_\alpha$ su $\Q$. Consideriamo $\beta = \alpha - 2 = \sqrt{5 + \sqrt{-5}}$.
+    Mostriamo che $\Q(\alpha) = \Q(\beta)$ ha grado $4$ su $\Q$. Consideriamo $\Q \subset \Q(\sqrt{-5}) \subset \Q(\beta)$. $[Q(\beta) : \Q(\sqrt{-5})] = 2$ poiché $(a + b \sqrt{-5})^2 = 5 + \sqrt{-5}$ non ha soluzioni razionali (verifica), quindi per torri $[\Q(\beta) : \Q] = 4$.
+    $\deg \mu_\alpha = \deg \mu_\beta$, da cui $\mu_\alpha(x) = \mu_\beta(x - 2)$. Il polinomio di quarto grado $(x^2 - 5)^2 - 5 = x^4 - 10x^2 + 20$ si annulla in $\beta$, di cui dunque è il polinomio minimo. Si verifica che $\mu_\alpha(x) = \mu_\beta(x - 2) = p(x^2) + xd(x^2)$ ha termini di grado dispari, dunque il polinomio minimo di $\alpha^2$ è $p^2(x) - x^2d^2(x)$.
+\end{solution}
+
+\begin{exercise}
+    Sia $p$ un numero primo e siano $\alpha, \beta \in \overline{\Fp}$. Poniamo $m = [\Fp(\alpha) : \Fp]$ e $n = [\Fp(\beta) : \Fp]$. Dimostrare che, se $(m, n) = 1$, allora $[\Fp(\alpha + \beta) : \Fp] = mn$.
+\end{exercise}
+\begin{solution}
+    $(m, n) = 1 \implies p \nmid m \lor p \nmid n$. (wlog) $p \nmid m$.
+    Per un esercizio svolto in precedenza, $[\Fp(\alpha, \beta) : \Fp] = \#\Gal(\Fp(\alpha, \beta) / \Fp) = mn$. Siano $\alpha = \alpha_1, \dots, \alpha_m$, $\beta = \beta_1, \dots, \beta_n$ i coniugati rispettivamente di $\alpha$ e di $\beta$. Per cardinalità, $\Gal(\Fp(\alpha, \beta) / \Fp) = \{ \psi(\alpha \mapsto \alpha_i, \beta \mapsto \beta_j) : i = 1, \dots, m, j = 1, \dots, n \}$. Le immagini di $\alpha + \beta$ tramite gli elementi del Galois sono quindi gli elementi nella forma $\alpha_i + \beta_j$: se queste sono $mn$ elementi distinti, allora $\deg \mu_{\alpha + \beta} = mn$, da cui la tesi. Supponiamo
+     $\alpha_i + \beta_j = \alpha_k + \beta_l$, allora $\alpha_i - \alpha_k = \beta_l - \beta_j \in \Fp(\alpha) \cap \Fp(\beta) = \Fp$ per coprimalità. Mostriamo che $\alpha_i - \alpha_k = 0$, da cui $i = k$ e $j = l$, quindi la tesi. Supponiamo per assurdo $\alpha$ coniugato a $\alpha + c$ con $c \in \Fp^\times$, cioè $\alpha + c$ radice di $\mu_\alpha(x)$. Allora $\mu_\alpha(x + c)$ è un polinomio monico irriducibile di grado $m$ che si annulla in $\alpha$, dunque $\mu_\alpha(x) = \mu_\alpha(x + c)$. Reiterando otteniamo che per ogni radice $\gamma$ di $\mu_\alpha(x)$, gli elementi $\gamma, \gamma + c, \gamma + (p-1)c$ sono radici di $\mu_\alpha(x)$, da cui $p \mid \deg \mu_\alpha(x)$: assurdo poiché $p \nmid n = \deg \mu_\alpha(x)$. Necessariamente allora $\alpha_i - \alpha_k = 0$, da cui la tesi.
+\end{solution}
+
+Ripetendo il ragionamento della soluzione si dimostrano i seguenti fatti:
+\begin{enumerate}
+    \item Siano $K$ un campo con $\char K = 0$ e $\alpha, \beta$ coniugati su $K$. Allora $\alpha - \beta \notin K$;
+    \item Siano $K$ un campo perfetto con $\char K = p$ e $\alpha, \beta$ coniugati di grado $n$ su $K$. Se $(n, p) = 1$, allora $\alpha - \beta \notin K$.
+\end{enumerate}

@@ -1,0 +1,1174 @@
+\section{Teoria dei gruppi}
+
+Dove non diversamente specificato $G$ è un gruppo con identità $e$. Il simbolo dell'operazione verrà omesso.
+
+\subsection{Definizioni e richiami di Aritmetica}
+
+\begin{definition}{centro}
+    $Z(G) = \{h \in G : \forall \ g \in G \ gh = hg\}$.
+\end{definition}
+\begin{proposition}{proprietà del centro}
+    $G/Z(G)$ ciclico $\Rightarrow$ $G$ abeliano ($Z(G) = G$).
+    
+    \textbf{Attenzione!} $G/Z(G)$ abeliano $\Rightarrow$ $G$ abeliano è falsa, un controesempio è $Q_8$.
+\end{proposition}
+\begin{definition}{centralizzatore di un elemento}
+    se $g \in G$,  $Z_G(g) = \{h \in G : gh = hg\}$.
+\end{definition}
+\begin{definition}{centralizzatore di un sottogruppo}
+    se $H < G$, $Z_G(H) = \bigcap_{h \in H} Z_G(h)$.
+\end{definition}
+\begin{definition}{classe di coniugio di un elemento}
+    $Cl(g) = \{hgh^{-1} : h \in G \}$.
+\end{definition}
+\begin{theorem}{Lagrange}
+    sia $G$ finito e $H< G$. Allora $\#H \mid \#G$. Corollario: $g \in G \Rightarrow \text{ord}(g) \mid \#G$.
+\end{theorem}
+\begin{definition}{prodotto diretto}
+    Dati $(H,*_H), (K,*_K)$ gruppi si può dare una struttura di gruppo al loro prodotto cartesiano $H \times K$, prendendo come operazione $*$ tale che $(h_1,k_1)*(h_2,k_2) = (h_1*_Hh_2, k_1*_Kk_2)$. Tale gruppo è detto \textit{prodotto diretto} di $H, K$.
+\end{definition}
+\begin{proposition}{prodotto di sottogruppi}
+    Siano $H,K \leq G$. $HK$ sottogruppo $\iff HK = KH$. Si nota che ciò è certamente verificato se almeno uno tra $H$ e $K$ è normale.
+\end{proposition}
+\begin{proposition}{cardinalità del prodotto di sottogruppi}
+    Siano $H,K \leq G$. A prescindere dal fatto che $HK$ sia o meno un sottogruppo, $\#HK = \frac{\#H \#K}{\#H\cap K} = \#KH$.
+\end{proposition} 
+
+\subsection{Teoremi di omomorfismo}
+\begin{theorem}{1$^{\circ}$ di omomorfismo}
+    \newline
+    \begin{minipage}{0.7\textwidth}
+    Sia $\varphi : G \rightarrow G'$ un omomorfismo, $N \tri G$ tale che $N \subseteq \ker(\varphi)$. Allora $\exists ! f$ che fa commutare il diagramma a lato. Inoltre $N = \ker(\varphi) \Rightarrow f$ iniettiva.
+    \end{minipage}\hfill\hfill
+    \begin{minipage}{0.1\textwidth}  
+    \end{minipage}\hfill
+    \begin{minipage}{0.2\textwidth}  
+    \begin{tikzcd}
+    G \arrow{r}{\varphi} \arrow{d}{\pi_N} & G'\\
+    G/N \arrow[dashed]{ur}[swap]{f}
+    \end{tikzcd} 
+    \end{minipage}\hfill
+\end{theorem}
+\begin{proof}
+    Considero la funzione $f : G/N \rightarrow G'$ data da $f(gN\mapsto \varphi(g))$.
+    \begin{itemize}
+        \item buona def.: se scelgo due diversi rappresentanti per la classe in $G/N$  allora si ha $g_1N = g_2N \Rightarrow g_2^{-1}g_1 \in N \Rightarrow g_2^{-1}g_1 \in \ker(\varphi) \Rightarrow \varphi(g_2)^{-1}\varphi(g_1) = e' \Rightarrow \varphi(g_1) = \varphi(g_2)$ quindi non ci sono problemi.
+        \item è omomorfismo: usando che $\varphi$ è omomorfismo si ha $gNhN = ghN \Rightarrow f(gNhN) = f(ghN) = \varphi(gh) = \varphi(g)\varphi(h) = f(gN)f(hN)$ 
+    \end{itemize}
+    Dimostriamo ora che $\ker(f) = \ker(\varphi)/N$. Si nota intanto che l'espressione a destra ha senso perché $N$ è un sottogruppo normale in $G$ contenuto in $\ker(\varphi)$, e quindi è normale in $\ker(\varphi)$. Inoltre $f(gN) = e' \iff \varphi(g) = e' \iff g \in \ker(\varphi) \iff gN \in \ker(\varphi)/N$. Da ciò segue l'iniettività se $\ker(\varphi)= N$.
+\end{proof}
+\begin{theorem}{2$^{\circ}$ di omomorfismo}
+    Siano $H,K \tri G$, $H \leq K$. Allora $\frac{G/H}{K/H} \cong G/K$.
+\end{theorem}
+\begin{proof}
+    Notiamo intanto la buona def. Infatti da $H \tri G$ e $H \leq K$ segue che $H$  normale anche in $K$. Quindi $K/H$ è ben definito. Inoltre da $K \tri G$ segue $K/H \tri G/H$.
+    Considero l'omomorfismo $f: G/H \rightarrow G/K$ tale che $f(gH \mapsto gK)$.
+    \begin{itemize}
+    \item buona def.: se scelgo due diversi rappresentanti per la classe in $G/H$  allora si ha $g_1H = g_2H \Rightarrow g_2^{-1}g_1 \in H \subset K \Rightarrow g_1K = g_2K$ quindi non ci sono problemi
+    \item è omomorfismo: chiaro per le proprietà del gruppo quoziente
+    \end{itemize}
+    Dimostriamo ora che $\ker(f) = K/H$. Infatti $f(gH) = K \iff gK = K \iff g \in K$. Per il $1^{\circ}$ teorema di omomorfismo si ha la tesi.
+\end{proof}
+\begin{theorem}{3$^{\circ}$ di omomorfismo} Siano $H < G, N \tri G$. Allora $\frac{H}{H \cap N} \cong \frac{HN}{N}$.
+\end{theorem}
+\begin{proof}
+    Per normalità di $N$ si ha $HN$ gruppo e $N \cap H \tri H$, da cui le buone definizioni degli oggetti coinvolti. Considero ora $f: H \rightarrow HN/N$ definita da $f(h \mapsto hN)$. È un omomorfismo per le proprietà del gruppo quoziente. 
+    Dimostriamo che $\ker(f) = H \cap N$: si ha $f(h) = N \iff hN = N \iff h \in N$, ma $h\in H$ per definizione, quindi $\ker(f) = H \cap K$. A questo punto la tesi segue dal $1^{\circ}$ teorema di omomorfismo.
+\end{proof}
+
+\subsection{Sottogruppi normali e automorfismi interni}
+\begin{definition}{normalizzatore}
+    Dato $H \leq G$ chiamiamo $N_G(H) := \{g \in G : gHg^{-1} = H\}$.
+\end{definition}
+
+Dalla definizione segue che $N_G(H)$ è un gruppo, $H \tri N_G(H)$, $H \tri G \iff N_G(H) = G$ e $Z_G(H) < N_G(H)$. Talvolta si chiama normalizzatore di un elemento il normalizzatore del sottogruppo generato.
+
+\begin{example}
+    per $G = S_3$ si ha $N_G((1,2)) = \grp{(1,2)}$, $N_G((1,2,3)) = G$ (e infatti $\grp{(1,2,3)} \tri S_3$); per $G = S_4$ si ha $N_G((1,2)) = \set{id,(1,2),(3,4),(1,2)(3,4)}$.
+\end{example}
+\begin{definition}{automorfismi interni}
+    Sia $g \in G$; denotiamo con $\varphi_g \in \Aut(G)$ il coniugio $\varphi_g(x \mapsto gxg^{-1})$. $\Inn(G) := \{\varphi_g : g \in G\}$ viene chiamato il gruppo degli \textit{automorfismi interni} di $G$.
+\end{definition}
+Per definizione $H < G$ è normale se e solo se è è invariante per automorfismi interni.
+\begin{bdef}
+    $\varphi_g \in \Aut(G)$ perché $\varphi_g(h_1)\varphi_g(h_2) = gh_1g^{-1}gh_2g^{-1} = gh_1h_2g^{-1} = \varphi_g(h_1h_2)$. Inoltre è un gruppo perché $\varphi_{g_1}\circ\varphi_{g_2}(h) = g_1g_2hg_2^{-1}g_1^{-1} = g_1g_2h(g_1g_2)^{-1} = \varphi_{g_1g_2}(h)$, ovvero composizione di automorfismi interni resta automorfismo interno. L'identità è $\varphi_e$, l'inverso di $\varphi_g$ è $\varphi_{g^{-1}}$ per quanto appena detto.
+\end{bdef}
+\begin{proposition}{proprietà degli automorfismi interni}
+    (1) $\Inn(G) \lhd \Aut(G)$, (2) $\Inn(G) \cong G/Z(G)$
+\end{proposition}
+\begin{proof} 
+    \begin{enumerate}
+    \item[(1)] basta notare che $\forall f \in \Aut(G)$ si ha $f \circ \varphi_g \circ f^{-1} = \varphi_{f(g)}$. Infatti $\forall h \in G$ si ha $f \circ \varphi_g \circ f^{-1}(h) = f(gf^{-1}(h)g^{-1}) = f(g)f(f^{-1}(h))f(g)^{-1} = f(g)hf(g)^{-1} = \varphi_{f(g)}(h)$
+    \item[(2)] Consideriamo l'omomorfismo di gruppi $\varphi: G \rightarrow \Aut(G)$, $\varphi(g \mapsto \varphi_g)$ (si vede facilmente che è omomorfismo). Notiamo che $\varphi_g(h) = h \iff gh = hg$ e quindi $g \in \ker(\varphi) \iff g \in Z(G)$ (l'uguaglianza di prima deve valere $\forall h \in G$). Allora per il primo teorema di omomorfismo si ha: $G/Z(G) \cong \Inn(G)$, come voluto. 
+    \end{enumerate}
+    \end{proof}
+\begin{example2}{\normalfont $\Inn(S_3) = \Aut(S_3)$}
+    vale in particolare  $\Inn(S_3) = \Aut(S_3) \cong S_3$.
+
+    \hyperlink{InnSn}{Questo risultato si può generalizzare.}
+\end{example2}
+\begin{proof}
+    Innanzitutto $\Inn(S_3) \cong S_3$ per il teorema appena dimostrato (il centro di $S_3$ è banale). Notiamo ora che $\#\Aut(G) \leq 6$. Infatti $S_3$ è generato dalle sue trasposizioni, la cui immagine può essere solo un'altra trasposizione. Quindi un automorfismo di $S_3$ deve permutare le trasposizioni $\Rightarrow$ ci sono (al più) 6 possibilità $\Rightarrow \#\Aut(G) \leq 6$ $\Rightarrow \Inn(S_3) \cong S_3 \cong \Aut(S_3)$.
+\end{proof}
+\begin{definition}{sottogruppo caratteristico}
+    $H < G$ si dice \textit{caratteristico} se $\forall \varphi \in \Aut(G)$ vale $\varphi(H)=H$.
+\end{definition}
+
+Un sottogruppo caratteristico è invariante per automorfismi, quindi in particolare per automorfismi interni, ed è quindi normale... ma non vale il viceversa! Infatti $\Z/2\Z \times \Z/2\Z$ è abeliano, quindi tutti i suoi sottogruppi sono normali, tuttavia l'omomorfismo che scambia le componenti dimostra che $\Z/2\Z \times \set{0}$ non è caratteristico.
+
+\begin{proposition}{la normalità non è transitiva}
+    Un controesempio sono i sottogruppi $D_2 < D_4 < D_8$: si ha infatti $D_2 \tri D_4$, $D_4 \tri D_8$ ma $D_2 \not \tri D_8$.
+\end{proposition}
+\begin{proof}
+    (si rimanda allo \hyperlink{diedrale}{studio del gruppo diedrale} per dettagli sulle dimostrazioni che seguono.) Si ha $D_2 \tri D_4 \tri D_8$ perché ciascuno ha indice 2 nel successivo, ma $D_2 \not \tri D_8$ perché, chiamando $r,s$ la rotazione e la simmetria standard di $D_8$ si ha $D_2 = <r^4, s> = \{id, r^4, s, sr^4\}$ ma $srD_2(sr)^{-1} = srD_2sr = \{id, srr^4sr, srssr, srsr^4sr\} = \{id, r^4, sr^2, sr^6\}$. 
+\end{proof}
+Rafforzando leggermente le ipotesi, il fatto vale.
+\begin{proposition}{fatto utile}
+    se $C < N< G$ con $C$ caratteristico in $N$ e $N \tri G$, allora $C \tri G$.
+\end{proposition}
+\begin{proof}
+    $C \tri G \iff \forall \varphi \in \Inn(G) \ \varphi(C) = C$ ma $N \tri G \Rightarrow \forall F \in \Inn(G) \ F\mid_H \in \Aut(H)$ e $C$ caratteristico in $N \Rightarrow \forall f \in \Aut(H) \ f(C)= C$. Mettendo assieme le due cose: $ \forall \varphi \in \Inn(G) \ \varphi(C)  = \varphi\mid_H(C) = C$. 
+\end{proof}
+\begin{lemma}{normalizzatore-centralizzatore}
+    Sia $H < G$.  Vale che $Z_G(H) \tri N_G(H)$ e inoltre
+    \[
+        N_G(H)/Z_G(H) \hookrightarrow \Aut(H).
+    \]
+\end{lemma}
+\begin{proof}
+    $Z_G(H) \subset N_G(H)$ è chiaro dalla definizione. Per vedere la normalità, basta considerare $g \in N_G(H)$. Per definizione, $\forall h \in H \ \exists h' \in H \ h = gh'g^{-1}$.
+    Quindi si ha $\forall z \in Z_G(H) \ gzg^{-1}h = gzh'g^{-1} = gh'zg^{-1} = hgzg^{-1}$,
+    e dunque $gzg^{-1} \in Z_G(H) \Rightarrow gZ_G(H) \ g^{-1} \subseteq Z_G  \Rightarrow gZ_G(H)g^{-1} = Z_G$.
+    
+    Considero ora $\varphi: N_G(H) \rightarrow \Aut(H)$ tale che $\varphi(g \mapsto \varphi_g)$ dove $\varphi_g(h \mapsto ghg^{-1})$ è il coniugio per $g$. È ben definita per definizione di normalizzatore, e si è visto prima che è un omomorfismo. Inoltre è chiaro che $\ker(\varphi) = Z_G(H)$, e quindi per il $1^{\circ}$ teorema di omomorfismo $N_G(H)/Z_G(H)$ è isomorfo a $\imm(\varphi) < \Aut(H)$, come voluto. 
+\end{proof}
+
+\subsection{Azioni di gruppo}
+\begin{definition}{azione}
+    dato $X$ insieme, chiamiamo \emph{azione} di $G$ su $X$ un omomorfismo da $G$ nel gruppo delle permutazioni degli elementi di $X$, i.e. $S(X)$. La permutazione in cui viene mandato $g \in G$ si indica con $\varphi_g$, oppure semplicemente $x \mapsto g\cdot x$ o $x \mapsto x^g$. In questo caso diciamo che $X$ è un $G$-insieme.
+\end{definition}
+
+Notiamo ora che un'azione definisce in modo naturale una relazione d'equivalenza, in cui $(x,y \in X)$ $x \sim y \iff \exists g \in G$ $g\cdot x = y$. 
+\begin{bdef}
+    È riflessiva perché $e\cdot x = x \Rightarrow x \sim x$. È simmetrica perché $x \sim y \Rightarrow \exists g\in G \ g\cdot x = y$ e $g\cdot x = y \Rightarrow g^{-1} \cdot y = x$ (l'azione è un omomorfismo, quindi la permutazione di $g^{-1}$ è l'inversa di quella di $g$). È transitiva perché $x \sim y, y \sim z \Rightarrow \exists g_1,g_2\in G \ g_1\cdot x = y, g_2\cdot y = z$ e quindi $g_2g_1 \cdot x = z$ (l'azione è un omomorfismo, quindi $g_2g_1 \cdot x = g_2 \cdot(g_1 \cdot x)$).
+\end{bdef}
+\begin{example} Nel caso in cui $X=G$ il coniugio è un'azione di gruppo ($g \cdot x := gxg^{-1}$), così come anche la moltiplicazione a sinistra/destra ($g \cdot x := gx$ oppure $xg$). Un caso in cui $X \neq G$ è dato da $G = K^\times$ con $K$ campo, $X = V$ $K-$ spazio vettoriale, e l'azione di $X$ su $G$ è data da $\lambda \cdot \underline{v} :=  \lambda \underline{v} $.
+
+Le verifiche sono lasciate per esercizio.
+\end{example}
+
+\begin{definition}{orbita}
+    data un'azione di $G$ su $X$  $\orb(x) := \{g \cdot x : g\in G\} \subseteq X$.
+\end{definition} 
+
+Le orbite sono per definizione le classi della relazione di equivalenza definita dall'azione, quindi partizionano $X$.
+\begin{itemize}
+    \item Nel caso del coniugio per $g \in G$, l'orbita di un elemento $x \in G$ è la sua classe di coniugio $Cl(x)$;
+    \item nel caso della moltiplicazione a sinistra (o a destra), l'orbita di un elemento $x \in G$ è tutto $G$;
+    \item nel caso $G = K^\times, X = V$ $K$-spazio vettoriale e $\lambda \cdot \underline{v} = \lambda\underline{v}$, vale che se $\underline{v} \neq \underline{0}$ $\text{orb}(\underline{v}) = \text{Span}(\underline{v}) \setminus \set{\underline{0}}$, mentre $\orb(\underline{0}) = \set{\underline{0}}$.
+    \end{itemize}
+\begin{definition}{stabilizzatore}
+    data un'azione di $G$ su $X$ $\stab(x) := \set{g \in G : g \cdot x = x} $
+\end{definition} 
+Si verifica facilmente che $\stab(x)$ è un sottogruppo.
+\begin{itemize}
+    \item Nel caso del coniugio per $g \in G$, lo stabilizzatore di un elemento $x \in G$ è il suo centralizzatore $Z_G(g)$ (basta notare che $gxg^{-1} = x \Longleftrightarrow gx = xg$);
+    \item nel caso della moltiplicazione a sinistra (e a destra) l'orbita di un elemento $x \in G$ è solo $\set{e}$ ($yx = x \Rightarrow y = e$);
+    \item nel caso $G = K^\times$ e $X = V$ $K$-spazio vettoriale e $\lambda \cdot \underline{v} = \underline{v}$, vale che se $\underline{v} \neq \underline{0}$ $\stab(\underline{v}) = \set{1}$, mentre $\text{stab}(\underline{0}) = X$.
+    \end{itemize}
+\begin{lemma}{orbita-stabilizzatore}
+    se $G$ è finito vale,
+    \[
+    \forall x \in X \quad \#\text{orb}(x) \#\text{stab}(x) = \#G.
+    \]
+\end{lemma}
+\begin{proof}
+    Poiché lo stabilizzatore è un sottogruppo di $G$, per il teorema di Lagrange si ha $\#G = [G : \text{stab}(x) ]\#\text{stab}(x)$. Basta quindi dimostrare $[G : \text{stab}(x) ] = \# \text{orb}(x)$. Consideriamo la mappa \\ $F : \text{orb}(x) \rightarrow G/\text{stab}(x)$ tale che se $y = g\cdot x$ $F(y) = g \ \text{stab}(x)$.
+    \begin{itemize}
+        \item buona def: se $y = g_1\cdot x = g_2\cdot x$ allora $g_2^{-1}g_1 \cdot x = x \Rightarrow g_2^{-1}g_1 \in \text{stab}(x) \Rightarrow g_1\text{stab}(x) = g_2\text{stab}(x)$ quindi la scelta è indipendente dal rappresentante di $g$.
+        \item iniettività: si procede al contrario $g_1\text{stab}(x) = g_2\text{stab}(x) \Rightarrow g_2^{-1}g_1 \in \text{stab}(x) \Rightarrow g_2^{-1}g_1 \cdot x = x \Rightarrow g_1\cdot x = g_2\cdot x$
+        \item suriettività: segue dal fatto che $\text{orb}(x)$ contiene tutti gli $g\cdot x$ al variare di $g \in G$ e quindi la sua immagine secondo $F$ contiene tutti i $g \text{stab}(x)$ al variare di $g \in G$.
+    \end{itemize}
+\end{proof}
+
+Osserviamo che preso $H < G$, se si considera l'azione di $G$ su $G/H$ data sulla moltiplicazione a sinistra si ottiene il teorema di Lagrange: $\#G/H = \#\text{orb}(H) = \frac{\#G}{\#\text{stab}(H)} = \frac{\#G}{\#H}$; poiché $G/H$ è un intero, $\#H \mid \#G$.
+
+\begin{example2}{cardinalità classi di coniugio}
+    $\forall x \in G \ \ \#Cl(x) = [G : Z_G(x)]$; equivalentemente, se $G$ finito, si ha $\forall x \in G$ $\#G = \#Cl(x) \#Z_G(x)$.
+\end{example2}
+\begin{proof}
+    considerando come azione quella di coniugio (azione di $G$ su $G$) si ha $\forall x \in G$ $\text{stab}(x) = Z_G(x)$, $\text{orb}(x) = Cl(x)$ e si ottiene la tesi per il lemma orbita-stabilizzatore.   
+\end{proof}
+\begin{corollary}{gli stabilizzatori sono tutti coniugati}
+    se l'azione agisce transitivamente sull'insieme (ovvero $\forall x,y \in X \ \exists g \in G \ \ g \cdot x = y$).
+\end{corollary}
+\begin{proof} $\forall x,y \in X $ se $g_0 \cdot x = y$ si ha 
+    \begin{align*}
+        \text{stab}(y) & = \set{g \in G : g \cdot y = y} = \\
+         & = \set{g \in G : gg_0 \cdot x = g_0 \cdot x} = \\
+         & = \set{g \in G : g_0^{-1}gg_0 \cdot x = x} = \\
+         & = \set{g \in G : g_0^{-1}gg_0 \in \text{stab}(x)} = \\
+         & = g_0\text{stab}(x)g_0^{-1}
+    \end{align*} 
+\end{proof}
+\begin{example2}{esiste azione senza punti fissi}
+    se $\#X \geq 2$ e l'azione agisce transitivamente sull'insieme allora $\exists g \in G$ tale che la sua permutazione associata $\varphi_g$ non abbia punti fissi (ovvero $g\cdot x \neq x \ \forall x \in X$).
+\end{example2}
+\begin{proof}
+    \begin{align*}
+        g \text{ agisce senza punti fissi } & \iff \forall x \in X g \not \in \text{stab}(x) \iff \\
+        & \iff g \not \in \bigcup_{x \in X} \text{stab}(x) \iff  \qquad \text{ (fissiamo $x_0 \in X$ e usiamo transitività)} \\
+        & \iff g \not \in \bigcup_{h \in G} \text{stab}(h \cdot x_0) \iff \qquad \text{ usiamo il corollario di sopra} \\
+        & \iff g \not \in \bigcup_{h \in G} h\text{stab}(x_0) h^{-1} 
+    \end{align*}
+    Usando che \hyperlink{es1}{$G$ non è unione di sottogruppi coniugati} si ha che un tale $g$ esiste sempre se $\text{stab}(x_0) \neq G$. Ma $\text{stab}(x_0) = G$ e $\text{orb}(x_0) = X$ (azione transitiva) dà un assurdo per il lemma orbita-stabilizzatore, quindi $\text{stab}(x_0) \neq G$ da cui la tesi. 
+\end{proof}
+\begin{theorem}{formula delle classi}
+    Sia $G$ finito e $R$ insieme di rappresentanti per le classi di coniugio di $G$. Vale allora:
+    \[
+    \#G = \#Z(G) + \sum_{g \in R \setminus Z(G)} \frac{\#G}{\#Z_G(g)}
+    \]
+\end{theorem}
+\begin{proof}
+    Notiamo intanto che l'omomorfismo che manda un elemento nel coniugio per quell'elemento è un'azione di un gruppo su sé stesso (omettiamo le verifiche). Consideriamo quindi l'azione data dal coniugio. Chiaramente in questa azione l'orbita di un elemento è la sua classe di coniugio, mentre lo stabilizzatore è il centralizzatore. Per il lemma orbita-stabilizzatore allora si ha $\forall g \in G \ \#Cl(g)\#Z_G(g) = \#G$.  Poiché $G$ può essere partizionato nelle sue classi di coniugio, scegliendo un insieme $R$ di rappresentanti per esse, vale $\#G = \sum_{g \in R} \#Cl(g) = \sum_{g \in R} \frac{\#G}{\#Z_G(g)}$. Notiamo ora che se $g \in Z(G)$ allora $Cl(g) = \{g\}$ e $Z_G(g) = G$, e quindi $\frac{\#G}{\#Z_G(g)} = 1$. Notiamo anche che ciò implica che in $R$ si trovano tutti gli elementi di $Z(G)$, visto che ciascuno è l'unico possibile rappresentante della propria classe di coniugio. Isolando questi termini nella sommatoria si ottiene la formula dell'enunciato.
+\end{proof}
+\begin{corollary}{formula delle classi per sottogruppi normali}
+    Se $H \tri G$ allora vale una formula delle classi ``modificata'':
+    \[
+    \#H = \#(Z(G)\cap H) + \sum_{g \in (R \setminus Z(G)) \cap H} \frac{\#G}{\#Z_G(g)}.
+    \]
+\end{corollary}
+\begin{proof}
+    Basta notare che $H \tri G \Rightarrow H$ è unione di classi di coniugio e procedere come nella dimostrazione del teorema.
+\end{proof}
+Alcune applicazioni interessanti della formula delle classi si trovano nella sezione \hyperlink{gruppi finiti}{``Fatti utili sui gruppi finiti''}.
+
+\begin{definition}{(*) omomorfismi di azioni}
+    Siano $X$ e $Y$ rispettivamente un $G$-insieme e un $H$-insieme. Si chiama omomorfismo di azioni una coppia $(\psi, \sigma)$ con $\psi : G \to H$ omomorfismo e $\sigma : X \to Y$ tale per cui $\forall g \in G, x \in X \ \sigma(g \cdot x) = \psi(g) \cdot \sigma(x)$. Se $\psi$ e $\sigma$ sono bigettive si dice che le due azioni sono isomorfe.
+\end{definition}
+\begin{proposition2}
+    Sia $\varphi : G \to S(X)$ un'azione transitiva del gruppo $G$ sull'insieme $X$. Sia $H < G$ uno stabilizzatore. Allora, in modo del tutto analogo alla dimostrazione di orbita-stabilizzatore, $\varphi$ è isomorfa all'azione di moltiplicazione di $G$ su $G/H$.
+\end{proposition2}
+\begin{exercise}
+    Sia $\varphi : G \to S(X)$ un'azione 2-transitiva, cioè tale per cui ogni coppia ordinata di elementi distinti $(w, x)$ può essere mappata in ogni altra coppia ordinata di elementi distinti $(y, z)$ attraverso un opportuno elemento di $G$: $y = g\cdot w, z = g\cdot x$. Allora gli stabilizzatori di $\varphi$ sono massimali in $G$.
+\end{exercise}
+\begin{theorem}{Poincaré}
+    Sia $H < G$ con $[G : H] = n$. Allora esiste un sottogruppo normale $N \tri G$, $N \subseteq H$ con $[G : N] \mid n!$.
+\end{theorem}
+\begin{proof}
+    Consideriamo l'azione $\varphi : G \to S(G / H)$ di moltiplicazione di $G$ sui laterali di $H$. Sia $N = \ker(\varphi) \tri G$. La moltiplicazione per elementi di $N$ fissa il laterale $eH$, dunque $N \subseteq H$. Inoltre $G / N \cong \imm(\varphi) < S(G / H)$, da cui $[G : N] \mid n!$.
+\end{proof}
+
+\subsection{Teoremi fondamentali}
+\begin{theorem}{Cauchy}
+    Sia $G$ finito, e sia $p$ primo che divide $\#G$. Allora $\exists g\in G \ \text{ord}(g) = p$.
+\end{theorem}
+\begin{proof}
+    Notiamo intanto che è sufficiente dimostrare che esiste un elemento $x \in G$ tale che $p \mid \text{ord}(x)$. Infatti $y := x^{\frac{\text{ord}(x)}{p}}$ avrebbe ordine $p$, come voluto.
+    
+    Trattiamo prima il caso in cui $G$ è abeliano. Scriviamo $\#G = pn$ e procediamo per induzione estesa su $n$.
+    
+    Passo base: $n = 1 \ \Rightarrow \#G = p \Rightarrow G \cong \Zp$ e la tesi è ovvia.
+    
+    Passo induttivo: prendiamo ora $x \in G \setminus \{e\}$. Poichè $G$ è abeliano tutti i suoi sottogruppi sono normali in $G$ e quindi $\grp{x} \tri G$. Distinguiamo ora due casi: 
+    \begin{itemize}
+        \item $p \mid \text{ord}(x)$ allora si ha già la tesi.
+        \item $p \nmid \text{ord}(x)$ allora $p \mid \#(G/\grp{x})$. $G/\grp{x}$ ha cardinalità minore di $G$ perché $x \neq e$. Allora per ipotesi induttiva nel gruppo quoziente $\exists \overline y$ tale che $p \mid \text{ord}(\overline y)$. Notiamo però che considerando l'omomorfismo di proiezione $\pi : G \rightarrow G/\grp{x}$ poiché l'ordine in arrivo è un divisore dell'ordine in partenza, si ha che, se $\overline y = \pi(y)$, $p \mid \text{ord}(\overline y) \mid \text{ord}(y)$, come voluto.
+    \end{itemize}
+    Trattiamo ora il caso generale, di nuovo per induzione. Il passo base è analogo a prima.
+    
+    Passo induttivo: distinguiamo due casi:
+    \begin{itemize}
+        \item $\exists H < G, H \neq G, \ p \mid \#H$. Allora per ipotesi induttiva si avrebbe la tesi. 
+        \item $\forall H < G, \ p \nmid \#H$. In particolare allora $\forall g \in G \setminus Z(G) \ p \nmid Z_G(g)$. Guardiamo allora la formula delle classi modulo $p$. $p \mid \#G, \frac{\#G}{\#Z_G(g)}$ e quindi $p \mid \#Z(G)$, da cui $Z(G) = G$, cioè $G$ abeliano e ci riconduciamo al caso precedente.
+    \end{itemize}
+
+\underline{seconda dim.}
+    Consideriamo un'azione di $\Zp$ su $X = \{ (h_1,h_2,\dots,h_p) : h_1h_2\dots h_p = e \}$ ($p$-uple di $G$ con prodotto $e$). Notiamo intanto che $X$ è non vuoto perché $(e,\dots, e) \in X$. L'azione è da $k \mapsto f_k$ tale che $f_k(\ (h_1,\dots,h_p) \mapsto (h_{1+k},\dots,h_{p+k}) \ )$, dove nella seconda espressione gli indici sono intesi modulo $p$ (è chiaramente ben definita).
+    
+    $\forall \bar h = (h_1,\dots,h_p) \in X$ per il lemma orbita-stabilizzatore $\#\Zp = p = \#\text{orb}(\bar h) \#\text{stab}(\bar h)$, e quindi abbiamo due scelte: $ \#\text{orb}(\bar h) = 1$ oppure $p$. Notiamo che se $\#\text{orb}( \bar h ) = 1$ allora è formata da $p$ elementi uguali. Infatti $f_k( (h_1,\dots,h_p) ) = (h_1,\dots,h_p) \Rightarrow h_1 = h_{1+k}$ e quindi se vale $\forall k$ tutti gli elementi sono uguali a $h_1$. In particolare, o $h_1 = e$ o $\text{ord}(h_1) = p$, poiché per definizione $h_1^p = e$ e $p$ è primo. Sia $Y$ l'insieme delle $p$-uple formate da $p$ elementi uguali, ossia con orbita banale, e $Z$ un insieme di rappresentanti per gli elementi di $X$ con orbita di cardinalità $p$. Vorremmo dimostrare che $\#Y \geq 2$, perché così avremmo una $p$-upla di tutti elementi uguali e diversi da $e$.
+    
+    $\#X = \sum_{x \in Y \cup Z} \#\text{orb}(x) = \#Y + p\#Z \cong \#Y \pmod{p}$ perché $X$ è partizionato nelle sue orbite. Studiamo ora $\#X$. Fissati in un qualunque modo i primi $p-1$ elementi della $p$-upla l'ultimo è univocamente determinato da $h_p = (h_1\dots h_{p-1})^{-1}$. Quindi $\# X = (\#G)^{p-1}$. In particolare $p \mid \#G \Rightarrow p \mid \#X \Rightarrow p \mid \#Y$ e quindi, poiché abbiamo dimostrato che $Y$ è non vuoto, $\#Y \geq p \geq 2$.
+\end{proof}
+\begin{theorem}{Cayley}
+    Sia $G$ finito, $\#G = n$. Allora $G \hookrightarrow S_n$ ($G$ ``si immerge'' in $S_n$, ovvero esiste una copia di $G$ in $S_n$).
+\end{theorem}
+\begin{proof}
+    Consideriamo l'azione $g \mapsto \psi_g \in S(G) \cong S_n$ tale che $\psi_g(h \mapsto gh)$.
+    \begin{itemize}
+        \item buona def.: la moltiplicazione a sinistra appartiene a $S(G)$ perché $gh_1 = gh_2 \iff h_1 = h_2$ (legge di cancellazione), quindi $\psi_g$ è iniettiva $\Rightarrow$ è bigettiva ($G$ è finito).
+        \item è omomorfismo: si vede chiaramente $\psi_{g_1} \circ \psi_{g_2} = \psi_{g_1g_2}$
+        \item iniettività: guardiamo il nucleo dell'azione, corrispondente a $\{g \in G : \psi_g = \text{id}\} = \{g \in G \mid \forall h \in G gh = h \} = \{e\}$. Questo basta per dimostrare l'iniettività.
+    \end{itemize}
+\end{proof}
+\begin{observation}{embedding di Cayley}
+    guardiamo l'immagine di un elemento di $g$ secondo quell'omomorfismo. Se $\text{ord}(g) = d$ (divisore di $n$) allora ``seguendo'' un elemento $h_0 \in G$ otteniamo $h_0, \ gh_0=h_1, \ g^2h_0 = gh_1=h_2, \ \dots , \ g^{d-1}h_0 = h_{d-1}, \ g^dh_0 = h_0$ (e da qui in poi si ripete il ciclo). Gli $h_i$ sono necessariamente tutti distinti ($h_i = h_j \iff g^ih_0= g^jh_0 \iff g^{i-j} = e \iff i-j \cong 0 \pmod{d} \iff i-j = 0$ visto che $1 \leq i,j\leq d-1$).
+    Quindi $\psi_g$ nell'isomorfismo con $S_n$ è una permutazione con $\frac{n}{d}$ $d$-cicli (abbiamo appena dimostrato che ogni elemento che viene permutato sta in un $d$-ciclo).
+\end{observation}
+\begin{theorem}{di corrispondenza}
+    Sia $N \tri G$ e consideriamo $\pi : G \rightarrow G/N = G'$ la proiezione al quoziente. Allora c'è una corrispondenza biunivoca tra i sottogruppi di $G$ che contengono $N$ e i sottogruppi di $G'$. Inoltre tale corrispondenza preserva ordinamento, indice e normalità. 
+\end{theorem}
+\begin{proof}
+    Siano $\pi_N: G \rightarrow G/N$ la proiezione al quoziente, $X  = \{ H \leq G \mid N \subseteq H \}$, $Y = \{ \overline H \leq G/N \}$. Consideriamo le due funzioni $\alpha: X \rightarrow Y$ tale che $\alpha(H \mapsto \pi_N(H))$ e $\beta: Y \rightarrow X$ tale che $\beta( \overline H \mapsto \pi_N^{-1}(\overline H) )$. 
+    \begin{itemize}
+        \item buona def. di $\alpha$: $N \tri G, N \subseteq H \Rightarrow N \tri H$ e quindi è ben definito $H/N = \pi_N(H)$, che è chiaramente un sottogruppo
+        \item buona def. di $\beta$: $\pi_N^{-1}(\overline H)$ è un sottogruppo perché controimmagine di sottogruppo. Inoltre da $N \in \overline H$ segue $N \subseteq \pi_N^{-1}(\overline H)$
+    \end{itemize}
+    Notiamo ora che: $\alpha \circ \beta$ manda $H \mapsto  \pi_N(\pi_N^{-1}(\overline H)) = H$ dove l'ultima uguaglianza segue dal fatto che $\pi_N$ è suriettiva. Invece $ \beta \circ \alpha$ manda 
+    $H \mapsto  \pi_N(\pi_N(H))^{-1} = \pi_N(H/N)^{-1} = \{g \in G : gN \in H/N \} =  H$
+    dove l'ultima uguaglianza segue da $N \subseteq H$ (quindi $\exists h \in H \ gN = hN \iff \exists h \in H, n \in N \  g = hn \iff g \in H$ dove $\Rightarrow$ segue da $N \subseteq H$, mentre per $\Leftarrow$ basta scegliere, per ogni $g \in H$, $h = g, n = e$).
+    
+    Quindi $\alpha$ e $\beta$ sono entrambe bigezioni, una inversa dell'altra. Dimostriamo le proprietà della tesi per $\alpha$.
+    \begin{itemize}
+        \item Preserva il contenimento: segue dalla definizione
+        \item Preserva la normalità: segue dal fatto che $\pi_N$ è un omomorfismo, e quindi controimmagine di sottogruppi normali è normale, e inoltre è suriettiva, e quindi manda sottogruppi normali in sottogruppi normali
+        \item Preserva gli indici:  occorre dimostrare che $\forall H \leq G , N \subseteq H \ [G:H] = [G' : \alpha(H)] = [G' : H/N]$. Consideriamo la funzione $T: G/H \rightarrow \frac{G'/N}{H/N}$ (nota: poiché non è assunta la normalità, non stiamo intendendo il gruppo quoziente ma solo l'insieme delle classi laterali) data da $T(xH \mapsto (xN)H/N)$. $T$ è ben definita perché $xH = yH \Rightarrow \exists h \in H \ x = yh \Rightarrow (xN)H/N = (yhN)H/N = (yNh)H/N = (yN)H/N$ dove la penultima uguaglianza segue dalla normalità di $N$. Inoltre $T$ è suriettiva per definizione ed è iniettiva perché se si ha $(xN)H/N = (yN)H/N$ allora $\exists h \in H \ xN = (yN) (hN) \Rightarrow x \in yNh \Rightarrow$ (usando che $N\subseteq H$) $\exists h' \in H \ x = yh' \Rightarrow xH = yH$.
+        
+        (Si noti che se il sottogruppo in questione fosse stato abeliano, per dimostrare che l'indice viene preservato sarebbe bastato il $2^{\circ}$ teorema di omomorfismo.)
+    \end{itemize}
+\end{proof}
+\begin{theorem}{decomposizione in prodotto diretto}
+    Siano $H,K \tri G$ tali che $H \cap K = \{e\}$ e $HK = G$. Allora $G \cong H \times K$.
+\end{theorem}
+\begin{proof}
+    Mostriamo prima un lemma, ossia che nelle ipotesi del teorema si ha $hk = kh \ \forall h\in H, k \in K$. Fissiamo tali $h,k$. Per normalità di $H$ in G si ha $khk^{-1} = \tilde h \in H$. Quindi $khk^{-1}h^{-1} = \tilde h h^{-1} \in H$. In modo analogo si mostra  $khk^{-1}h^{-1} \in K$. Quindi $khk^{-1}h^{-1} \in H \cap H = \{ e\} \Rightarrow kh= hk$. \\Consideriamo ora $\varphi: H \times K \to G$ $\varphi(\ (h,k) \mapsto hk)$. $\varphi$ è omomorfismo perché per il lemma appena dimostrato $h_1h_2k_1k_2 =  h_1k_1h_2k_2$ $\Rightarrow$ $\varphi((h_1h_2, k_1k_2)) =\varphi((h_1, k_1)) \varphi((h_2k_2))$.  Da $HK = G$ segue $\varphi$ suriettiva. Inoltre $\varphi$ è iniettiva perché $(h,k) \in \ker(\varphi) \iff hk = e \iff H \ni h = k^{-1} \in K \Rightarrow h,k \in H\cap K \Rightarrow h=k=e$.
+\end{proof}
+\begin{definition}{prodotto semidiretto}
+    Siano $H, K$ due gruppi, e $\psi: K \rightarrow \Aut(H)$ un omomorfismo. Indichiamo con $\psi_g$ l'immagine di $g\in K$ secondo $\psi$ e definiamo l'operazione $*$ sul prodotto cartesiano $H \times K$ data da $(h_1,k_1)*(h_2,k_2) = (h_1\psi_{k_1}(h_2), k_1k_2)$. Indichiamo con $H \rtimes_{\psi} K$ questo nuovo gruppo, che chiamiamo un \textit{prodotto semidiretto} di $H$ e $K$.
+\end{definition}
+
+Si noti che se $\psi \equiv id_{K}$ si ottiene il prodotto diretto (e viceversa). D'ora in poi il segno ``$*$'' verrà omesso, come le altre operazioni.
+
+\begin{bdef} Verifichiamo che è un gruppo:
+    \begin{itemize}
+        \item elemento neutro: $(h,k)*(h',k') = (h',k') \iff (h\phi_k(h'),kk') = (h',k') \iff h\phi_k(h') = h' \text{ e } k' = e_K \iff h\phi_{e_K}(h') = hh' = h' \text{ e } k' = e_K \iff (h,k) = (e_H,e_K) $ e analogamente $(h',k')*(h,k) = (h',k') \iff (h'\phi_{k'}(h),k'k) = (h',k') \iff \phi_{k'}(h) = e_H \text{ e } k' = e_k \iff (h,k) = (e_H,e_K)$.
+        \item associatività: siano $h,h',h'' \in H$, $k,k',k'' \in K$.
+        \begin{align}
+         ((h,k)*(h',k'))*(h'',k'') & = (h\phi_k(h'),kk')*(h'',k'') = \nonumber \\
+         & = (h\phi_k(h')\phi_{kk'}(h''),kk'k'') = \nonumber \\
+         & = (h\phi_k(h')\phi_h(h'')\phi_{k'}(h''),kk'k'') \nonumber ;
+         \end{align} 
+         \begin{align}
+         (h,k)*((h',k')*(h'',k'')) & = (h,k)*(h'\phi_{k'}(h''),k'k'') = \nonumber \\
+         & = (h\phi_k(h'\phi_{k'}(h'')),kk'k'') = \nonumber \\
+         & = (h\phi_k(h') \phi_k\circ\phi_{k'}(h'')),kk'k'') \nonumber.
+         \end{align}
+        Quindi le due espressioni sono uguali e si ha associatività.
+        \item inverso: detto $(h,k)^{-1} = (\phi_{k^{-1}}(h^{-1}), k^{-1})$, vale $(h, k)(h, k)^{-1} = (h, k)^{-1}(h, k) = e$.
+    \end{itemize}
+\end{bdef}
+\begin{observation}{asimmetria del prodotto semidiretto}
+    $H \times \{e_K\} \tri H \rtimes K$; \textbf{non} vale con $\{e_H\} \times K$.
+\end{observation}
+\begin{proof}
+    Basta considerare la proiezione sul secondo fattore, e notare che $H \times \{e_K\}$ ne è il nucleo. Non si può fare lo stesso con la proiezione sul primo fattore per quella che è la definizione del gruppo, e dopo il teorema successivo sarà chiaro come costruire un controesempio.
+\end{proof}
+\begin{theorem}{decomposizione in prodotto semidiretto}
+    Siano $H,K \leq G$ tali che $H \tri G$, $H \cap K = \{e\}$ e $HK = G$. Allora $G \cong H \rtimes_{\varphi} K$, dove $\varphi(k \mapsto \varphi_k)$ è la mappa che manda $k \in K$ nel coniugio per $k$ ristretto ad $H$.
+\end{theorem}
+\begin{proof}
+    Si nota intanto che $\forall k \in K \ \varphi_k \in \Aut(H)$ per normalità di $H$.
+    
+    Consideriamo $F: H \rtimes_{\varphi} K \rightarrow G$ tale che $F((h,k) \mapsto hk)$.
+    \begin{itemize}
+        \item è omomorfismo: $F((h,k)(h',k')) = F(hkh'k^{-1},kk') = hkh'k^{-1}kk' = hkh'k' = F((h,k))F((h',k'))$
+        \item è bigettiva: il ragionamento è analogo a quello per i prodotti diretti
+    \end{itemize}
+\end{proof}
+\begin{proposition}{isomorfismo di prodotti semidiretti}
+    siano $H,K$ gruppi, $\varphi, \psi: K \rightarrow \Aut(H)$ omomorfismi. Se $\exists \alpha \in \Aut(H), \ \beta \in \Aut(K)$ tali che $\forall k \in K \ \alpha \circ \varphi_k \circ \alpha^{-1} = \psi_{\beta(k)}$ allora $H \rtimes_{\varphi} K \cong  H \rtimes_{\psi} K$.
+\end{proposition}
+\begin{proof}
+    Consideriamo $F: H \rtimes_{\varphi} K \to  H \rtimes_{\psi} K$ tale che $F((h,k) \mapsto (\alpha(k), \beta(h))$.
+    \begin{itemize}
+        \item è omomorfismo: $F((h,k)*_{\varphi}(h',k')) = F(h\varphi_{k}(h'),kk') =  (\alpha(h)\alpha\circ\varphi_{k}(h'),\beta(k)\beta(k')) = (\alpha(h)\psi_{\beta(k)}(\alpha(h')),\beta(k)\beta(k')) =(\alpha(h), \beta(k))*_{\psi} (\alpha(h'),\beta(k')) =  F((h,k))*_{\psi}F((h',k'))$
+        \item è bigettiva perché lo sono $\alpha, \beta$
+    \end{itemize}
+\end{proof}
+\begin{definition}{$p$-Sylow}
+    Sia $G$ un gruppo finito, $\#G = p^n m$ con $p$ primo, $n \geq 1$, $p \nmid m$. Chiamiamo $p$-Sylow un sottogruppo di $G$ di cardinalità $p^n$.
+\end{definition}
+\begin{theorem}{Sylow}
+    Sia $G$ come prima. Valgono i seguenti quattro enunciati:
+    \begin{itemize}
+        \item \textbf{esistenza}: $\forall \alpha \in \N, \ 1 \leq \alpha \leq n$ $\exists  H \leq G, \#H = p^{\alpha}$;
+        \item \textbf{inclusione}: $\forall \alpha \in \N, \ 1 \leq \alpha \leq n-1$ $\forall  H \leq G$ tali che $\#H = p^{\alpha}$ $\exists  K \leq G, \#K = p^{\alpha+1}$ e $ H \leq K$;
+        \item \textbf{coniugio}: i $p$-Sylow sono tutti coniugati;
+        \item \textbf{numero}: detto $n_p$ il numero di $p$-Sylow, valgono $n_p \equiv 1 \pmod{p}$ e $n_p \mid \#G$, da cui $n_p \mid m$.
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    Sia $M = \{ X \subseteq G : \#X = p^{\alpha}\}$.  Calcoliamo innanzitutto la potenza di $p$ che divide $\#M = \binom{\#G}{p^{\alpha}} = \frac{p^nm \cdot (p^nm-1) \cdot \dots \cdot (p^nm - p^{\alpha} +1)}{p^{\alpha}\cdot(p^{\alpha}-1)\cdot \dots \cdot 1} = p^{n-\alpha}m \prod_{i=1}^{p^{\alpha}-1} \frac{p^nm-i}{p^{\alpha}-i}$. Da $p^n \geq p^{\alpha} > i$ segue che nella produttoria la valutazione $p$-adica di numeratore e denominatore è sempre la stessa, e quindi non sopravvive nessun fattore $p$ nel prodotto. Quindi la valutazione $p$-adica di $\#M$ è $n-\alpha$.
+    
+    Consideriamo l'azione di $G$ su $M$ data da $g\mapsto \psi_g(X \mapsto gX)$ (chiaramente è ben definita). Poiché $p^{n-\alpha +1} \nmid \#M$ e $\#M$ è somma delle cardinalità delle orbite dell'azione, deve necessariamente esistere $Y \in M$ tale che $p^{n-\alpha +1} \nmid \#\text{orb}(Y) = \frac{p^nm}{\#\text{stab}(Y)}$ per il lemma orbita-stabilizzatore. Ma allora necessariamente $p^{\alpha} \mid \#\text{stab}(Y)$.
+    
+    Fissiamo ora $y_0 \in Y$ e consideriamo $j: \text{stab}(Y) \rightarrow Y$ data da $j(x \mapsto y_0x)$. È ben definita per definizione di stabilizzatore ed è iniettiva per la legge di cancellazione, quindi $p^{\alpha} = \#Y \geq \text{stab}(Y)$, da cui segue $\#\text{stab}(Y) = p^{\alpha}$. Abbiamo così \textbf{esistenza}.
+    
+    Sia ora $S$ un $p$-Sylow di $G$ e $H \leq G$ tale che $\#H = p^{\alpha}$, $0 \leq \alpha \leq n$. Consideriamo l'insieme $G/S$ delle classi laterali di $S$ e consideriamo l'azione (di moltiplicazione a sinistra) di $H$ su $G/S$ che manda $h \in H$ in $\theta_h(gS \mapsto (hg)S)$ (chiaramente è ben definita). Per il lemma orbita-stabilizzatore e usando che le orbite partizionano $G/S$ si ha che, scelto un insieme $R$ di rappresentanti per le orbite $m = \#(G/S) = \sum_{g \in R} \text{orb}(gS) = \sum_{g\in R} \frac{\#H}{\#\text{stab}(gS)} = \sum_{g\in R} \frac{p^{\alpha}}{\#\text{stab}(gS)}$. Da ciò segue, poiché $p \nmid m$, che $\exists g_0 \in R$ tale che $p^{\alpha} = \#\text{stab}(g_0S)$ e quindi $H = \text{stab}(g_0S)$. Ma allora si ha $\forall h \in H \ hg_0S = g_0S \Rightarrow h \in g_0 S g_0^{-1}$ e quindi $H \subseteq g_0Sg_0^{-1}$, che è un $p$-Sylow. Ciò prova \textbf{coniugio} se si pone $\alpha = n$ (l'uguaglianza segue per cardinalità).
+    Se $\alpha < n$ si ha solo che $H$ è contenuto in un $p$-Sylow, ma tanto basta per restringerci al caso di un $p$-gruppo.
+    \begin{lemma2}
+        in un $p$-gruppo $G$, $\forall H \lneq G \ H \lneq N_G(H)$.
+    \end{lemma2}
+    \begin{proof}
+        Procediamo per induzione su $n= v_p(\#G)$. Il passo base $n = 1$ è ovvio perché il gruppo è isomorfo a $\Zp$, che ha solo i due sottogruppi banali per cui la tesi è ovvia. Nel passo induttivo distinguiamo due casi: 
+        \begin{itemize}
+        \item $Z(G) \nsubseteq H$: basta allora notare  $Z(G) \subseteq N_G(H)$
+        \item $Z(G) \subseteq H$: allora quozientiamo per $Z(G)$ e concludiamo usiamo l'ipotesi induttiva, unita al teorema di corrispondenza. 
+        \end{itemize}
+    \end{proof}
+    Consideriamo la proiezione: $\pi: N_G(H) \rightarrow N_G(H)/H$. Poiché $N_G(H)/H$ è un $p$-gruppo non banale, per il teorema di Cauchy $\exists \overline x \in N_G(H)/H \ \text{ord}(\overline x) = p$. Allora $H \subseteq \pi^{-1}(\langle \overline x \rangle)$ e $\#\pi^{-1}(\langle \overline x \rangle) = p^{\alpha+1}$. Infatti se $\overline x = xH$, si ha $\pi(H)\cup \pi(xH)\cup\dots\cup\pi(x^{p-1}H) =  \langle \overline x \rangle$ e per costruzione sono tutti disgiunti ($\overline x = xH$ ha ordine $p$). Allora, poiché le classi laterali hanno tutte la stessa cardinalità, pari a $\#H = p^{\alpha}$, si ha $\#\pi^{-1}(\langle \overline x \rangle) = \#\bigcup_{i=0}^{p-1} x^iH = p\cdot p^{\alpha}$. Questo dimostra \textbf{inclusione}.
+    
+    Passiamo ora al numero di $p$-Sylow. Sia $X = \set{ p\text{-Sylow}}$ e come prima fissiamo $S$ un $p$-Sylow. Il coniugato di un $p$-Sylow, avendo la stessa cardinalità, è a sua volta un $p$-Sylow e abbiamo precedentemente dimostrato che i $p$-Sylow sono tutti coniugati, quindi $n_p = \#X$ è la cardinalità della classe di coniugio di $S$. Consideriamo l'azione di $G$ per coniugio sull'insieme $X$, ben definita per quanto detto. Chiaramente $\text{orb}(S) = X$, quindi per il lemma orbita-stabilizzatore $n_p = \#\text{orb}(S) \mid \#G$. Restringiamo ora questa azione a $S$ (ossia, consideriamo solo il coniugio per elementi di $S$, come azione di $S$ su $X$). Notiamo che $S$ è l'unico elemento con orbita banale: per ogni $p$-Sylow $S'$ con orbita banale si ha $S \subseteq \text{stab}(S') = N_G(S') \Rightarrow SS'$ sottogruppo e $\#(SS') = \frac{\#S \#S'}{\#(S \cap S')} = \frac{p^n \cdot p^n}{\#(S \cap S')}$, ma $SS'$ sottogruppo di $G$ e $p$-gruppo $\Rightarrow \#(SS') = p^k$ con $k\leq n \Rightarrow \#(S\cap S') \geq p^n \Rightarrow \#(S\cap S') = p^n$ e quindi $S = S'$. Poiché le orbite partizionano l'insieme che subisce l'azione, dato $R$ insieme di rappresentanti, si ha $n_p = \sum_{S' \in R} \#\text{orb}(S') = 1 + \sum_{S' \in R\setminus\{S\}} \#\text{orb}(S') \equiv 1 \pmod{p}$. Questo conclude \textbf{numero}.
+\end{proof}
+
+\begin{exercise}
+    Sia $G$ un gruppo finito. Si mostri che le seguenti proprietà sono equivalenti:
+    \begin{enumerate}[label=$(\roman*)$]
+        \item $G$ è \emph{nilpotente}, cioè, detta $f$ la funzione $G \overset{f}{\mapsto} \frac{G}{Z(G)}$ e $f^{k}$ la sua composizione $k$ volte, esiste $k \in \N$ tale che $f^k(G) \cong \{e\}$;
+        \item $\forall H \lneq G \ H \subsetneq N_G(H)$;
+        \item $G$ è isomorfo al prodotto diretto dei suoi Sylow.
+    \end{enumerate}
+    \tiny{HINT: dato $P$ $p$-Sylow, $P \tri N_G(N_G(P))$.}
+\end{exercise}
+
+\subsection{Teorema di struttura dei gruppi abeliani finiti}
+La sezione tratta gruppi abeliani, quindi si userà principalmente la notazione additiva (vale a dire $g+h$ invece di $gh$ e $0$ invece di $e$).
+
+\textbf{\ldots in generale:} I seguenti risultati sono conseguenze del teorema di decomposizione ciclica primaria dei moduli di torsione su PID (Capitolo 6 di Advanced Linear Algebra, Roman)! In particolare, ogni gruppo abeliano è uno $\mathbb{Z}$-modulo di torsione (per $n = \#G$ si ha $n G = \{e\}$) e $\mathbb{Z}$ è un PID. Il teorema di struttura dei gruppi abeliani finiti corrisponde alla più generale ``decomposizione in fattori invarianti''. Queste generalizzazioni non fanno parte del programma di Algebra 1.
+
+\begin{definition}{componente di $p$-torsione}
+    Dato $p$ primo e $G$ abeliano, chiamiamo così il gruppo $G(p) = \{g \in G : \exists k \in \N\ \ \text{ord}(x) = p^k\}$. (Se $G$ non è abeliano, in generale $G(p)$ non è un sottogruppo: un $3$-ciclo è prodotto di due trasposizioni.)
+\end{definition}
+\begin{theorem}{1}
+    Se $G$ abeliano finito, $\#G = \prod_{i = 1}^s p_i^{\alpha_i}$ con $p_i$ primi,  $G \cong G(p_1) \times \dots \times G(p_s)$.
+\end{theorem}
+\begin{proof}
+    Procediamo per induzione su $s$. Nel passo base la tesi è ovvia. Scriviamo ora $\#G = n = mm'$ con $m,m' \neq 1$ e coprimi. Consideriamo i sottogruppi $mG$ e $m'G$. Essi sono chiaramente sottogruppi di $G$ e inoltre si ha:
+    \begin{itemize}
+        \item $mG + m'G = G$: il contenimento $\subseteq$ è ovvio, mentre $\supseteq$ utilizza il teorema di Bezout: poiché $m,m'$ sono coprimi, esistono $a,b\in \Z$ tali che $am +bm' = 1$ e quindi vale $\forall g \in G \ m(ag) + m'(bg) = g$
+        \item $mG \cap m'G = \{0\}$: infatti se $g$ appartiene all'intersezione, allora necessariamente si ha $g = mx = m'y$ per degli opportuni $x,y \in G$. Allora $m'g = m'mx = nx = 0$, $mg = mm'y = ny = 0$ $\Rightarrow \text{ord}(g) \mid m,m'$ e, poiché $m,m'$ coprimi, $\text{ord}(g) = 1 \Rightarrow g = 0$.
+    \end{itemize}
+    Quindi per il teorema di decomposizione in prodotto diretto $G \cong mG \times m'G$. Noto ora che $mG = G_{m'} = \{x \in G : m'x = 0\}$. Infatti il contenimento $\subseteq$ è ovvio, mentre $\supseteq$ utilizza ancora $a,b$ dati da Bezout: se $x \in G_{m'}$ $x = amx + bm'x = amx = m(ax)$. Analogamente $m'G = G_m$.
+    
+    Da $G \cong mG \times m'G = G_{m'} \times G_m$ segue allora $\#G_m \#G_{m'} = mm'$. Poiché l'ordine di un elemento deve dividere l'ordine del sottogruppo, guardando i primi che possono dividere $\#G_m, \#G_{m'}$, necessariamente si deve avere $\#G_m=m, \#G_{m'}=m'$. Per lo stesso motivo e usando le cardinalità $\forall p_i$ divisore di $m$ si ha anche $G(p_i) = G_m(p_i)$ e analogamente con $m'$. Quindi le componenti di $p$-torsione si partizionano tra $G_m, G_{m'}$. Poiché $m,m' < \#G$, usiamo l'ipotesi induttiva e concludiamo:
+    
+    $G \cong G_{m'}\times G_m \cong \prod_{p_i \mid m'} G_{m'}(p_i) \times \prod_{p_i \mid m} G_{m}(p_i) = \prod_{p_i \mid m'} G(p_i) \times \prod_{p_i \mid m} G(p_i)$.
+\end{proof}
+\begin{corollary}{1}
+    Sia $G$ abeliano finito, allora $\forall p$ primo $\#G(p) = p^r$ con $r = v_p(\#G)$.
+\end{corollary}
+\begin{proof}
+    Basta guardare le cardinalità dei fattori nella scomposizione data dal teorema, notando che in $\#G(p)$ può e deve comparire solo $p$.
+\end{proof}
+\begin{corollary}{2}
+    Sia $G$ abeliano finito, allora la decomposizione di $G$ come prodotto diretto di $p$-gruppi esiste ed è unica (ed è quella data dall'enunciato del teorema). 
+\end{corollary}
+\begin{proof}
+    Le cardinalità dei $p$-gruppi sono fissate dal fatto che il loro prodotto deve essere $\#G$. A questo punto l'unica possibilità nel caso di due diverse scomposizioni (isomorfe, perché isomorfe a $G$) è che i $p$-gruppi corrispondenti allo stesso primo siano a due a due isomorfi, il che implica che sono la stessa composizione. Siano infatti $H_1, H_2$ i due $p$-gruppi in questione, relativi al primo $p$, e sia $n = \#G = p^km$ con $(m,p)=1$. Allora $H_1 \cong mG \cong H_2$ (moltiplicando ogni elementi del prodotto diretto per $m$ tutte le componenti relative ai primi divisori di $m$ diventano 0).
+\end{proof}
+\begin{theorem}{2}
+    Sia $G$ $p$-gruppo abeliano. Allora esistono $r_1 \geq \dots \geq r_t$ univocamente determinati tali che $G \cong \Z/p^{r_1}\Z \times \dots \times \Z/p^{r_t}\Z$.
+\end{theorem}
+\begin{proof}
+    Sia $\#G = p^n$ e procediamo per induzione su $n$. Il passo base è chiaro.
+    Per il passo induttivo, sia $ x_1 \in G$ di ordine massimo, $\text{ord}(x_1) = p^{r_1}$. Se $r_1 = n$ $G \cong \Z/p^n\Z$ e si ha la tesi. Altrimenti consideriamo $G/\langle x_1 \rangle$. Esso è un $p$-gruppo non banale di cardinalità strettamente inferiore a $p^n$, e posso dunque applicargli l'ipotesi induttiva, ottenendo (prendo i generatori dei gruppi ciclici) $\Z/p^{r_2}\Z \times \dots \times \Z/p^{r_t}\Z \cong G/\langle x_1 \rangle = \langle \overline x_2 \rangle \langle \overline x_3 \rangle \dots  \langle \overline x_t \rangle $ con $\text{ord}(x_i) = p^{r_i}$ e $r_2 \geq r_3 \geq \dots \geq r_t$.
+
+    \textbf{lemma:} $\forall \overline x \in G/\langle x_1 \rangle$ $\exists x \in \pi^{-1}(\overline x)$ tale che $\text{ord}(x) = \text{ord}(\overline x)$.
+    \begin{proof}
+        Sia $y \in \pi^{-1}(\overline x)$: cerchiamo tale elemento in $y + \langle x_1 \rangle = \{y + a x_1 \mid a \in \mathbb{Z}\} = \pi^{-1}(\overline x)$. Sia $p^r = \text{ord}(\overline x)$, $r \leq r_1$ perché per omomorfismo e per massimalità di $r_1$ si ha $p^r = \text{ord}(\overline x) \mid \text{ord}(y) \mid p^{r_1}$. Analogamente anche $\forall a \in \mathbb{Z} \ p^r = \text{ord}(\overline x) \mid \text{ord}(y + a x_1)$, dunque $\text{ord}(y + a x_1) = p^r \Leftrightarrow p^r(y + a x_1) = 0$. Abbiamo $0 = \pi(p^r y) \Rightarrow p^r y \in \ker(\pi) = \langle \overline x_1 \rangle$, dunque $\exists b \in \Z \ p^ry = bx_1$. Sappiamo inoltre $0 = p^{r_1}y = p^{r_1-r}(p^r y) = p^{r_1-r}(b x_1) \Rightarrow p^{r_1} = \text{ord}(x_1) \mid p^{r_1-r}b \Rightarrow \exists c \in \Z \ b = p^rc$. Allora $y-cx_1$ è l'elemento cercato, infatti $p^r(y-cx_1) = p^ry - p^rcx_1 = b x_1 - bx_1 = 0$.
+     \end{proof}
+    Consideriamo $x_2, \dots, x_t$ dati dal lemma per $\overline x_2, \dots , \overline x_t$. Sia $H = \langle x_2,\dots, x_t \rangle$. Dimostriamo $\pi|_H$ isomorfismo. È chiaramente suriettiva perché $\pi|_H(x_i) = \overline x_i$ per $i=2,\dots,t$. Inoltre:
+    \begin{align}
+    \ker(\pi|_H) & = \{h \in H : \pi(h) = 0 \} =  \nonumber \\
+    & = \{a_2 x_2+\dots+a_t x_t \in H :  \overline 0 = \pi(h) = a_2\overline x_2+\dots+a_t\overline x_t \}  =  \nonumber \\
+    & =  \{a_2 x_2+\dots+a_t x_t \in H : a_i\overline x_i = \overline 0 \ \forall i = 2,\dots, t\}  = \nonumber \\
+    & = \{a_2 x_2+\dots+a_t x_t \in H : p^{r_i} \mid a_i \ \forall i = 2,\dots, t\}  = \nonumber \\
+    & = \{a_2 x_2+\dots+a_t x_t \in H : a_i x_i =  0 \ \forall i = 2,\dots, t\} = \{0\}. \nonumber 
+    \end{align}
+    Quindi $H \cong \langle \overline x_2 \rangle \dots \langle \overline x_t \rangle \cong \langle x_2 \rangle \dots  \langle  x_t \rangle$. Se dimostriamo $G \cong \langle x_1 \rangle \times H$, segue la tesi. Verifichiamo che sono soddisfatte le ipotesi del teorema di decomposizione in prodotto diretto: 
+    \begin{itemize}
+    \item $\langle x_1 \rangle + H  = G$: $\forall x \in G$ vale che $\pi(x) = a_2\overline x_2 + \dots + a_t \overline x_t \Rightarrow \pi(x - (a_2 x_2 + \dots + a_t  x_t)) = 0 \Rightarrow x - (a_2 x_2 + \dots + a_t  x_t) \in \langle x_1 \rangle$;
+    \item $\langle x_1 \rangle \cap H = \{e\}$: basta notare che $\{0\} = \ker(\pi|_H) = \ker(\pi) \cap H = \langle x_1 \rangle \cap H.$
+    \end{itemize}
+    Dunque $G \cong \langle x_1 \rangle \times \dots \langle x_t \rangle$.
+
+    Per l'unicità procediamo sempre per induzione. Nel passo base è ovvia, perché può essere solo isomorfo a $\Zp$. Per il passo induttivo supponiamo che esistano due scritture $\Z/p^{r_1}\Z \times \dots \times \Z/p^{r_t} \cong \Z/p^{q_1}\Z \times \dots \times \Z/p^{q_s}$,($r_i$ e $q_i$ crescenti). Poiché i campi sono isomorfi l'ordine massimo di un loro elemento deve essere lo stesso, e quindi  $p^{r_t} = p^{q_s} \Rightarrow r_t = q_s$. Quozientiamo allora i due gruppi per $\Z/p^{r_t}$. Otteniamo due scritture  $\Z/p^{r_1}\Z \times \dots \times \Z/p^{r_{t-1}} \cong \Z/p^{q_1}\Z \times \dots \times \Z/p^{q_{s-1}}$ che per ipotesi induttiva sono la stessa, e quindi $t = s$ e $r_i = q_i \forall i = 1,\dots,t$.
+\end{proof}
+
+\begin{theorem}{struttura dei gruppi abeliani finiti}
+    Sia $G$ abeliano finito. Allora esistono univocamente determinati $n_1, \dots, n_t$ tali che $G \cong \Z/n_1\Z \times \dots \times \Z/n_t\Z$ e $n_t \mid n_{t-1} \mid \dots \mid n_1$.
+\end{theorem}
+\begin{proof}
+    Sia $\#G = \prod_{i = 1}^s p_i^{\alpha_i}$ con $p_i$ primi. Mettiamo insieme i due teoremi appena visti.
+    \begin{align}
+        G & \cong G(p_1) \times \dots \times G(p_s) \cong \\
+        & \cong \Z/p_1^{r_{1,1}}\Z \times \dots \times \Z/p_1^{r_{1,t_1}}\Z \times \dots \times \Z/p_s^{r_{s,1}}\Z \times \dots \times \Z/p_s^{r_{s,t_s}}\Z \cong \\
+        & \cong \Z/p_1^{r_{1,1}}\Z \times \dots \times \Z/p_1^{r_{1,t}}\Z \times \dots \times \Z/p_s^{r_{s,1}}\Z \times \dots \times \Z/p_s^{r_{s,t}}\Z \cong  \\
+        & \cong \Z/p_1^{r_{1,1}}\Z \times \dots \times \Z/p_s^{r_{s,1}}\Z \times \dots \times \Z/p_1^{r_{1,t}}\Z \times \dots \times \Z/p_s^{r_{s,t}}\Z \cong  \\
+        & \cong \Z/n_1\Z \times \times \dots \times \Z/n_t\Z 
+        \end{align}
+    Motivazioni dei vari passaggi:
+    \begin{itemize}
+        \item[(1)] applichiamo il teorema 1
+        \item[(2)] applichiamo il teorema 2, e chiamiamo $r_{i,j}$ gli esponenti ottenuti per il primo $p_i$, $1 \leq j \leq t_i$; si ha quindi $r_{i,1} \geq \dots \geq r_{i,t_i} \forall i = 1,\dots, s$
+        \item[(3)] imponiamo wlog che le scritture abbiano tutte la stessa lunghezza, estendendole eventualmente alla massima, che indichiamo con $t$, con dei gruppi banali ($\forall i = 1,\dots,s \ r_{i,j} = 0 \ \forall j > t_i$)
+        \item[(4)] riarrangiamo i termini
+        \item[(5)] applichiamo TCR raggruppando blocchi di termini coprimi: $n_k = \prod_{i = 1}^s p_i^{r_{i,k}}$ e quindi, dal fatto che gli $r_{i,k}$ sono ordinati (rispetto a $k$) in senso decrescente, si ha $n_t \mid n_{t-1},  \dots, n_2 \mid n_1$
+    \end{itemize}
+    Per l'unicità ripercorriamo i passaggi al contrario, sfruttando il fatto che si ha unicità nei teoremi 1 e 2.
+\end{proof} 
+
+\hypertarget{gruppi finiti}{
+\subsection{Fatti utili sui gruppi finiti}
+}
+\hypertarget{es1}{
+\begin{proposition}{gruppo finito non è unione di sottogruppi coniugati}
+    Sia $G$ finito e $H <G$ sottogruppo. Allora $\bigcup_{g \in G} gHg^{-1} = G \iff H = G$
+\end{proposition}
+}
+\begin{proof}
+    La freccia ``$\Leftarrow$'' è ovvia. Si nota che l'unione è un'unione di $\# G $ gruppi, che però non sono necessariamente tutti distinti. In particolare:
+    \[
+    g_1 H g_1^{-1} = g_2 H g_2^{-1} \iff g_2^{-1}g_1 H g_1^{-1}g_2 = H \iff g_2^{-1}g_1 \in N_G(H).
+    \]
+    Quindi ogni gruppo compare $\# N_G(H)$ volte, da cui segue che i gruppi distinti sono $n = \#G / \#N_G(H)$. Potremmo notare che se vale $N_G(H) \gneq H $ abbiamo già chiuso per cardinalità. Tuttavia, possiamo raffinare la stima: ciascun gruppo $gHg^{-1}$ è in bigezione naturale con $H$ e quindi ha $\#H$ elementi. Ma essendo gruppi, certamente tutti contengono l'identità. Quindi gli elementi distinti nell'unione $\bigcup_{g \in G} gHg^{-1}$ sono al più $n\cdot(\#H -1) + 1$, ovvero:
+    \[
+    \#\bigcup_{g \in G} gHg^{-1} \leq \#G / \#N_G(H) \cdot (\#H -1) + 1 \leq \#G / \#H \cdot (\#H -1) + 1 = \#G - \#G / \#H + 1,
+    \]
+    che è minore di $\#G$ se $H \neq G$. 
+\end{proof}
+\begin{proposition}{centro di un $p$-gruppo}
+    Sia $G$ tale che $\#G = p^n$, con $p$ primo. Allora $Z(G) \neq \{e\}$.
+\end{proposition}
+\begin{proof}
+    Consideriamo la formula delle classi modulo $p$. Se fosse $\#Z(G) = 1$ allora $\sum \frac{\#G}{\#Z_G(g)} = \sum \frac{p^n}{\#Z_G(g)}$ non sarebbe divisibile per $p$, e quindi almeno uno dei termini dovrebbe non essere divisibile per $p$. L'unica possibilità è che si abbia $\frac{\#G}{\#Z_G(g)} = 1$ per un qualche $g$, ossia $Z_G(g) = G$, assurdo perché $g \notin Z(G)$.
+\end{proof}
+\begin{proposition}{gruppi di ordine $p^2$}
+    Sia $G$ con $\#G = p^2$, con $p$ primo. Allora $G \cong \Z/p^2\Z$ oppure $G \cong \Zp \times \Zp$. In particolare $G$ è abeliano.
+\end{proposition}
+\begin{proof}
+    Dimostriamo innanzitutto che $G$ è abeliano. Le possibili cardinalità di $Z(G)$ sono solo $1, p, p^2$. $\#Z(G) = 1$ è esclusa dalla proposizione precedente. Non può essere neanche $\#Z(G) = p$, infatti si avrebbe $[G : Z(G)] = p \Rightarrow G/Z(G)$ ciclico $\Rightarrow$ $G$ abeliano $\Rightarrow$ $\#Z(G) = p^2$, contro l'ipotesi $\#Z(G) = p$. Necessariamente allora $\#Z(G) = p^2$, i.e. $G$ è abeliano.
+    
+    Distinguiamo ora due casi: se esiste un elemento di ordine $p^2$ allora $G$ è ciclico, se invece un tale elemento non esiste, per il teorema di Lagrange tutti gli elementi eccetto il neutro hanno ordine $p$. Sia $x$ un tale elemento e $y \in G \setminus \langle x \rangle$. $\langle x \rangle\cap \langle y \rangle = \{e\}$ perché se avessero in comune un elemento $z \neq e$ di ordine $p$ si avrebbe l'assurdo $\langle x \rangle = \langle z \rangle = \langle y \rangle$. Poiché $G$ è abeliano, sia $\langle x \rangle$ che $\langle y \rangle$ sono normali in $G$. Dal teorema di decomposizione in prodotto diretto segue $G \cong \langle x \rangle \times \langle y \rangle \cong \Zp \times \Zp$.
+\end{proof}
+\begin{proposition}{gruppi di ordine $pq$}
+    Sia $G$ tale che $\#G = pq$, con $p < q$ primi. Se $p \nmid q-1$ allora necessariamente $G \cong \Z/pq\Z$, altrimenti a questa possibilità si aggiunge $G \cong  \Zq \rtimes \Zp$.
+\end{proposition}
+\begin{proof}
+    Per il teorema di Cauchy $\exists x,y \in G \ \text{ord}(x) = q, \text{ord}(y) = p$. Se per assurdo esistesse $z \in G \setminus \grp{x}$ di ordine $q$, allora avrei $\grp{x} \cap \grp{z} = \{e\}$ e quindi l'assurdo $\# \grp{x}\grp{z} = q^2 > pq$. Dunque $\grp{x}$ è l'unico sottogruppo di ordine $q$, quindi è caratteristico e in particolare normale.
+    $\grp{x} \cap \grp{y} = \{e\}$ perché l'ordine di un elemento nell'intersezione divide sia $p$ che $q$, che sono coprimi. Segue $\#\grp{x}\grp{y} = pq$, cioè $G = \grp{x}\grp{y}$. Per il teorema di decomposizione in prodotto semidiretto si ha allora $G \cong \langle x \rangle \rtimes_{\varphi} \langle y \rangle$ dove $\varphi$ è l'azione per coniugio di $\langle y \rangle$ su $\langle x \rangle$,
+    quindi un omomorfismo $\varphi : \langle y \rangle \rightarrow \Aut(\grp{x})$ che corrisponde a un omomorfismo $f : \Zp \to \Z/(q-1)\Z \ (\cong \Aut(\Zq))$.
+    Le possibili cardinalità dell'immagine di $\varphi$ sono $1$ o $p$, ma per Lagrange l'immagine può avere cardinalità $p$ solo se $p \mid q-1$. Quindi:
+    \begin{itemize}
+        \item se $p \nmid q-1$ l'unica possibilità è l'omomorfismo banale, nel cui caso il prodotto è diretto;
+        \item se $p \mid q-1$ esistono anche omomorfismi $f$ non banali, ognuno univocamente determinato dall'immagine di $1$. $\text{ord}f(1) = p \Rightarrow f(1) = k \frac{q-1}{p}$ per un $k \in \{1, \dots, p-1\}$. Quindi, detta $f^{(k)}$ la funzione $f^{(k)}(1 \mapsto k \frac{q-1}{p})$, vale $f = f^{(k)}$ per qualche $k$. Data $\beta \in \Aut(\Zp)$ definita da $\beta(1 \mapsto k^{-1})$ vale $\forall i \in \Zp \ (f^{(k)} \circ \beta)(i) = f^{(k)}(i \beta(1)) = i\beta(1)f^{(k)}(1) = i\beta(1)k\frac{q-1}{p} = i (ap + 1) \frac{q-1}{p} = i \frac{q-1}{q} = f^{(1)}(i)$, dunque $f^{(k)} \circ \beta = f^{(1)}$. Per il lemma sull'isomorfismo di prodotti semidiretti si ha $\Zq \rtimes_{f^{(1)}} \Zp \cong \Zq \rtimes_{f^{(k)}} \Zp$, dunque il prodotto semidiretto non banale $\langle x \rangle \rtimes_\varphi \langle y \rangle$ è unico a meno di isomorfismo.
+    \end{itemize}
+\end{proof}
+\begin{proposition}{gruppi di ordine $2d$}
+    Sia $G$ tale che $\#G = 2d$, con $d$ dispari. Allora $G$ ha un sottogruppo di indice 2 (che quindi è normale in $G$).
+\end{proposition}
+\begin{proof}
+    Per il teorema di Cauchy $\exists x \in G \ \text{ord}(x) = 2$. Consideriamo l'immersione del teorema di Cayley, $f: G \hookrightarrow S_{2d}$. Sia $H = f^{-1}(A_{2d}) = f^{-1}(A_{2d} \cap f(G))$. Per il teorema di corrispondenza, $[G : H] = [f(G) : A_{2d} \cap f(G)]$, dove il secondo termine può essere solo 1 o 2. Infatti $A_{2d} \cap f(G) = \ker(\sgn\mid_{f(G)})$ e quindi $f(G)/(A_{2d} \cap f(G)) \cong \imm(\sgn\mid_{f(G)}) \subseteq\{\pm 1\}$, da cui segue $[f(G) : A_{2d} \cap f(G)] \leq 2$.
+    Segue dalle proprietà viste dell'embedding di Cayley che se $\text{ord}(x) = 2$ allora $f(x)$ è una permutazione formata da $d$ 2-cicli, quindi in particolare $f(x)$ ha segno dispari e $f(x) \not \in A_{2d}$. Quindi $H \neq G \Rightarrow [G:H] = 2$.
+    Alternativamente, per ogni $H < S_n$ se esiste $\sigma \in H \ \sgn(\sigma) = -1$, allora $\tau \mapsto \sigma \circ \tau$ è una bigezione tra gli elementi pari e gli elementi dispari di $H$.
+\end{proof}
+\begin{proposition}{condizione sufficiente per normalità}
+    Sia $G$ finito. Se $H < G$ ha indice il più piccolo primo che divide $\#G$, allora $H$ è normale.
+\end{proposition}
+\begin{proof}
+    Considero l'azione $\varphi$ di $G$ sull'insieme $X = \set{gH : g \in G}$ data dalla moltiplicazione a sinistra. Per definizione si ha $\# X = p $. Ricordiamo che un'azione è definita come un omomorfismo $\varphi: G \rightarrow S(X) \cong S_p$. Sia $K$ il suo nucleo, voglio dire $K = H$. Per il primo teorema di omomorfismo, $G/K \cong \imm(\phi) < S_p$, quindi $\#(G/K) \mid p!$ e chiaramente $\#(G/K) \mid \#G$. Segue $\#(G/K) \mid MCD(\# G, p!) = p$, dove l'ultima uguaglianza segue dal fatto che $p$ è il \textit{minimo} primo che divide $\#G$. Non può essere $K = G$ poiché $\forall g \in G \ gH = H \Rightarrow H = G$, contro l'ipotesi. Necessariamente allora $\#(G/K) = p$. $H \leq K$ implica $p = \#(G/K) \leq \#(G/H) = p$, da cui $K = H$.
+
+    \underline{seconda dim:}
+    Vale $H \tri G \Leftrightarrow \forall g \in G, h \in H \ hgH = gH$. Considero l'azione $\varphi$ di $H$ sull'insieme $X = \set{gH : g \in G} \setminus \{ eH \}$ data dalla moltiplicazione a sinistra, per definizione si ha $\# X = p - 1$.
+    La moltiplicazione per elementi di $H$ è una bigezione di $G/H$ che fissa $eH$, quindi l'azione è ben definita. Ricordiamo che un'azione è un omomorfismo $\varphi: H \rightarrow S(X) \cong S_{p-1}$. Per quanto detto, $H \tri G \Leftrightarrow \imm(\varphi) = \{ id_X \}$. Si ha $\# \imm(\varphi) \mid \#S_{p-1} = (p-1)!$ e $\# \imm(\varphi) \mid \# H$, ma allora $\#\imm(\varphi) \mid MCD(\#H, (p-1)!) = 1$, cioè $\imm(\varphi) = \{id_X\}$.
+\end{proof}
+\begin{proposition}{sottogruppo normale contenuto nel centro}
+    Sia $G$ finito. Se $H \tri G$ ha ordine $p$ il più piccolo primo che divide $\#G$, allora $H$ è contenuto nel centro.
+\end{proposition}
+\begin{proof}
+    Nello stesso spirito della dimostrazione precedente, considero l'azione per coniugio di $G$ su $X = H \setminus \{ e \}$, ben definita per normalità di $H$ e poiché $ghg^{-1} = e \Leftrightarrow h = e$. L'azione è un omomorfismo $\varphi : G \to S(X) \cong S_{p-1}$. $H \subset Z(G)$ se e solo se l'immagine di $\varphi$ è banale, ma ciò è sicuramente verificato poiché $\#\imm(\varphi) \mid MCD(\#G, \#S_{p-1}) = 1$.
+\end{proof}
+\begin{definition}{sottogruppo derivato/dei commutatori}
+    il commutatore di due elementi $x,y \in G$ si indica con $[x,y]:= xyx^{-1}y^{-1}$. Il sottogruppo generato da tutti i commutatori si indica con $G'$. \\
+\end{definition}
+\begin{proposition}{proprietà del sottogruppo derivato}
+    Valgono le seguenti:
+    \begin{enumerate}
+        \item è caratteristico (e quindi anche normale)
+        \begin{proof}
+            Basta osservare che per ogni omomorfismo $f$ con dominio $G$ si ha $f([x,y]) = [f(x),f(y)] \ \forall x,y \in G$. Quindi un qualsiasi automorfismo manda l'insieme dei commutatori in sé stesso, e di conseguenza $G'$ in sé stesso.
+        \end{proof}
+        
+        \item $G/G'$ è abeliano (tale gruppo è detto l'\textit{abelianizzato} di $G$).
+        \begin{proof}
+            $\forall g,h \in G$ si ha $gG' \cdot hG' =  hG' \cdot gG' \iff gh G' = hgG' \iff ghg^{-1}h^{-1} \in G'$ che è chiaro perché è un commutatore.
+        \end{proof}
+        
+        \item $\varphi: G \rightarrow H$ omomorfismo con $H$ abeliano $\Rightarrow G' \subset \ker(\varphi)$
+        \begin{proof}
+            Basta osservare che se $H$ abeliano
+            \[
+                f([x,y]) = [f(x),f(y)] = f(x)f(y)f(x)^{-1}f(y)^{-1} = f(x)f(x)^{-1}f(y)f(y)^{-1} = e_H \quad \forall x,y \in G.
+            \]
+            Quindi i commutatori sono tutti nel nucleo e di conseguenza anche $G'$.
+        \end{proof}
+        
+        \item $H$ abeliano $\Rightarrow$ $\Hom(G,H)$ e $\Hom(G/G',H)$ sono in bigezione.
+        \begin{proof}
+            Costruiamo le sue corrispondenze come segue. 
+            \begin{itemize}
+            \item $\varphi \in \Hom(G,H)$ la mandiamo in $\tilde \varphi \in \Hom(G/G',H)$ data dal $1^{\circ}$ teorema di omomorfismo (visto che $G' \subseteq \ker(\varphi)$). Segue dall'unicità nel teorema che sono tutte distinte e quindi questa mappa è iniettiva.
+            \item $\varphi \in \Hom(G,H)$ la mandiamo in $\varphi \circ \pi \in \Hom(G/G',H)$ dove $\pi$ è la proiezione $\pi: G \rightarrow G/G'$. Anche questa mappa è chiaramente iniettiva, visto che $G' \subseteq \ker(\varphi)$ e quindi se due mappe vengono mandate nella stessa allora coincidono anche su tutto $G$.
+            \end{itemize}
+        \end{proof}
+        \end{enumerate}    
+\end{proposition}
+
+\begin{proposition}{prodotti diretti belli}
+    Se $G \cong H \times K$ con $H,K$ finiti tali che $(\#H, \#K) = 1$ allora $\{e_H\} \times K$ e $H \times \{e_K\}$ sono caratteristici in $G$.
+\end{proposition}
+\begin{proof}
+    Dimostriamo che $\{e_H\} \times K$ e $H \times \{e_K\}$ sono gli unici sottogruppi delle rispettive cardinalità, quindi caratteristici. Basta dire che nelle ipotesi per ogni sottogruppo $L \le G$ vale $L = \grp{\pi_H(L) \times \{e_K\}, \{e_H\} \times \pi_K(L)}$ e quindi $\#L = \#\pi_H(L) \#\pi_K(L)$. Vale sempre $L \subseteq \grp{\pi_H(L) \times \{e_K\}, \{e_H\} \times \pi_K(L)}$. L'altro contenimento segue da $(\#H, \#K) = 1$, infatti per Bezout $\forall (h, k) \in L \ \exists a, b \in \N \ (h, k)^a = (h, e_K)$ e $(h, k)^b = (e_H, k)$.
+\end{proof}
+\begin{proposition}{automorfismi in un prodotto diretto}
+    Se $G \cong H \times K$ e $\{e_H\} \times K$ e $H \times \{e_K\}$ sono caratteristici in $G$, allora $\Aut(G) \cong \Aut(H) \times \Aut(K)$. 
+\end{proposition}
+\begin{proof}
+    Per ogni $\varphi \in \Aut(G)$ sia $\varphi_H \in \Aut(H)$ definito mediante $\varphi_H(x) := \pi_H \circ \varphi (x, e_K)$ (chiaramente è un automorfismo) e analogamente $\varphi_K \in \Aut(K)$. \\
+    Consideriamo allora $\Phi: \Aut(G) \rightarrow \Aut(H) \times \Aut(K)$ dato da $\Phi(\varphi) = (\varphi_H, \varphi_K)$. 
+\begin{itemize}
+    \item è omomorfismo: basta notare che $(\psi \circ \varphi)_H = \psi_H \circ \varphi_H$;
+    \item è iniettivo: $\Phi(\varphi)=(id_H,id_K) \Rightarrow \forall (h, k) \in G \ \varphi((h, k)) = (h, k) \Rightarrow \varphi = id_G$.
+\end{itemize}
+\end{proof} 
+\begin{proposition}{(*) centro di un prodotto semidiretto}
+    Sia $G\cong H \rtimes_{\varphi} K$ con $H$ abeliano. Allora
+    \[
+    Z(G) \cong \left( \bigcap_{k \in K} Fix(\varphi_k) \right) \times (\ker(\varphi) \cap Z(K)).
+    \]
+\end{proposition}
+\begin{proof}
+    Un elemento $(a, b)$ sta nel centro di $G$ se e solo se commuta con gli elementi dell'insieme di generatori $H \times \{e_K\} \cup \{e_H\} \times K$:
+    \begin{itemize}
+        \item $(a, b)(e_H, b') = (a \varphi_b(e_H), b b') = (a, b b')$ e $(e_H, b')(a, b) = (\varphi_{b'}(a), b' b)$ coincidono per ogni $b' \in K$ se e solo se $b \in Z(K)$ e $a \in Fix(\varphi_{b'})$;
+        \item $(a, b)(a', e_K) = (a \varphi_b(a'), b)$ e $(a', e_K)(a, b) = (a' a, b) = (a a', b)$ coincidono per ogni $a' \in H$ se e solo se $b \in \ker(\varphi)$.
+    \end{itemize}
+    Quindi $(h,k) \in Z(G) \Leftrightarrow h \in \bigcap_{k \in K} Fix(\varphi_k) \land k \in \ker(\varphi) \cap Z(K)$, come voluto.
+\end{proof}
+\begin{proposition}{(*) intersezione dei $p$-Sylow con il centro}
+    L'intersezione di un $p$-Sylow con il centro non dipende dal $p$-Sylow scelto.
+\end{proposition}
+\begin{proof}
+    Sia $S$ un fissato $p$-Sylow. Ricordiamo che i $p$-Sylow sono tutti coniugati, quindi dato $Q$ un qualsiasi $p$-Sylow $\exists g \in G$ $Q = gSg^{-1}$. Poiché ogni elemento del centro è invariante per qualsiasi coniugio si ha: $Q \cap Z(G) = gSg^{-1} \cap Z(G) = gSg^{-1} \cap gZ(G)g^{-1} = g(S \cap Z(G))g^{-1} = S \cap Z(G)$. 
+\end{proof} 
+
+\hypertarget{diedrale}{\subsection{Il gruppo diedrale}}
+    Il gruppo diedrale $D_n$ è il gruppo delle isometrie di un fissato $n$-agono regolare -- diciamo quello inscritto nella circonferenza unitaria e con un vertice in $(1,0)$ -- con l'operazione di composizione. Chiamiamo $r$ la rotazione di $2\pi/n$ in senso antiorario e $s$ la simmetria rispetto all'asse $x$. Le $n$ rotazioni sono multiple di $r$ ed elementi di $D_n$, così come sono elementi di $D_n$ anche le $n$ simmetrie relative all'asse origine-vertice al variare dei vertici. Questi sono $2n$ elementi distinti, da cui $\#D_n \geq 2n$. Assicuriamoci siano tutti e soli gli elementi del diedrale mostrando $\#D_n = 2n$.
+\begin{proof}
+    Chiamiamo i vertici, in senso antiorario a partire da $(1,0)$, $V_1, V_2, \dots, V_n$ e sia $\sigma \in D_n$. Poiché $\sigma$ è isometria, manda vertici in vertici, e inoltre una volta fissata l'immagine di $V_1,V_2$, è tutto univocamente determinato. Per $V_1$ abbiamo $n$ scelte (tutti i vertici), per $V_2$ ne abbiamo 2 (i due vicini di $\sigma(V_1)$), da cui $\#D_n = 2n$. 
+\end{proof}
+Notiamo ora che $sr^k$ è un'altra simmetria.
+\begin{proof}
+    Un'isometria è in particolare un'applicazione lineare. Consideriamo le matrici $2\times 2$ $R$ relativa a $r$ e $S$ relativa a $s$. Si nota che un'isometria in $D_n$ è una simmetria assiale se e solo se la sua matrice ha determinante $-1$ e una rotazione se e solo se la sua matrice ha determinante $1$. La tesi segue allora dalla moltiplicatività del determinante. 
+\end{proof}
+    Allora $s, sr, sr^2, \dots sr^{n-1}$ sono $n$ simmetrie distinte, quindi tutte (e sole) quelle descritte prima. Segue
+    \[
+        D_n = \langle r, s \rangle.
+    \]
+    Per lavorare con il diedrale è fondamentale la seguente relazione: $srs = r^{-1}$
+\begin{proof}
+    $r$ manda $V_i$ in $V_{i+1}$, $s$ manda $V_i$ in $V_{n+1-i}$ (guardando gli indici modulo $n$) e quindi $srs$ manda $V_1 \mapsto V_1 \mapsto V_2 \mapsto V_{n-1}$, $V_2 \mapsto V_{n-1} \mapsto V_1 \mapsto V_1$,  da cui la tesi.
+\end{proof}
+    La presentazione di $D_n$ è $\langle x,y \mid x^n = id, y^2 = id, yxyx = id\rangle$.
+    
+    Da quella relazione, con manipolazioni algebriche, si ricava 
+    \[ s^ar^bs^cr^d= s^{a+c} r^{(-1)^cb + d}. \]
+    Questa relazione ci fa già intuire la struttura di prodotto semidiretto. Si dimostra infatti
+    \[ D_n \cong \Zn \rtimes \Z/2\Z \]
+\begin{proof}
+    Il sottogruppo delle rotazioni $R=\langle r \rangle$ è normale perché ha indice 2, è chiaramente disgiunto da $\langle s \rangle$ per quanto detto precedentemente sui determinanti, e si è visto prima che $\langle r \rangle \langle s \rangle = \langle r, s \rangle = D_n$. La tesi segue allora dal teorema di decomposizione in prodotto semidiretto: $D_n \cong \langle r \rangle \rtimes \langle s\rangle \cong \Zn \rtimes \Z/2\Z$.
+\end{proof}
+Studiamone infine i sottogruppi. Come detto sopra, il sottogruppo delle rotazioni $R = \langle r \rangle$ è normale perché ha indice 2. Inoltre è ciclico, quindi ha esattamente un sottogruppo di ordine $d$ per ogni $d$ divisore di $n$. Tutti questi sottogruppi sono caratteristici in $R$ perché sono gli unici del proprio ordine, quindi sono normali in $D_n$. Perciò i sottogruppi generati da un qualsiasi multiplo della rotazione $r$ sono tutti normali.
+
+Notiamo ora che se in un gruppo $H$ ci sono due simmetrie distinte, allora c'è anche una rotazione: $sr^a, sr^b \in H \Rightarrow sr^asr^b = r^{b-a} \in H$. Tutti i gruppi restanti sono allora quelli generati da una rotazione (quella di ordine massimo nel sottogruppo) e una simmetria. Sia $H = \langle r^d, sr^h \rangle$. Senza perdita di generalità possiamo supporre:
+\begin{itemize}
+    \item $0 \leq h < d$: se $h = md + x$ con $0 \leq x < d$ (resto) e $r^d \in H$ si ha $sr^x\in H \iff sr^h = sr^x(r^d)^m \in H$;
+    \item $0 \leq d < n$, $d \mid n$: basta notare che $\grp{r^d} = \grp{r^{xd}}$ per ogni $x$ coprimo con $n$ e $d$ divisore.
+\end{itemize}
+Imponendo queste condizioni su $d,h$ notiamo che i gruppi trovati sono tutti distinti. In altre parole, $\langle r^{d_1}, sr^{h_1} \rangle = \langle r^{d_2}, sr^{h_2} \rangle \iff (d_1,h_1) = (d_2,h_2)$ (se $d_1,h_1$ sono come su e anche $d_2,h_2$).
+\begin{proof}
+    Sia $H_i = \langle r^{d_i}, sr^{h_i} \rangle$ per $i = 1,2$. Notiamo che $H_1 = H_2 \Rightarrow \grp{r^{d_1}} = H_1 \cap R = H_2 \cap R = \grp{r^{d_2}}$. Per quanto osservato prima, ciò implica $d_1 = d_2$. Si può ora notare che $H_i = \grp{sr^{h_i}}\grp{r^{d_i}}$ (basta osservare che $r^{d_i}sr^{h_i}=sr^{h_i-d} \in \grp{sr^{h_i}}\grp{r^{d_i}}$). Allora $sr^{h_2} \in H_1  \Rightarrow sr^{h_2} = (sr^{h_1})^a(r^{d_1})^b = s^ar^{ah_1+d_1}$ da cui segue che $a$ è dispari (o il membro di destra non sarebbe una simmetria) e quindi senza perdita di generalità $a =1$ (le simmetrie hanno ordine 2). Ma allora $h_1 + d_1 = ah_1 + d_1 \equiv h_2 \pmod{n}$. In particolare $h_1 \equiv h_2 \pmod{d_1}$. Ma $d_1 = d_2$ e l'ipotesi implicano che sono entrambi ridotti modulo $d_1$ e quindi non si ha solo congruenza ma uguaglianza.
+\end{proof}
+Ci chiediamo quando un gruppo nella forma sopra è normale. Verificando la normalità rispetto ai generatori $r,s$ si verifica che gli unici sottogruppi normali che contengono una simmetria sono $\grp{r^2, s}$, $\grp{r^2, sr}$, che sono sottogruppi propri solo nel caso in cui $n$ sia pari.
+
+Ricapitolando, i sottogruppi di $D_n$ sono tutti e soli i seguenti:
+\begin{itemize}
+    \item $R = \grp{r}$ delle rotazioni, che è normale e caratteristico (non ci elementi di ordine $n$ fuori da $R\cong \Z/n\Z$);
+    \item $\grp{r^d}$ con $d\mid n$, che sono caratteristici in $R$, quindi normali in $D_n$;
+    \item $\grp{r^d, sr^h}$ con $d \mid n, 0\leq h < n$, che sono normali in $D_n$ solo nel caso $\grp{r^2, s}$ e $\grp{r^2, sr}$.
+\end{itemize}
+
+\begin{exercise}
+    Un gruppo si dice \emph{decomponibile} se è isomorfo al prodotto diretto di gruppi non banali. Mostrare che $D_n$ è decomponibile sse $n = 2d$ con $d$ dispari.
+\end{exercise}
+
+\subsection{Il gruppo simmetrico}
+
+Ogni permutazione $\sigma \in S_n$ si può scrivere come composizione di trasposizioni. Infatti un ciclo si può scrivere nella forma $(a_1, \dots, a_k) = (a_1, a_2)(a_2,a_3)\dots(a_{k-1},a_k)$ e ogni permutazione può essere rappresentata come prodotto di cicli disgiunti. Dunque le trasposizioni generano $S_n$.
+
+\begin{proposition}{classi di coniugio}
+    Data $\sigma \in S_n$, $Cl(\sigma)$ è l'insieme delle permutazioni di $S_n$ con la stessa struttura ciclica di $\sigma$.
+    
+    Ad esempio, $Cl((1,2)) = \set{\text{trasposizioni}}$ e $Cl((1,2)(3,4,5)) = \set{\text{2+3-cicli}}$.
+\end{proposition}
+\begin{proof}
+    Fissiamo $\sigma = (a^1_1, \dots, a^1_{k_1})(a^2_1, \dots, a^2_{k_2}) \dots (a^c_1, \dots, a^c_{k_c})\in S_n$ e $X$ insieme delle permutazioni di $S_n$ con la stessa struttura in cicli di $\sigma$. \\
+    Si mostra facilmente che $\forall \tau \in S_n$, $\tau\circ\sigma\tau^{-1} = (\tau{a^1_1}, \dots, \tau{a^1_{k_1}})(\tau{a^2_1}, \dots, \tau{a^2_{k_2}}) \dots (\tau{a^c_1}, \dots, \tau{a^c_{k_c}}) \in X$. Quindi $Cl(\sigma)\subseteq X$. \\
+    Sia $\sigma ' = (b^1_1, \dots, b^1_{k_1})(b^2_1, \dots, b^2_{k_2}) \dots (b^c_1, \dots, b^c_{k_c}) \in X$; notiamo che $\tau = (a^1_1,b^1_1)\circ\dots \circ (a^c_{k_c},b^c_{k_c})$ è tale che $\tau\circ \sigma\circ \tau^{-1} = \sigma'$. Quindi $\sigma' \subseteq Cl(\sigma)$. Facendo variare $\sigma'$, $X \subseteq Cl(\sigma)$. 
+\end{proof}
+
+\begin{proposition}{cardinalità di un centralizzatore}
+    Se $\sigma \in S_n$ è formata da $a_i \geq 0$ $i$-cicli $\forall i = 1,\dots,n$, vale che \[ \#Z_{S_n}(\sigma) = \prod_{i=1}^n (a_i!\cdot i^{a_i}). \]
+    Ciò ci può aiutare a capire come sono fatti dei centralizzatori semplici oppure, combinato con il lemma normalizzatore-centralizzatore, dei centralizzatori.
+    
+    Generalmente si cerca di costruire ``indovinando'' il centralizzatore e poi si dice che è quello per cardinalità. Ad esempio il centralizzatore di un $k$-ciclo ($a_i = 1$ se $i = k$, $a_i = n-k$ se $i = 1$, $a_i = 0$ altrimenti) secondo la formula ha cardinalità $k \cdot (n-k)!$. Poiché sia il sottogruppo generato dal $k$-ciclo che il sottogruppo di $S_n$ che permuta gli elementi che non compaiono nel $k$-ciclo sono banalmente nel centralizzatore (e l'intersezione di questi due sottogruppi è banale) per cardinalità si conclude che il centralizzatore del ciclo è proprio il prodotto di questi due sottogruppi. 
+\end{proposition}
+\begin{proof}
+    Abbiamo infatti visto che per il lemma orbita-stabilizzatore vale $\#Z_{S_n} = \frac{\#S_n}{Cl(\sigma)}$. Sappiamo che $Cl(\sigma)$ è l'insieme di tutte e sole le permutazioni con $a_i$ (fissato da $\sigma$) $i$-cicli. Dobbiamo contare quante sono tali permutazioni. Il conto è puramente combinatorico e si può fare in vari modi, eccone uno: 
+    \begin{enumerate}
+        \item mettiamo in fila in ordine: il primo blocco da 1 casella, il secondo blocco da 1 casella, $\dots$ il $a_1$-esimo blocco da 1 casella, il primo blocco da 2 caselle, $\dots$, il $a_2$-esimo blocco da 2 caselle, $\dots$, il $a_k$-esimo blocco da $k$-caselle; chiaramente in totale ci sono in fila $n$ caselle;
+        \item riempiamo tali caselle con i numeri da 1 a $n$ in qualche ordine ; questa operazione ci dà una permutazione in $Cl(\sigma)$ se trasformiamo i blocchi di caselle in cicli;
+        \item ci sono delle ripetizioni, che si manifestano in 2 modi:
+        \begin{itemize}
+            \item possiamo scambiare due blocchi da $i$ caselle ottenendo la stessa scrittura in cicli; essendoci $a_i$ $i$-cicli per ogni $i$ per togliere queste ripetizioni dobbiamo dividere per $\prod_{i=1}^n a_i!$;
+            \item possiamo far ciclare (attenzione: non permutare!) il contenuto di un blocco da $i$ fissato; per tale blocco i modi di ciclare sono $i$ quindi per togliere queste ripetizioni dobbiamo dividere per $\prod_{i=1}^n i^{a_i}$ (per ciascun blocco divido per $i$).
+        \end{itemize}
+    \end{enumerate}
+    Si ha allora la tesi in quanto \[ \#Cl(\sigma) = \frac{n!}{\prod_{i=1}^n (a_i!\cdot i^{a_i})}. \]
+\end{proof}
+\begin{definition}{segno di una permutazione}
+    $\forall \sigma \in S_n$ definiamo \[ \sgn(\sigma) := \prod_{1\leq i<j\leq n} \frac{\sigma(j)-\sigma(i)}{j-i}. \]
+\end{definition}
+Le permutazioni con segno 1 sono dette \emph{pari}, le altre \emph{dispari}. Si mostra che se $\tau$ è una trasposizione, allora $\sgn(\tau) = -1$ e più in generale se $\sigma$ è un $k$-ciclo, $\sgn(\sigma) = (-1)^{k+1}$.
+
+Vale inoltre $\sgn (\sigma \circ \tau) = \sgn (\sigma)\sgn(\tau)$.
+    \begin{proof}
+        \begin{align*}
+            \sgn(\sigma \circ \tau) & =  \prod_{1\leq i<j\leq n} \frac{\sigma \circ \tau(j)-\sigma \circ \tau(i)}{j-i} = \qquad\qquad\qquad\qquad\qquad\text{applicando $\tau^{-1}$}\\
+            & = \prod_{1\leq i<j\leq n} \frac{\sigma(j)-\sigma(i)}{\tau^{-1}(j)-\tau^{-1}(i)} = \\
+            & = \prod_{1\leq i<j\leq n} \frac{\sigma(j)-\sigma(i)}{j-i}\cdot \frac{j-i}{\tau^{-1}(j)-\tau^{-1}(i)} = \\
+            & = \prod_{1\leq i<j\leq n} \frac{\sigma(j)-\sigma(i)}{j-i} \prod_{1\leq i<j\leq n}  \frac{j-i}{\tau^{-1}(j)-\tau^{-1}(i)} = \qquad \text{applicando $\tau$ nel secondo fattore}\\
+            & = \prod_{1\leq i<j\leq n} \frac{\sigma(j)-\sigma(i)}{j-i} \prod_{1\leq i<j\leq n}  \frac{\tau(j)-\tau(i)}{j-i} = \\
+            & = \sgn(\sigma)\sgn(\tau)
+        \end{align*}
+    \end{proof}
+    
+    In altre parole, $\sgn: S_n \rightarrow \set{\pm 1} \cong \Z/2\Z$ è un omomorfismo.
+\begin{definition}{$A_n$}
+    Chiamiamo \emph{sottogruppo alternante} il sottogruppo $A_n = \{\sigma \in S_n : \sgn (\sigma) = 1\} = \ker(\sgn) \tri S_n$.
+\end{definition}
+\begin{proposition}{intersezioni con $A_n$}
+    Se $H < S_n$ vale $[H : H \cap A_n] \in \{1, 2\}$.
+\end{proposition}
+\begin{proof}
+    Se $H \subseteq A_n$ è chiaro che $[H : H \cap A_n] = 1$. Supponiamo allora che $H$ contenga un ciclo dispari $\sigma$. 
+    Considero l'azione per moltiplicazione a sinistra di $H$ sulle classi laterali di $H \cap A_n$. Per quanto già visto $[H : H \cap A_n] = \#\text{orb}(H \cap A_n) = \#\set{g(H \cap A_n)  \mid  g \in H}$.
+
+    Per ciascuna permutazione dispari $\sigma \in H$ $\sigma(H \cap A_n)$ contiene solo permutazioni dispari ed è quindi disgiunta da $H \cap A_n$, da cui segue che l'orbita ha cardinalità almeno 2. Ma due permutazioni $\sigma_1,\sigma_2$ con lo stesso segno sono tali che $\sigma_1(H \cap A_n) = \sigma_2(H \cap A_n)$. Infatti ciò vale $\iff \sigma_2^{-1}\sigma_1 \in H \cap A_n$ banalmente vero. Quindi l'orbita ha cardinalità 2 da cui la tesi.
+\end{proof}
+\begin{proposition}{classi di coniugio in $A_n$}
+    Sia $\sigma \in A_n$ e $Cl_{A_n}(\sigma)$ la sua classe di coniugio in $A_n$. Allora $\#Cl_{A_n}(\sigma)$ è uguale a $\#Cl_{S_n}(\sigma)$ oppure a $\frac{1}{2}\#Cl_{S_n}(\sigma)$. Vale inoltre $\#Cl_{S_n}(\sigma) = \#Cl_{A_n}(\sigma) \iff$ $\sigma$ ha almeno un ciclo pari oppure 2 cicli dispari di uguale lunghezza (gli elementi fissati sono cicli di lunghezza 1).
+\end{proposition}
+\begin{proof}
+    Sia $j=[Z_{S_n}(\sigma): (Z_{S_n}(\sigma) \cap A_n)] \in \{1, 2\}$. Un'applicazione diretta del lemma orbita-stabilizzatore mostra $\#Cl_{A_n}(\sigma) = \#Cl_{S_n}(\sigma)$ se $j = 2$, $\#Cl_{A_n}(\sigma) = \frac12\#Cl_{S_n}(\sigma)$ altrimenti. 
+    
+    Dimostriamo la seconda parte dell'enunciato. Ci basta dire $Z_{S_n}(\sigma) \subseteq A_n \iff \sigma$ è prodotto di cicli disgiunti, tutti dispari e di lunghezze diverse. $(\implies)$ per contronominale. Se $\sigma$ ha un ciclo pari $\tau$, allora $\tau \in Z_{S_n}(\sigma)$ e $\tau \notin A_n$. Se invece $\sigma$ ha due cicli dispari $(a, b, \dots, k), (\alpha, \beta, \dots, \kappa)$ di uguale lunghezza, allora commuta con la permutazione $(a, \alpha)(b, \beta) \dots (k, \kappa)$ che li scambia, prodotto di un numero dispari di trasposizioni, quindi non un elemento di $A_n$. In entrambi i casi $Z_{S_n}(\sigma) \not\subseteq A_n$.
+    $(\impliedby)$ Se $\sigma = \tau_1 \tau_2 \dots \tau_k$ è prodotto di cicli dispari di lunghezze $d_1, d_2, \dots, d_k$ distinte, allora il coniugio per una permutazione che commuta con $\sigma$ coniuga ogni ciclo in se stesso, quindi elementi in cicli distinti ``non si mescolano''. Ma allora (dopo opportuna identificazione degli elementi di $\tau_i$ con $\{1, \dots, d_i\}$) il centralizzatore di $\sigma$ in $S_n$ è il generato dai centralizzatori $\{ Z_{S_{d_i}}(\tau_i) \}_{i=1\dots k}$. Per orbita-stabilizzatore il centralizzatore di un $d$-diclo in $S_d$ è il suo generato, quindi per $d$ dispari gli elementi del centralizzatore sono permutazioni pari. Nel nostro caso quindi $Z_{S_n}(\sigma) \subseteq A_n$.
+\end{proof}
+\begin{proposition}{generatori di $A_n$}
+    se $n\geq 3$ i $3$-cicli generano $A_n$; se $n\geq 5$ i $2+2$-cicli generano $A_n$.
+\end{proposition}
+\begin{proof}
+    Ogni permutazione $\sigma$ si scrive come prodotto di trasposizioni, se inoltre $\sigma \in A_n$, allora $\sigma$ si esprime come prodotto di un numero \emph{pari} di trasposizioni. Basta allora mostrare che i 3-cicli generano $\set{(a,b)(c,d) : a \neq b, c\neq d, 1\leq a,b,c,d \leq n}$ visto che ogni elemento di $A_n$ si scrive come composizione di un certo numero di elementi di questo tipo. Basta notare $(a, c, d)(a, b, d) = (a,b)(c,d)$.
+    
+    Se $n \ge 5$, allora i 2+2-cicli generano i 3-cicli e quindi tutto $A_n$. Si nota infatti $(a, b, c) = (a, b)(b, c) = (a b)(x y) \circ (x y)(b, c)$ per $x, y \neq a, b, c$ (da cui la necessità di $n \ge 5$).
+\end{proof}
+Con tutti i lemmi appena visti, possiamo caratterizzare i sottogruppi normali di $S_n$.
+\begin{example2}{sottogruppi normali di $S_3$}
+    In $S_3$ i sottogruppi normali sono $\set{id}, A_3 = \grp{(1,2,3)}, S_3$.
+\end{example2}
+\begin{proof}
+    In $S_3$ la cardinalità di un sottogruppo $H$ può essere solo $1,2,3,6$. Se $\#H = 1$ il sottogruppo è banale e se $\#H = 6$ allora $H = S_3$. Se $\#H = 2$ o $3$, essendo primi, il gruppo è ciclico (generato da un 2-ciclo oppure 3-ciclo). Se $H \cong \Z/3\Z$ allora $H$ è normale perché ha indice 2 (minimo primo che divide 6). $H \cong \Z/3\Z$ non può essere normale perché altrimenti $S_3$ sarebbe abeliano. Quindi l'unico sottogruppo normale non banale è $\grp{(1,2,3)} = A_3$\\
+    Nota: si poteva anche usare che $\#S_3 = pq$ con $p,q$ primi, per dire che $S_3 \cong \Z/3\Z \rtimes \Z/2\Z$.
+\end{proof}
+\begin{definition}{sottogruppo di Klein}
+    $K_4 := \set{id, (1,2)(3,4), (1,3)(2,4), (1,4)(2,3)}$. Si verifica facilmente che è sottogruppo normale di $S_4$ e che $K_4 \cong \Z/2\Z \times \Z/2\Z$.
+\end{definition}
+\begin{example2}{sottogruppi normali di $S_4$}
+    In $S_4$ gli unici sottogruppi normali sono $\set{id}, K_4, A_4, S_4$, dove 
+\end{example2}
+\begin{proof}
+    Abbiamo già visto che tutti quei sottogruppi sono normali. Sia $H \neq \set{id}$ un sottogruppo normale di $S_4$. Facciamo i casi. Si ricorda che per normalità $H$ è unione di classi di coniugio, e che le classi di coniugio in $S_4$ sono: trasposizioni, 3-cicli, 2+2-cicli, 4-cicli.
+    \begin{enumerate}
+        \item $H$ contiene una trasposizione: allora contiene tutte le trasposizioni che però sono generatori di $S_4 \Rightarrow H = S_4$. 
+        \item $H$ contiene un 3-ciclo: allora contiene tutti i 3-cicli, che però sono generatori di $A_4$, quindi $A_4 \leq H \leq S_4$. Ma $A_4$ ha indice 2 $\Rightarrow$ $H = A_4$ oppure $S_4$ (non esistono possibilità intermedie).
+        \item $H$ contiene un 2+2-ciclo: allora contiene il sottogruppo di Klein $K_4$. Se $H$ contiene un 4-ciclo allora li contiene tutti e si ha in particolare $(1,2)(3,4) \in H$, $(1,2,3,4)$ $\in H \Rightarrow (1,2)(3,4)\circ(1,2,3,4) = (2,4) \in H$ e quindi siamo nel primo caso. Se $H$ non contiene 4-cicli allora o $H = K_4$ o comunque ci riconduciamo a uno dei casi precedenti.
+        \item $H$ contiene un 4-ciclo: sia esso $(a_1,a_2,a_3,a_4)$. Ma allora contiene anche $(a_1,a_2,a_3,a_4)^2 = (a_1,a_3)(a_2,a_4)$ e ci riconduciamo al caso precedente.
+    \end{enumerate}
+\end{proof}
+
+\begin{proposition}{$A_n$ è semplice}
+    Se $n \ge 5$ gli unici sottogruppi normali di $A_n$ sono $\{id\}$ e $A_n$.
+\end{proposition}
+\begin{proof}
+    Dimostriamo l'enunciato per induzione. Se $n = 5$ (caso base), l'ordine di un sottogruppo normale proprio $N \tri A_5$ divide $60$. Le classi di coniugio dei 3-cicli e dei 2+2-cicli non si spezzano in $A_5$, quindi $N$ normale proprio non contiene 3-cicli e 2+2-cicli, cioè (in $A_5$) elementi di ordine $3$ o di ordine $2$, altrimenti suoi elementi genererebbero $A_5$. Per Cauchy allora l'unica possibilità è $\#N = 5$. Preso però 5-ciclo, diciamo $(1, 2, 3, 4, 5) \in N$ e il suo coniugato (in $A_n$) $(1, 5, 3, 2, 4) \in N$ si ha $(1, 2, 3, 4, 5)(1, 5, 3, 2, 4) = (1, 5, 3) \in N$: assurdo. Alternativamente avremmo potuto guardare le cardinalità delle classi di coniugio.
+
+    \begin{lemma2}
+        Sia $\sigma \in A_n$ con $n \ge 6$. Allora $\exists i \in \{1, \dots, n\}, \tilde \sigma \in A_n$ coniugata non banale di $\sigma$ tale che $\sigma(i) = \tilde \sigma(i)$.
+    \end{lemma2}
+    \begin{proof}
+        $\sigma$ non è una trasposizione, quindi muove almeno tre elementi. Scriviamo (wlog) $\sigma = (1, 2, \dots)\dots$. Se la classe di coniugio di $\sigma$ non si spezza in $A_n$, allora si può scegliere una sua coniugata non banale in $S_n$ (quindi in $A_n$) permutando opportunamente gli elementi $3, \dots, n$. Se invece $\sigma$ è prodotto di cicli dispari di lunghezze distinte, allora necessariamente il ciclo di lunghezza massima è almeno un 5-ciclo, quindi $\sigma = (1, 2, 3, 4, 5, \dots)\dots$, nel cui caso scegliamo $\tilde \sigma = (3, 4, 5) \sigma (3, 4, 5)^{-1} = (1, 2, 4, 5, 3, \dots)\dots$.
+    \end{proof}
+    Sia ora $n \ge 6$ e $N \tri A_n$. Poniamo $K_i = \{\sigma \in A_n : \sigma(i) = i\} \cong A_{n - 1}$, semplice per ipotesi induttiva. Notiamo che per $n \ge 4$ ciascun $K_i$ contiene un 3-ciclo. Siano $\sigma \in N$ e $i, \tilde \sigma$ come nel lemma, per normalità di $N$ $\tilde \sigma \in N$. Ma allora $id \neq \sigma {\tilde \sigma}^{-1} \in N \cap K_i \tri K_i$. Per semplicità di $K_i$ allora $N \cap K_i = K_i$, quindi $N$ contiene un 3-ciclo, da cui $N = A_n$.
+\end{proof}
+% \begin{proof}
+%     Useremo come lemma che se $H \tri A_n$ contiene un 3-ciclo allora $H = A_n$. Poiché i 3-cicli generano ciò è dimostrato se si mostra che $Cl_{A_n}(\text{3-ciclo}) = Cl_{S_n}(\text{3-ciclo}) = \set{3\text{-cicli}}$. Il centralizzatore di un $3$-ciclo in $S_n$ è il sottogruppo da esso generato. Essendo contenuto in $A_n$ è anche il suo centralizzatore in $A_n$. Ma allora per quanto visto sulle classi di coniugio in $A_n$ si ha la tesi. 
+    
+%     Mostriamo ora la semplicità per induzione su $n$. I passi base $n = 5,6$ si trattano vedendo le cardinalità delle classi di coniugio delle permutazioni pari e provando a farle sommare ad $\#A_n$ (occhio all'identità).
+    
+%     Per il passo induttivo supponiamo la tesi dimostrata per $n-1$ e mostriamola per $n$. Sia $H \tri A_n$. Sia per ogni $i = 1, \dots, n$ $K_i := \set{\sigma \in A_n : \sigma(i) = i} \cong A_{n-1}$. Poiché $H$ è normale in $A_n$, $H \cap K_i$ è normale in $K_i$ per ogni $i$. Ma $K_i \cong A_{n-1}$ è semplice, quindi $\forall i$ si ha $K_i \cap H = \set{id}$ oppure $K_i$.
+    
+%     Notiamo che ciascun $K_i$ contiene un 3-ciclo (basta $n \geq 4$), quindi se per qualche $i_0$ $K_{i_0} \cap H = K_{i_0} \Rightarrow K_{i_0} \subseteq H$ si ha necessariamente $H = A_n$ per il lemma iniziale.
+
+%     Si allora $H \cap K_i = \set{id}$ per ogni $i$ e per assurdo $id \neq \sigma \in H$. Prendiamo un qualsiasi 3-ciclo $\tau \in A_n$. Per normalità di $H$ $\tau \sigma^{-1} \tau^{-1} \in H$, e quindi $H \ni \sigma \tau \sigma^{-1} \tau^{-1} = (\sigma \tau \sigma^{-1}) \tau^{-1}$ dove i due fattori sono 3-cicli. Questa permutazione muove allora al più 6 elementi, e quindi o è l'identità o ci dà un assurdo se $n \geq 7$ perché si dovrebbe trovare in uno dei $K_i$. Facendo variare $\tau$ possiamo sceglierla in modo che non sia l'identità e ottenere l'assurdo (basta ad esempio che $\tau$ muova $\sigma(1)$). 
+% \end{proof}
+
+\begin{proposition}{sottogruppi normali di $S_n$}
+    Se $n \geq 5$ gli unici sottogruppi normali di $S_n$ sono $\{id\}, A_n, S_n$.
+\end{proposition}
+\begin{proof}
+    È noto $A_n \tri S_n$. Sia ora $N \tri S_n$ un sottogruppo normale, allora $N \cap A_n \tri A_n$, da cui $N \cap A_n \in \{ \{id\}, A_n \}$. Se $A_n \subseteq N$ allora $N = A_n$ o $N = S_n$. Se fosse $N \cap A_n = \{id\}$, allora $N = \grp{\sigma}$ con $\sigma$ dispari di ordine $2$, ma tale $N$ sarebbe troppo piccolo per contenere tutti i coniugati di $\sigma$.
+\end{proof}
+\begin{corollary2}
+    $A_n$ è caratteristico in $S_n$.
+\end{corollary2}
+
+\begin{proposition}{derivato di $S_n$}
+    $S_n' = A_n$ per ogni $n$.    
+\end{proposition}
+\begin{proof}
+    Per omomorfismo $\sgn([\sigma, \tau]) = \sgn(\sigma)^2\sgn(\tau)^2 = 1$ e quindi $S_n' \subseteq A_n$. \\ Inoltre il sottogruppo $S_n'$ è caratteristico, e dunque normale, da cui segue $S_n' = \set{id}$ oppure $A_n$. La prima si esclude perché $S_n$ non è abeliano. 
+\end{proof}
+\begin{proposition}{derivato di $A_n$}
+    se $n \geq 5$ $A_n' = A_n$.
+    
+    Domanda: chi è $A_4'$?
+\end{proposition}
+\begin{proof}
+    Il sottogruppo derivato è caratteristico, e quindi normale. Ma $A_n$ è semplice per $n $, quindi restano solo le possibilità $A_n' = A_n$ e $A_n' = \{ id\}$. Ma quest'ultima implicherebbe che $A_n$ sia abeliano, assurdo. 
+\end{proof}
+\hypertarget{InnSn}{\begin{proposition}{(*) automorfismi interni}
+    $\forall n$ vale $Z(S_n) = \set{id}$, da cui segue $\Inn(S_n) \cong S_n$. 
+\end{proposition}}
+\begin{proof}
+    I casi $n = 2,3$ si trattano a mano. Sia $id \neq \sigma \in S_n$. Costruiamo $\tau \in S_n$ che non commuti con $\sigma$. $\sigma \neq id \Rightarrow \exists k \in \set{1, \dots, n}$ $\sigma(k) \neq k$. Se prendo $j \neq k,\sigma(k),\sigma(\sigma(k))$ e considero $\tau = (k, \sigma(k), j)$ si ha per costruzione $\tau\circ\sigma(k) = j \neq \sigma(\sigma(k)) = \sigma\circ\tau(k)$, e quindi $\tau\sigma \neq \sigma\tau $ come voluto.
+\end{proof}
+\begin{proposition}{(*) Automorfismi di $S_n$}
+    $\Aut(S_n) = S_n$ $\forall n \in \N \setminus \{2, 6\}.$
+\end{proposition}
+\begin{proof}
+    La dimostrazione si divide in due parti: 
+    \begin{enumerate}
+    \item se un automorfismo manda trasposizioni in trasposizioni, allora è interno;
+    \item un automorfismo manda trasposizioni in trasposizioni se $n \neq 6$;
+    \end{enumerate}
+    (1.) Sia $\varphi \in \Aut(S_6)$ che mappa trasposizioni in trasposizioni e consideriamo le immagini tramite $\varphi$ $\{ (a_k,b_k) : k = 2 \dots n \}$ dell'insieme di generatori $\{ (1,k) : k = 2 \dots n \}$. Dati $k \neq k'$ si ha $[(1, k), (1, k')] \neq \id$, quindi anche $[(a_k,b_k),(a_{k'},b_{k'})] \neq \id$, da cui $\lvert \{a_k,b_k\} \cap \{a_{k'},b_{k'}\} \rvert = 1$. (Wlog) $a_k = a_{k'} = a$. Poniamo $k=2,k'=3$, $a$ come sopra e mostriamo che anche $\forall k > 3 \ a \in \{a_k, b_k\}$. $[(1,k),(1,2)],[(1,k),(1,3)] \neq \id$, quindi se per assurdo fosse $a \notin \{a_k,b_k\}$ si avrebbe $\{a_k,b_k\} = \{b_2,b_3\}$, contro l'iniettività di $\varphi$: $\varphi((2,3)) = \varphi((1,3)(1,2)(1,3)) = (a,b_3)(a,b_2)(a,b_3) = (b_2,b_3) = \varphi((1,k))$. (Wlog) $a = a_k$ per ogni $k = 2\dots n$. Sia allora $\sigma \in S_n$ tale che $\sigma: 1 \mapsto a, k \mapsto b_k$ e $\varphi_\sigma \in \Inn(S_n)$ il coniugio per $\sigma$. Allora $\varphi$ e $\varphi_\sigma$ coincidono su un insieme di generatori, cioè $\varphi = \varphi_\sigma \in \Inn(S_n)$.
+    
+    $(2.)$ Un automorfismo preserva gli ordini degli elementi e le classi di coniugio. Preso $f \in \Aut(S_n)$ si ha che $f((1,2))$ ha ordine 2 (quindi è il prodotto di $k$ 2-cicli) e che $f(Cl((1,2))) = Cl(f((1,2)) \Rightarrow \#Cl((1,2)) = \#Cl(f((1,2))$. Usando la formula per la cardinalità delle classi di coniugio vista a inizio paragrafo, si ha:
+    \[
+    \#Cl((1,2)) = \frac{n!}{2\cdot (n-2)!}
+    \qquad
+    \#Cl(f((1,2)) = \frac{n!}{2^k\cdot k!(n-2k)!}
+    \]
+    Uguagliando le due espressioni, $(n-2)! = 2^{k-1}\cdot k!(n-2k)!$, le cui uniche soluzioni per $(n,k)$ sono $(n,1)$, $(6,3)$. Quindi, a meno che $n = 6$, si ha che $k = 1$, cioè ogni trasposizione viene mappata in una trasposizione.
+\end{proof}
+
+\begin{proposition}{Automorfismo esotico di $S_6$}
+    Esiste un automorfismo di $S_6$ \emph{non} interno.
+\end{proposition}
+\begin{proof}
+    Consideriamo l'azione per coniugio di $S_5$ sull'insieme dei suoi sei 5-Sylow. Tale azione è transitiva e ha kernel banale (il kernel è normale e non contiene $A_5$), dunque è un'immersione di $S_5$ in $S_6$. Sia $H \le S_6$ l'immagine di $S_5$ tramite questa immersione. $H$ è un sottogruppo transitivo, quindi non una delle copie canoniche di $S_5$ in $S_6$. Consideriamo l'azione per moltiplicazione a sinistra di $S_6$ sull'insieme dei sei laterali $S_6/H$. Tale azione ha kernel banale, quindi corrisponde a un automorfismo di $S_6$. La moltiplicazione per elementi del gruppo (transitivo) $H$ fissa il laterale $eH$, quindi la sua immagine tramite l'automorfismo non è transitiva. Segue che l'automorfismo così trovato non è un automorfismo interno, infatti mappa un sottogruppo transitivo in un sottogruppo non transitivo.
+\end{proof}
+
+\subsection{Presentazione di gruppo}
+
+\begin{definition}{gruppo libero}
+    chiamiamo gruppo libero su $n$ generatori l'insieme
+    \[ F_n = \grp{x_1, \dots, x_n} = \set{s = x_{i_1}^{\alpha_1} x_{i_2}^{\alpha_2} \dots x_{i_k}^{\alpha_k} : k \in \N, i_j \in \set{1,\dots,n} \text{ e } \alpha_j \in \{\pm 1\} \ \forall \  1 \leq j \leq k, \ s \text{ ridotta}} \]
+    Ignorando l'ultima condizione esso è l'insieme delle stringhe (scritture formali) di lunghezza finita ottenute concatenando come caratteri degli $x_i$ oppure dei loro inversi (definizione solo formale). Diciamo che una tale stringa è \textit{ridotta} se non esiste $i$ tale che esistano un $x_i$ e un $x_i ^{-1}$ consecutivi. Chiaramente per ciascuna scritta esiste la stringa ridotta, ottenibile in un numero finito di passi. Talvolta si dice che due stringhe a cui è associata la stessa stringa ridotta sono \textit{equivalenti}.
+    
+    Ciò ci permette di dare a $F_n$ struttura di gruppo: l'operazione è quella di concatenare le stringhe una accanto all'altra, l'elemento neutro è la stringa vuota e l'inverso di $s$ è la stringa ottenuta riscrivendo $s$ da destra a sinistra al contrario e cambiando segno agli esponenti (è già ridotta e chiaramente concatenandola a $s$ e riducendo si cancella tutto).
+    
+    Notare che la definizione funziona ugualmente anche se il gruppo dei generatori è infinito (continuiamo a considerare le stringhe finite). In tal caso chiameremo $\grp{X}$ il gruppo libero generato da $X$. 
+\end{definition}
+\begin{example}
+    $F_1 = \grp{x} = \set{x^k : k \in \Z} \cong \Z$.
+\end{example}
+\begin{proposition}{proprietà universale del gruppo libero}
+    per ogni gruppo $G$ si ha \[ \forall 1 \leq i \leq n \ \Hom(F_n, G) \leftrightarrow G^n \cong \{(g_1, \dots, g_n) : g_i \in G\}, \] ovvero sono in bigezione.
+\end{proposition}
+\begin{proof}
+    verifiche formali (lasciate per esercizio), la bigezione è quella naturale. 
+\end{proof}
+\begin{definition}{presentazione di gruppo}
+    Dato $G$ gruppo, $\grp{S \mid R}$ è una presentazione di $G$ se:
+    \begin{itemize}
+        \item $S\subseteq G$ è un insieme di \emph{generatori} di $G$
+        \item $R \subseteq \grp{S}$ (gruppo libero generato da $S$) è un insieme di \emph{relazioni}, tale che $\exists \varphi: \grp{S} \rightarrow G$ surgettivo con $\ker(\varphi) = N_R$ più piccolo sottogruppo normale di $\grp{S}$ che contiene $\grp{R}$.
+
+        Intuitivamente, sono scritture formali tali che una volta valutate nel gruppo $G$ siano l'elemento neutro. Ciò sarà chiarito dall'esempio.
+    \end{itemize} 
+    Notare che, nella notazione della definizione e usando $\varphi$ vale $G \cong \grp{S}/N_R$.
+\end{definition}
+\begin{itemize}
+    \item la presentazione è un invariante per isomorfismo
+    \item non tutti i gruppi ammettono presentazione finita (sia come generatori che come relazioni)
+    \item la presentazione non è unica (ci possono essere vari insiemi di generatori o varie relazioni ammissibili)
+    \item a ogni presentazione è associato un unico gruppo (a meno di isomorfismo)
+    \end{itemize}
+\begin{example}
+    $\Z/n\Z = \grp{x \mid x^n = 1}$ (di solito invece di indicare le relazioni si scrive ``stringa'' = el. neutro).
+\end{example}
+\begin{example}
+    il gruppo libero generato da $S$ ha presentazione $\grp{S} = \grp{S \mid \emptyset}$.
+\end{example}
+\begin{example}
+    Per dire che due elementi commutano basta scrivere $[a,b] = 1$ (si ricorda che $[a,b] = aba^{-1}b^{-1}$ è il commutatore). Quindi ad esempio $\Z/2\Z \times \Z/2\Z = \grp{x,y \mid x^2 = y^2 = xyx^-1y^-1 = 1}$ e l'informazione "il gruppo è abeliano" può essere espressa mediante le relazioni $\set{[g,h] = 1 \mid g,h \in G}$.
+\end{example}
+È un utile esercizio mostrare che le seguenti due sono presentazioni usando la definizione data sopra:
+\begin{example}
+    $D_n = \grp{ r, s \mid r^n = id, s^2 = id, srsr = id }$ (da queste relazioni si ricava $s^ar^bs^cr^d = s^{a+c}r^{(-1)^cb+d}$).
+\end{example}
+\begin{example}
+    $Q_8 = \grp{i,j \mid i^4 = 1, i^2j^{-2} = 1, j^{-1}iji = 1} = \grp{i,j \mid i^4 = 1, i^2 = j^2, ji = i^{-1}j}$.
+\end{example}
+A cosa ci serve una presentazione? Intuitivamente, è l'insieme dei check minimali da fare quando si costruisce un omomorfismo definendolo prima sui generatori e poi volendolo estendere. Nella pratica, è molto difficile lavorarci e costruirle, nel corso si usano principalmente per ``riconoscere'' $D_n$ oppure $Q_8$ mentre si studia un gruppo. 
+
+
+\subsection{Invertibili modulo $n$}
+
+\begin{proposition}{invertibili modulo $n$}
+    $(\Zn)^\times$ (come gruppo moltiplicativo) è ciclico se e solo se $n = 2,4,p^k$ o $2p^k$ con $p$ primo dispari, $k \geq 1$.
+\end{proposition}
+\begin{proof}
+    La dimostrazione per $n = p$ è data ad aritmetica. Si verifica manualmente che $(\Zn)^\times$ è ciclico per $n=2, 4$. Mostriamo che $(\Zn)^\times$ è ciclico anche per $n = p^k$, il caso $n = 2p^k$ segue dal teorema cinese del resto:
+    \[
+        (\Zn)^\times \cong (\Z/2\Z)^\times \times (\Z/p^k\Z)^\times \cong (\Z/p^k\Z)^\times.
+    \]
+    
+    Sia in seguito $r$ un generatore modulo $p$.
+    
+    \begin{lemma2}
+        uno tra $r$ e $r+p$ è generatore $\pmod{p^2}$.
+    \end{lemma2}
+    \begin{proof}
+        Poiché $\varphi(p^2) = p(p-1)$ e $r,r+p$ sono coprimi con $p^2$ si ha $\ord_{p^2}(r), \ord_{p^2}(r+p) \mid p(p-1)$. Ma poiché entrambi sono per definizione generatori $\pmod{p}$ deve necessariamente valere $p-1  \mid  \ord_{p^2}(r), \ord_{p^2}(r+p)$. Quindi per entrambi gli ordini abbiamo due possibilità: $p-1$ e $p(p-1)$. Supponiamo per assurdo che entrambi gli ordini siano $p-1$. Sviluppando il binomio di Newton si ha:  \[ 1 \equiv (r + p)^{p-1} = \sum_{i=0}{p-1} \binom{p-1}{i}p^ir^{p-1-i} \equiv r^{p-1} + (p-1)pr^{p-2} \equiv 1 - pr^{p-2} \pmod{p^2}, \]
+        dove la penultima congruenza segue dal fatto che per $i\geq 2$ l'addendo nella sommatoria è divisibile per $p^2$ e quindi $\equiv 0 \pmod{p^2}$. Si ha quindi $0 \equiv pr^{p-2} \pmod{p^2}$ che è assurdo essendo $r,p$ coprimi. 
+    \end{proof}
+    Sia ora $s$ il generatore modulo $p^2$ trovato grazie al lemma. Ci occorre prima di tutto un lemma.
+    
+    \textbf{lemma:} se $a,m \geq 1$ si ha $(1+mp)^{p^a} \equiv 1 + mp^{a+1} \pmod{p^{a+2}}$.
+    \begin{proof}
+        Per induzione su $a$. 
+        \begin{itemize}
+            \item caso base, $a=1$. Sviluppiamo il binomio di Newton:
+                \[
+                    (1+mp)^{p} \equiv \sum_{i=0}^{p} \binom{p}{i}(mp)^i \equiv 1 + mp^2 + m^2p^3 \frac{p-1}{2} \equiv 1 + mp^2 \pmod{p^3}
+                \]
+                dove nella congruenza centrale abbiamo eliminato i termini con $i \geq 3$ in quanto chiaramente divisibili per $p^3$.
+            \item Per il passo induttivo $a \mapsto a+1$ scriviamo $(1+mp)^{p^a} = 1 + mp^{a+1} + m' p^{a+2}$ (è l'ipotesi induttiva) e procediamo in modo analogo:
+            \begin{align*}
+                (1+mp)^{p^{a+1}} &= (1 + p^{a+1}(m+m'p))^p \\
+                &\equiv \sum_{i=0}^{p} \binom{p}{i} p^{i(a+1)}(m+m'p)^i \\
+                &\equiv 1 + p^{a+2}(m+m'p) \\
+                &\equiv 1 + mp^{a+2} \pmod{p^{a+3}}.
+            \end{align*}
+        \end{itemize}
+    \end{proof}
+    \textbf{lemma:} $s$ è generatore modulo $p^k$ per ogni $k \geq 2$.
+    \begin{proof}
+        Usando che $s$ è generatore modulo $p^2$ e Lagrange si ha $p(p-1)  \mid  \text{ord}_{p^k}(s)  \mid  \varphi(p^k) = p^{k-1}(p-1)$, da cui segue che $\text{ord}_{p^k}(s) = p^h(p-1)$ per qualche $1 \leq h \leq k-1$. Supponiamo per assurdo che $h < k-1$ e quindi che $\text{ord}_{p^k}(s)  \mid  p^{k-2}(p-1)$. Poiché $s$ era per costruzione anche un generatore modulo $p$ si ha $s^{p-1} = 1 + mp $ per qualche $m \in \Z$. Usando il lemma appena mostrato si ha allora \[ 1 \equiv s^{p^{k-2}(p-1)} =\equiv (1 + mp)^{p^{k-2}} \equiv 1 + mp^{k-1} \pmod{p^k}, \]
+        da cui segue che $ mp^{k-1} \equiv 0\pmod{p^k}$, che implica $p  \mid  m$. Ciò è però impossibile visto che si avrebbe $s^{p-1} \equiv 1 \pmod{p^2}$, ma $s$ è un generatore modulo $p^2$. 
+    \end{proof}
+    Questo conclude la dimostrazione della ciclicità per il caso $n = p^k$. Per $n = 2p^k$ si ha per il teorema cinese del resto: \[(\Zn)^\times \cong (\Z/2\Z)^\times \times (\Z/p^k\Z)^\times \cong (\Z/p^k\Z)^\times,\]
+    dove l'ultima uguaglianza segue dal fatto che $(\Z/2\Z)^\times$ è il gruppo banale.
+
+    Lasciamo le ultime verifiche per esercizio. Sapendo che $(\Z/8\Z)^\times \cong (\Z/2\Z)^2$, dimostrare che $(\Z/2^k\Z)^\times$ non è ciclico. Usando il TCR, mostrare che se la fattorizzazione di $m$ non ha la forma sopra, allora $(\Z/m\Z)^\times$ non è ciclico.
+\end{proof}
+
+
+\subsection{Esercizi di classificazione}
+\begin{example2}{classificazione dei gruppi di ordine 12}
+    Gli unici gruppi di ordine $12$ sono, a meno di isomorfismo: $\Z/12\Z, \Z/2\Z\times \Z/6\Z, D_6, A_4,\Z/3\Z \rtimes \Z/4\Z$.
+\end{example2}
+\begin{proof}
+    Notiamo $12 = 2^2 \cdot 3$. Siano $P_2,P_3$ rispettivamente un $2$-Sylow e un $3$-Sylow di $12$. Notiamo che $P_2 \cap P_3 = \{e\}$ (le cardinalità sono coprime) e quindi $P_2 P_3 = G$ (per cardinalità). Dal teorema di Sylow si vede che $n_2 = 1, 3$ e $n_3 = 1, 4$.
+    Guardando le possibilità e le cardinalità, necessariamente uno tra $P_2$ e $P_3$ è normale in $G$ { \tiny (due $3$-Sylow distinti devono necessariamente avere intersezione banale, quindi se $n_3 = 4$ si ha che i tre $3$-Sylow hanno unione di cardinalità $4\cdot (3-1) + 1 = 9$; un 2-Sylow ha chiaramente intersezione banale con questa unione, quindi deve essere contenuto nei $12 - 9 + 1 = 4$ elementi rimanenti, da cui segue che ce ne può essere uno solo) }, quindi $G \cong P_2 \rtimes P_3$ oppure $G \cong P_2 \rtimes P_3$. Poiché $P_3 \cong \Z / 3 \Z$ e $P_2 \cong \Z / 4 \Z$ oppure $P_2 \cong \Z / 2\Z \times \Z / 2\Z$ facciamo i casi: 
+    \begin{itemize}
+        \item $G \cong P_2 \rtimes P_3$, $P_2 \cong \Z / 4 \Z$. Quindi $G \cong  \Z / 4 \Z \rtimes_{\varphi} \Z / 3 \Z$. $\varphi : \  \Z / 3 \Z \rightarrow \text{Aut}(\Z / 4 \Z) \cong \Z / 2 \Z$ e quindi l'unica scelta per $\varphi$ è l'identità (i due gruppi hanno ordini coprimi). Quindi  $G \cong \Z / 4 \Z \times \Z / 3 \Z \cong \Z / 12 \Z$.
+        \item $G \cong P_2 \rtimes P_3$, $P_2 \cong \Z/2\Z \times \Z/2\Z$. Quindi $G \cong  (\Z/2\Z)^2 \rtimes_{\varphi} \Z / 3 \Z$. $\varphi :  \Z / 3 \Z \rightarrow \text{Aut}((\Z/2\Z)^2) \cong S_3$ e quindi abbiamo due scelte.
+        \begin{itemize}
+            \item $\varphi = id$ e quindi  $G \cong (\Z / 2 \Z)^2 \times \Z / 3 \Z \cong \Z / 2 \Z \times \Z / 6 \Z$.
+            \item $\varphi \neq id$ che ci dà $G \cong A_4$, con l'isomorfismo che manda $(\Z / 2 \Z)^2$ nel Klein e $\Z / 3 \Z$ nel gruppo generato da un tre ciclo.
+        \end{itemize} 
+        \item $G \cong P_3 \rtimes P_2$, $P_2 \cong \Z / 4 \Z$. Quindi $G \cong  \Z / 3 \Z \rtimes_{\varphi} \Z / 4 \Z$. $\varphi : \  \Z / 4 \Z \rightarrow \text{Aut}(\Z / 3 \Z) \cong \Z / 2 \Z$ e quindi abbiamo due scelte:
+        \begin{itemize}
+            \item $\varphi = id$ e quindi  $G \cong \Z / 4 \Z \times \Z / 3 \Z \cong \Z / 12 \Z$ (già visto)
+            \item $\varphi \neq id$ che non dà "gruppi noti"; scriviamo solo $G \cong \Z/3\rtimes \Z/4\Z$
+        \end{itemize} 
+        \item $G \cong P_3 \rtimes P_2$, $P_2 \cong \Z / 2 \Z \times \Z/2\Z$. Quindi $G \cong \Z / 3 \Z  \rtimes_{\varphi} (\Z/2\Z)^2$. $\varphi : \  (\Z/2\Z)^2 \Z \rightarrow \text{Aut}(\Z / 3 \Z) \cong \Z / 2 \Z$ e quindi abbiamo due scelte (in realtà le scelte sono 4, se consideriamo i due generatori canonici, ma tre di esse sono chiaramente isomorfe):
+        \begin{itemize}
+            \item $\varphi = id$ e quindi $G \cong (\Z / 2 \Z)^2 \times \Z / 3 \Z \cong  \Z / 2 \Z \times \Z / 6 \Z$ già visto. 
+            \item $\varphi \neq id$, e quindi $\ker(\varphi) \cong \Z/2\Z$. Sia $\ker(\varphi) = \grp{x}$ con $x \in G$, e siano $y,z \in G$ tali che $\grp{z} \cong \Z/3\Z$ e $\grp{x}\grp{y} \cong (\Z / 2 \Z)^2 \Rightarrow G \cong \grp{z} \rtimes \grp{x}\grp{y}$. Allora per definizione (essendo $\varphi_z$ il coniugio per $z$) si ha $zxz^{-1} = x, zyz^{-1} = xy = yx \Rightarrow $
+        Si può allora mostrare che $Z(G) \cong \Z/6\Z$. Poiché
+        \end{itemize} 
+    \end{itemize}
+\end{proof}
+\begin{example2}{classificazione dei gruppi di ordine 8}
+    gli unici gruppi di ordine $8$ sono, a meno di isomorfismo: $\Z/8\Z, \Z/2\Z\times \Z/4\Z, \big(\Z/2\Z\big)^3, D_4,Q_8$.
+\end{example2}
+\begin{proof}
+    Facciamo qualche considerazione sugli ordini degli elementi. Detto $G$ un gruppo di ordine 8 e preso $g \in G$ per Lagrange $\ord(g) \in \set{1,2,4,8}$. 
+    
+    Se tutti gli elementi hanno ordine 2 $G$ è abeliano; basta infatti notare che in tal caso si ha $g^2 = e$ e quindi $g^{-1} = g$ $\forall g \in G$. Da ciò segue $gh = g^{-1}h^{-1} = (hg)^{-1} = hg$ $\forall g,h\in G$. Usando il teorema di struttura, questo caso ci dà $G \cong (\Z/2\Z)^3$
+    
+    Se un elemento ha ordine 8 allora $G$ è ciclico e $G \cong \Z/8\Z$
+
+    Se nessuna delle precedenti condizioni è verificata $\exists a \in G$ tale che $\ord(a) = 4$. $[G : \grp{a}] = 2 \Rightarrow \grp{a} \tri G \Rightarrow$ preso $b \in G \setminus \grp{a}$ si ha $G = \grp{a} \cup b\grp{a}$ ($G$ è unione delle classi laterali), ovvero $G = \set{e,a,a^2,a^3,b,ba,ba^2,ba^3}$. Notiamo che, essendo $\grp{a}$ normale, necessariamente $bab^{-1} \in \grp{a}$. Facciamo i casi:
+    \begin{itemize}
+        \item $bab^{-1} = e \Rightarrow a =e$ assurdo
+        \item $bab^{-1} = a^2 \Rightarrow (bab^{-1})^2 = a^4 = e \Rightarrow ba^2b^{-1} = e \Rightarrow a^2 = e$ assurdo
+        \item $bab^{-1} = a \Rightarrow ab = ba$ da cui si verifica facilmente che $G$ è abeliano. I casi con $G$ abeliano sono dati dal teorema di struttura, e sono quelli nel testo. 
+        \item $bab^{-1} = a^3 = a^{-1}$. In questo caso distinguiamo due casi in base a $\ord(b)$, notando che le possibilità (per come abbiamo fatto i casi) sono solo 2 e 4:
+        \begin{itemize}
+            \item se $\ord(b) = 2$ si può verificare che $G \cong D_4$, mediante l'isomorfismo che manda $a \mapsto r$, $b \mapsto s$; la presentazione di gruppo in questo caso è $\grp{a,b \mid a^4 = 1, b^2= 1, ba = a^3b}$ (notare che è la stessa di $D_4$)
+            \item se $\ord(b) = 4$ si può verificare che $G \cong Q_8$, mediante l'isomorfismo che manda $a \mapsto i$, $b \mapsto j$; la presentazione di gruppo in questo caso è $\grp{a,b \mid a^4 = 1, b^4= 1, ba = a^3b}$. Si noti che è la stessa di $Q_8$.
+        \end{itemize}
+    \end{itemize}
+\end{proof}
+\begin{example2}{classificazione dei gruppi di ordine 30}
+    Gli unici gruppi di ordine $30$ sono, a meno di isomorfismo: $\Z/30\Z, D_{15}, D_5 \times \Z/3\Z,  D_3 \times \Z/5\Z$.
+\end{example2}
+\begin{proof}
+    Notiamo innanzitutto che $30 = 2\cdot15$ e quindi è della forma $2d$ con $d$ dispari. Pertanto, detto $G$ un generico gruppo di ordine 30, esiste $H \tri G$ con $\#H = 15$. $15 = 3 \cdot 5$, quindi è della forma $pq$ con $p,q$ primi. Per quanto visto a teoria, poiché $3 \nmid 5-1 = 4$ si ha $H \cong \Z/3\Z \times \Z/5\Z \cong\Z/15\Z$ e quindi $H = \grp{x}$ (è ciclico). Sia ora $y \in G$ di ordine $2$, che esiste per Cauchy. Chiaramente $y \not \in H$ per una questione di ordini. Quindi $\grp{x}\cap\grp{y} = \set{e}$ e per cardinalità $\grp{x}\grp{y} = G$, da cui segue dal teorema di decomposizione in prodotto semidiretto (ricordando che $\grp{x}$ è normale) che $G \cong \grp{x} \rtimes_{\varphi} \grp{y} \cong  \Z/15\Z \rtimes_{\psi} \Z /2\Z$. Sempre dal teorema segue che  $\varphi: \grp{y} \rightarrow \text{Aut}(\grp{x})$ è il coniugio, ossia $\varphi_y(x) = yxy^{-1}$.
+    
+    Notiamo che $\text{Aut}(\grp{x}) \cong \text{Aut}(\Z/15\Z) \cong (\Z/15\Z)^\times \cong (\Z/3\Z)^\times \times (\Z/5\Z)^\times \cong \Z/2\Z \times \Z/4\Z$. Poiché $y$ ha ordine 2 necessariamente $\varphi_y$ ha ordine 1 (quindi è $id$) oppure 2. In entrambi i casi $\varphi_y(\varphi_y(x)) = x$.
+    
+    Notiamo intanto che per normalità di $\grp{x}$ si ha $\varphi_y(x) \in \grp{x}$ e quindi $yxy^{-1} = \varphi_y(x) = x^{\ell}$.
+    $(\ell,15) = 1$, perché altrimenti $\varphi_y$ non sarebbe automorfismo, e che $x = \varphi_y(\varphi_y(x)) = x^{2\ell} \Rightarrow 2 \ell \equiv 1 \pmod{15}$. Ciò implica
+    $\begin{cases}
+    \ell \equiv \pm 1 \pmod{3} \\
+    \ell \equiv \pm 1 \pmod{5} 
+    \end{cases}$
+    e ci dà perciò quattro casi: 
+    \begin{enumerate}
+        \item
+        $\begin{cases}
+        \ell \equiv  1 \pmod{3} \\
+        \ell \equiv  1 \pmod{5} 
+        \end{cases}$ $\Rightarrow \ell \cong 1 \pmod{15} \Rightarrow yxy^{-1} = x \Rightarrow yx = xy$.
+        
+        Quindi il gruppo è abeliano, ovvero $G \cong \grp{x} \times \grp{y} \cong \Z/2\Z \times \Z/15\Z \cong \Z/30\Z$.
+        
+        \item
+        $\begin{cases}
+        \ell \equiv  1 \pmod{3} \\
+        \ell \equiv  -1 \pmod{5} 
+        \end{cases}$  $\Rightarrow \ell \cong 4 \pmod{15} \Rightarrow yxy^{-1} = x^4$ \\
+        Si può osservare che ciò implica $yx^5y^{-1} = x^5  \Rightarrow x^5 \in Z_G$. 
+        A questo punto si verifica manualmente $G \cong D_5 \times \Z/3\Z$ con l'isomorfismo che manda $x \mapsto (r,\overline{1})$, $y \mapsto (s,\overline{0})$.
+        
+        \item
+        $\begin{cases}
+        \ell \equiv  -1 \pmod{3} \\
+        \ell \equiv  1 \pmod{5} 
+        \end{cases}$  $\Rightarrow \ell \cong -4 \pmod{15} \Rightarrow yxy^{-1} = x^{-4}$
+        
+        In modo analogo a prima $x^3 \in Z_G$ e si verifica manualmente $G \cong D_3 \times \Z/5\Z$.
+        
+        \item
+        $\begin{cases}
+        \ell \equiv  -1 \pmod{3} \\
+        \ell \equiv  -1 \pmod{5} 
+        \end{cases}$ $\Rightarrow \ell \cong -1 \pmod{15} \Rightarrow yxy^{-1} = x^{-1}$ \\ Riconosciamo adesso la presentazione di $D_{15}$. Si ha allora $G \cong D_{15}$. 
+    \end{enumerate}
+\end{proof}
+\begin{example2}{(*) gruppi semplici piccoli}
+    Quali sono i possibili ordini $\leq 100$ di un gruppo semplice?
+
+    Ricordiamo che un gruppo $G$ si dice semplice se i suoi unici sottogruppi normali sono $\set{e}$ e $G$. 
+\end{example2}
+\begin{proof}
+    Si raccomanda di provare prima l'esercizio per conto proprio: per quanto noioso è utile per ripassare tutte le tecniche viste sulla classificazione gruppi. Si lascia qui uno sketch di svolgimento. Sia $n$ l'ordine del gruppo $G$ da studiare.
+
+    Casi noti dalla teoria:
+    \begin{itemize}
+        \item $n = p$ primo $\Rightarrow$ $G$ semplice (perché?) 
+        \item $n = p^k$ con $p$ primo $\Rightarrow$ $G$ NON semplice (perché?)
+        \item $n = pq$ con $p,q$ primi $\Rightarrow$ $G$ NON semplice (perché?)
+        \item $n = 2d$ con $d$ dispari $\Rightarrow$ $G$ NON semplice (perché?)
+    \end{itemize}
+    Vediamo ora dei casi in base a come si scompone in fattori primi $n \leq 100$. I casi a mano generalmente si trattano con Sylow. Se si mostra $n_p = 1$ per qualche primo $p  \mid  n$ allora il Sylow è normale, quindi il gruppo non è semplice. Potrebbero funzionare approcci che usino cardinalità cominciando col supporre $n_p > 1 \ \forall p  \mid  n$ per ottenere assurdi.
+    
+    Notiamo che ogni $n \le 100$ è prodotto di potenze di al più tre primi distinti, infatti $2 \cdot 3 \cdot 5 \cdot 7 = 210 > 100$.
+
+    Caso in cui $n$ è nella forma $n = p^aq^br^c$ con $p < q < r$ primi e $a, b, c \geq 1$. Allora:
+    \begin{itemize}
+        \item se $c \geq 2$ allora $n \geq 2 \cdot 3 \cdot 5^2 > 100$. Quindi $c =1$.
+        \item se $b \geq 3$ $n \geq 2 \cdot 3^3 \cdot 5 > 100$. Quindi $b = 1,2$
+        \item se $a=b=1$, $n = pqr \Rightarrow G$ NON semplice (esercizio)
+        \item se $b = 2$, allora necessariamente per $n \leq 100$ $p=2, q = 3, r = 5$ e $n = 90$ già trattato 
+        \item resta $n = p^a qr$ con $a >1$, che dà i casi $n = 60,84$. Per $n = 60$ esiste $A_5$ che è semplice. Per $n = 84$ si mostra $G$ NON semplice.
+    \end{itemize}
+    
+    Caso in cui $n$ è nella forma $n = p^aq^b$ con $p,q$ primi.
+    \begin{itemize}
+        \item i casi $a = b = 1$ sono già stati trattati.
+        \item $n = 2^a \cdot 3^b$ che possono essere trattati a mano. Un modo veloce di gestirli è notare che $n_3 = 4$ oppure $16$. 
+        \begin{itemize}
+        \item se $n_3 = 4$ l'azione di coniugio sull'insieme dei $3$-Sylow dà un'immersione di $G$ in $S_4$ (il nucleo dell'azione è normale in $G$ quindi deve essere banale se $G$ semplice), che ci dà pochi casi tutti NON semplici.
+        \item se $n_3 = 16$ abbiamo per cardinalità solo $n = 48,96$ e si potrebbero trattare a mano. Si può però notare che $n_2  \mid  3$ in entrambi i casi e quindi $n_2 = 3$ e in modo analogo a prima se $G$ fosse semplice dovremmo poterlo immergere in $S_3$, assurdo. Quindi NON sono semplice.
+    \end{itemize} 
+        \item $n = 2^kp$ con $p$ primo. Il caso $k=1$ è stato già trattato, $k = 2$ si può trattare a parte, gli altri ($n = 40,56,80,88$) vanno fatti a mano e NON sono mai semplici.
+        \item rimangono infine i casi $n = 45,63,75,99,100$, che si trattano a mano e NON sono mai semplici
+    \end{itemize}
+    
+    Gli unici gruppi semplici di ordine fino a $100$ sono quindi $A_5$ e gli $\Zp$.
+\end{proof}
+
+
+\subsection{Consigli e reminder per risolvere gli esercizi}
+\begin{itemize}
+    \item spesso vanno usati i punti precedenti;
+    \item vale la pena conoscere (bene) la struttura di $D_n$ e $S_n$;
+    \item i sottogruppi di $S_n$ in generale fanno un po' schifo. Alla richiesta di trovare sottogruppi di ordine dato in $S_n$, quasi sempre si risponde con centralizzatori o normalizzatori, eventualmente intersecati con $A_n$;
+    \item i gruppi normali sono i $\ker$ di omomorfismi, quindi di omomorfismi \textit{da} gruppi semplici ce ne sono ben pochi;
+    \item talvolta aiuta contare gli elementi di un certo ordine;
+    \item commutare/essere normale equivale a commutare con/essere normale a un insieme di generatori;
+    \item i prodotti $A \rtimes B$ sono generati da $A \times \{e\}$ e $\{e\} \times B$;
+    \item $Z_G(H) \tri N_G(H)$, inoltre $N_G(H) / Z_G(H) \hookrightarrow \Aut(H)$;
+    \item nel dubbio fai agire $G$ su $H < G$ per coniugio;
+    \item il numero $n_p$ di $p$-Sylow è l'indice in $G$ del normalizzatore di un $p$-Sylow. Segue che il numero di $p$-Sylow di un prodotto diretto è il prodotto dei numeri di $p$-Sylow;
+    \item se ho tanti $p$-Sylow, i normalizzatori sono piccoli;
+    \item il centro sta quantomeno nell'intersezione di tutti i normalizzatori, quindi se i $p$-Sylow sono tanti e i normalizzatori sono piccoli, anche il centro non è troppo grande;
+    \item qualche $p$-Sylow di solito è caratteristico;
+    \item il generato da una classe di coniugio (o da un insieme di classi di coniugio) è normale. Quindi se $G$ è semplice ogni classe di coniugio genera;
+    \item i $p$-Sylow di un sottogruppo sono tutti coniugati tramite elementi \textit{del sottogruppo}. Se $P$ è un $p$-Sylow di $G$ ed è contenuto in un sottogruppo $H$, allora $P$ è un $p$-Sylow di $H$;
+    \item l'insieme dei $p$-Sylow genera;
+    \item un'azione transitiva è isomorfa all'azione del gruppo sulle classi laterali di uno stabilizzatore;
+    \item per il teorema di Poincaré $A_n$, $S_n$ non hanno sottogruppi di indice piccolo (i.e. $3, \dots, n-1$);
+    \item per immergere gruppi in $S_n$ considera azioni il cui kernel è banale, per esempio $\GL_n(\Fp) \hookrightarrow S_{p^n - 1}$ tramite l'azione su $\Fp^n$;
+    \item un Sylow è normale sse è caratteristico. Se il normalizzatore di un Sylow avvesse indice $>1$ minimo, allora sarebbe normale in $G$, quindi il Sylow sarebbe normale in $G$: assurdo;
+    \item appena trovi un gruppo normale ha senso quozientare e usare corrispondenza.
+\end{itemize}
