@@ -1,0 +1,39 @@
+name: Compile and Release LaTeX PDF
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Compile algebra1.tex -> algebra1.pdf
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: algebra1.tex
+
+      # Step 3: Upload as an artifact for all pushes (for inspection)
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: algebra1-pdf
+          path: algebra1.pdf
+
+      # Step 4: If this push is a tag, attach the PDF to the corresponding release
+      - name: Upload compiled PDF to release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: algebra1.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
