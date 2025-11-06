@@ -586,7 +586,7 @@ A questo punto possiamo svolgere l'induzione. Per il passo base $n=1$ la tesi è
 \begin{proof}
  Per $(i)$ basta notare che $H \supseteq S \Rightarrow L^H \subseteq L^S$ segue direttamente dalla definizione, mentre sempre per definizione  $L^H \subseteq L^S \Rightarrow \Gal(L/L^H) \supseteq \Gal(L/L^S)$ e per uno dei lemmi visti a lezione $H = \Gal(L/L^H), S = \Gal(L/L^S)$. \\
 Per $(ii)$ notiamo intanto che per $(i)$ $L^H \subseteq L^{H\cap S}$ e analogamente $L^S$, quindi $L^HL^S \subseteq L^{H\cap S}$. Per corrispondenza di Galois $L^HL^S = L^N$ per $N = \Gal(L/L^HL^S)$. Ma allora $N = \Gal(L/L^H) \cap \Gal(L/L^S) = H \cap S$. Infatti si ha $\Gal(L/L^HL^S) =  \{\varphi : L \rightarrow \overline{K} : \varphi \text{ omomorfismo e } \varphi_{L^HL^S} = id\} = \{\varphi : L \rightarrow \overline{K} : \varphi \text{ omomorfismo e }\varphi_{L^H} = id, \varphi_{L^H} = id\} = \Gal(L/L^H) \cap \Gal(L/L^S)$.\\
-Per $(iii)$ come prima notiamo intanto che per $(i)$ $L^H \supseteq L^{\langle H, S \rangle}$ e analogamente $L^S$. Quindi $L^H \cap L^S \supseteq L^{\langle H, S \rangle}$. Notiamo ora che $\alpha \in L^H \cap L^S \Rightarrow \forall \ni \in H, \psi \in S, \ \ni(\alpha)=\alpha = \psi(\alpha) \Rightarrow \forall \varphi \in \langle H, S \rangle, \ \varphi(\alpha)=\alpha \Rightarrow \alpha \in L^{\langle H, S \rangle}$  quindi $L^H \cap L^S \subseteq L^{\langle H, S \rangle}$.
+Per $(iii)$ come prima notiamo intanto che per $(i)$ $L^H \supseteq L^{\langle H, S \rangle}$ e analogamente $L^S$. Quindi $L^H \cap L^S \supseteq L^{\langle H, S \rangle}$. Notiamo ora che $\alpha \in L^H \cap L^S \Rightarrow \forall \nu \in H, \psi \in S, \ \nu(\alpha)=\alpha = \psi(\alpha) \Rightarrow \forall \varphi \in \langle H, S \rangle, \ \varphi(\alpha)=\alpha \Rightarrow \alpha \in L^{\langle H, S \rangle}$  quindi $L^H \cap L^S \subseteq L^{\langle H, S \rangle}$.
 \end{proof}
 
 \begin{theorem}{estensioni con radici quadrate}
@@ -600,7 +600,7 @@ Per $(iii)$ come prima notiamo intanto che per $(i)$ $L^H \supseteq L^{\langle H
 \end{proof}
 
 \begin{theorem}{Galois di una biquadratica}
-    Siano $p(x) = x^4 + ax^2 + b \in \Q[x]$ irriducibile e $L$ il suo campo di spezzamento. Sia $\Delta = a^2 - 4b$. Allora $G = \Gal(L / Q)$ è isomorfo a:
+    Siano $p(x) = x^4 + ax^2 + b \in \Q[x]$ irriducibile e $L$ il suo campo di spezzamento. Sia $\Delta = a^2 - 4b$. Allora $G = \Gal(L / \Q)$ è isomorfo a:
     \begin{itemize}
         \item $\Z/2\Z \times \Z/2\Z$ se $b$ è un quadrato in $\Q$;
         \item $\Z/4\Z$ se $b\Delta$ è un quadrato in $\Q$;
