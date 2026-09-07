@@ -32,7 +32,7 @@ Dove non diversamente specificato, $A$ è un anello commutativo con unità con o
 \begin{definition}{elementi associati}
     Sia $A$ un dominio. $x,y \in A$ si dicono associati ``$x \sim y$'' se vale una delle seguenti condizioni equivalenti:
     \begin{enumerate}[label=(\roman*)]
-        \item $\exists u \in A^\times \ x = uv$;
+        \item $\exists u \in A^\times \ x = uy$;
         \item $x \mid y \land y \mid x$;
         \item $(x) = (y)$.
     \end{enumerate}
@@ -46,7 +46,7 @@ Dove non diversamente specificato, $A$ è un anello commutativo con unità con o
     \end{enumerate}
 \end{proposition}
 \begin{proof}
-    dimostriamo solamente (iii). $(\Rightarrow)$, dato $x$ irriducibile $\forall y \in A \ (x) \subseteq (y) \subsetneq A \Rightarrow \exists a \in A x = ya$, ma poiché $x$ irriducibile e $(y) \neq A$ necessariamente $a \in A^\times$, cioè $x \sim y$ e quindi $(x) = (y)$, cioè $(x)$ massimale tra gli ideali principali. $(\Leftarrow)$, sia $x = ab$ con $a \notin A^\times$, per massimalità $(x) = (a) \subsetneq A$, da cui $\exists c \ a = xc$. Segue $x(1 - bc) = 0$ e quindi $b \in A^\times$, cioè $x$ irriducibile.
+    dimostriamo solamente (iii). $(\Rightarrow)$, dato $x$ irriducibile $\forall y \in A \ (x) \subseteq (y) \subsetneq A \Rightarrow \exists a \in A, x = ya$, ma poiché $x$ irriducibile e $(y) \neq A$ necessariamente $a \in A^\times$, cioè $x \sim y$ e quindi $(x) = (y)$, cioè $(x)$ massimale tra gli ideali principali. $(\Leftarrow)$, sia $x = ab$ con $a \notin A^\times$, per massimalità $(x) = (a) \subsetneq A$, da cui $\exists c \ a = xc$. Segue $x(1 - bc) = 0$ e quindi $b \in A^\times$, cioè $x$ irriducibile.
 \end{proof}
 
 \subsection{Ideali e proprietà}
@@ -75,7 +75,7 @@ Gli ideali di un anello possono in un certo senso essere pensati come l'analogo 
 \begin{theorem}{di corrispondenza (per anelli)}
     Sia $I \tri A$ e $\pi_I: A \rightarrow A/I$ la proiezione. Allora $\pi_I$ induce una corrispondenza tra gli ideali di $A/I$ e gli ideali di $A$ che contengono $I$. Tale corrispondenza preserva: ordinamento per inclusione, indice, ideali primi, ideali massimali. 
 \end{theorem}\begin{proof}
-    Per il teorema di corrispondenza per gruppi (un anello è in particolare un gruppo additivo abeliano) si ha che, detti $X = \{ H \leq A : I \subseteq H\}$ e $Y = \{ \overline{H} \leq A/I\}$, la funzione $\alpha: X \rightarrow Y$ che mappa $H \overset{\alpha}{\mapsto} \pi_I(H)$ è una bigezione tra i sottogruppi additivi di $A$ e i sottogruppi additivi di $A/I$. Restringiamo ora $\alpha$ a $X' = \{ H \tri A : I \subseteq H\}$ e definiamo analogamente $Y' = \{ \overline{H} \tri A/I \}$. Sia $\tilde \alpha$ la funzione ristretta. Poiché $\pi_I$ è omomorfismo di anelli suriettivo, immagine di ideali è ideale (esercizio) e quindi $\tilde \alpha$ manda ideali in ideali. Sempre per omomorfismo, controimmagine di ideali è ideali, quindi $\tilde \alpha : X' \rightarrow Y'$ è anche suriettiva. Ma allora per iniettività $\alpha$, $\tilde \alpha$ è una bigezione. $\tilde \alpha$ Preserva indice e contenimenti perché $\alpha$ lo faceva. Questa corrispondenza preserva inoltre primalità e massimalità perché $\pi_I$ è un omomorfismo suriettivo il cui kernel ($I$) è contenuto in tutti gli elementi di $X'$.
+    Per il teorema di corrispondenza per gruppi (un anello è in particolare un gruppo additivo abeliano) si ha che, detti $X = \{ H \leq A : I \subseteq H\}$ e $Y = \{ \overline{H} \leq A/I\}$, la funzione $\alpha: X \rightarrow Y$ che mappa $H \overset{\alpha}{\mapsto} \pi_I(H)$ è una bigezione tra i sottogruppi additivi di $A$ e i sottogruppi additivi di $A/I$. Restringiamo ora $\alpha$ a $X' = \{ H \tri A : I \subseteq H\}$ e definiamo analogamente $Y' = \{ \overline{H} \tri A/I \}$. Sia $\tilde \alpha$ la funzione ristretta. Poiché $\pi_I$ è omomorfismo di anelli suriettivo, immagine di ideali è ideale (esercizio) e quindi $\tilde \alpha$ manda ideali in ideali. Sempre per omomorfismo, controimmagine di ideali è ideali, quindi $\tilde \alpha : X' \rightarrow Y'$ è anche suriettiva. Ma allora per iniettività di $\alpha$, $\tilde \alpha$ è una bigezione. $\tilde \alpha$ Preserva indice e contenimenti perché $\alpha$ lo faceva. Questa corrispondenza preserva inoltre primalità e massimalità perché $\pi_I$ è un omomorfismo suriettivo il cui kernel ($I$) è contenuto in tutti gli elementi di $X'$.
 \end{proof}
 \begin{theorem}{cinese del resto per anelli}
     Siano $I,J \tri A$ e $f: A \rightarrow A/I \times A/J$ tale che $f(a \mapsto (a+I,a+J))$. Allora $f$ è omomorfismo di anelli, $\ker(f) = I\cap J$ e $(I,J) = A \iff f$ suriettiva. 
@@ -121,7 +121,7 @@ Gli ideali di un anello possono in un certo senso essere pensati come l'analogo 
     \begin{itemize}
         \item immagine di ideale è ideale;
         \item controimmagine di ideale massimale è ideale massimale;
-        \item immagine di ideale massimale è ideale massimale.
+        \item se $M\supseteq \mathrm{Ker}(f)$ immagine di ideale massimale $M$ è ideale massimale.
     \end{itemize}
 \end{theorem}
 \begin{proof}
@@ -163,7 +163,7 @@ Si noti la monotonia del radicale $I_1 \subseteq I_2 \implies \sqrt{I_1} \subset
     $\sqrt{IJ} = \sqrt{I \cap J} = \sqrt{I} \cap \sqrt{J}$
 \end{proposition}
 \begin{proof}
-    Per monotonia $\sqrt{IJ} \subseteq \sqrt{I \cap J}$. D'altra parte, $x^n \in I \cap J \implies x^{2^n} = x^n x^n \in IJ$, dunque $\sqrt{IJ} = \sqrt{I \cap J}$. Ancora per monotonia si ha $\sqrt{IJ} \subseteq \sqrt{I} \cap \sqrt{J}$, inoltre dato $x$ tale che $x^n \in I$ e $x^m \in J$ si ha $x^{n+m} \in IJ$, quindi l'ultima uguaglianza.
+    Per monotonia $\sqrt{IJ} \subseteq \sqrt{I \cap J}$. D'altra parte, $x^n \in I \cap J \implies x^{2n} = x^n x^n \in IJ$, dunque $\sqrt{IJ} = \sqrt{I \cap J}$. Ancora per monotonia si ha $\sqrt{IJ} \subseteq \sqrt{I} \cap \sqrt{J}$, inoltre dato $x$ tale che $x^n \in I$ e $x^m \in J$ si ha $x^{n+m} \in IJ$, quindi l'ultima uguaglianza.
 \end{proof}
 \begin{proposition}{radicale di un primo}
     se $P$ è ideale primo $\sqrt{P} = P$
@@ -199,19 +199,19 @@ Si noti la monotonia del radicale $I_1 \subseteq I_2 \implies \sqrt{I_1} \subset
     si chiama localizzazione di $A$ rispetto a $S$ l'insieme $S^{-1}A := A \times S / \sim$ dove la relazione di equivalenza è definita da $(a, s) \sim (b, t) \iff \exists u \in S \ u(at - bs) = 0$. Indichiamo $(a, s) \in S^{-1}A$ con $\frac{a}{s}$. $S^{-1}A$ è un anello le cui operazioni sono definite come le operazioni sulle frazioni.
 \end{definition}
 \begin{proposition}{$A$ si immerge nella localizzazione}
-    l'immersione $f: A \hookrightarrow S^{-1}A$ data da $f(a \mapsto \frac{a}{1})$ è un omomorfismo di anelli (la verifica è immediata).
+    la mappa $f: A \hookrightarrow S^{-1}A$ data da $f(a \mapsto \frac{a}{1})$ è un omomorfismo di anelli, inoltre, se $A$ è un dominio, è iniettiva (la verifica è immediata).
 \end{proposition}
 \begin{proposition}{invertibili della localizzazione}
     $(S^{-1}A)^\times = \{ \frac{a}{s} \in S^{-1}A : \exists b \in A \ ab \in S \}$. Inoltre $\left(\frac{a}{s}\right)^{-1} = \frac{bs}{ab}$ con $b$ tale che $ab \in S$.
 \end{proposition}
 \begin{proof}
-    Un elemento $\frac{a}{s}$ della localizzazione è invertibile sse $\exists \frac{b}{t} \in S^{-1}A$ tale che $\frac{a}{s} \cdot \frac{b}{t} = \frac{ab}{st} = \frac{1}{1}$, cioè $ab = st$, che accade se e soltanto se esiste in $S$ un multiplo di $a$.
+    Un elemento $\frac{a}{s}$ della localizzazione è invertibile sse $\exists \frac{b}{t} \in S^{-1}A$ tale che $\frac{a}{s} \cdot \frac{b}{t} = \frac{ab}{st} = \frac{1}{1}$, cioè $uab = ust$, che accade se e soltanto se esiste in $S$ un multiplo di $a$.
 \end{proof}
 \begin{theorem}{ideali della localizzazione}
     gli ideali di $S^{-1}A$ sono tutti e soli gli insiemi della forma $S^{-1}I$ con $I$ ideale di $A$.
 \end{theorem}
 \begin{proof}
-    Se $I$ è un ideale di $A$ allora $S^{-1}I = \{ \frac{x}{s} : x \in I\}$ è un ideale di $S^{-1}A$. La proprietà di assorbimento di $S^{-1}I$ segue da quella di $I$ e da $S$ parte moltiplicativa. Inoltre $S^{-1}I$ è un sottogruppo additivo, infatti:
+    Se $I$ è un ideale di $A$ allora $S^{-1}I = \{ \frac{x}{s} : x \in I,s\in S\}$ è un ideale di $S^{-1}A$. La proprietà di assorbimento di $S^{-1}I$ segue da quella di $I$ e da $S$ parte moltiplicativa. Inoltre $S^{-1}I$ è un sottogruppo additivo, infatti:
     \begin{itemize}
         \item $0 \in I \Rightarrow \frac{0}{1} \in S$;
         \item $\frac{x}{s} \in S^{-1}I  \Rightarrow \frac{-x}{s} = - \frac{x}{s} \in S^{-1}I$ perché $x \in I \Rightarrow -x \in I$;
@@ -225,19 +225,19 @@ Si noti la monotonia del radicale $I_1 \subseteq I_2 \implies \sqrt{I_1} \subset
     esiste una corrispondenza biunivoca tra gli ideali primi di $S^{-1}A$ e gli ideali primi di $A$ disgiunti da $S$.
 \end{theorem}
 \begin{proof}
-    Dimostriamo innanzitutto che se $P$ è un ideale primo di $A$ disgiunto da $S$, allora $S^{-1}P$ è un ideale primo di $S^{-1}A$. Si nota intanto $S^{-1}P \neq S^{-1}A$, infatti $S^{-1}P = S^{-1}A \iff \frac{1}{1} \in S^{-1}P \iff S \cap P \neq \emptyset$. Inoltre $S^{-1}P$ è un ideale per il teorema precedente. Mostriamo che è primo: dato $\frac{x}{s} \frac{y}{t} = \frac{xy}{st} = \frac{p}{r} \in S^{-1}P$ si ha $xyr = pst \in P$ per assorbimento, dunque per primalità vale almeno una tra $x \in P$, $y \in P$ e $r \in P$. Sappiamo $r \notin P$ perché $r \in S$ e $S \cap P = \emptyset$, segue $x \in P \lor y \in P$ e quindi $\frac{x}{s} \in S^{-1}P \lor \frac{y}{t} \in S^{-1}P$.
+    Dimostriamo innanzitutto che se $P$ è un ideale primo di $A$ disgiunto da $S$, allora $S^{-1}P$ è un ideale primo di $S^{-1}A$. Si nota intanto $S^{-1}P \neq S^{-1}A$, infatti $S^{-1}P = S^{-1}A \iff \frac{1}{1} \in S^{-1}P \iff S \cap P \neq \emptyset$. Inoltre $S^{-1}P$ è un ideale per il teorema precedente. Mostriamo che è primo: dato $\frac{x}{s} \frac{y}{t} = \frac{xy}{st} = \frac{p}{r} \in S^{-1}P$ si ha $uxyr = upst \in P$ per assorbimento, dunque per primalità vale almeno una tra $x \in P$, $y \in P$ e $ur \in P$. Sappiamo $ur \notin P$ perché $ur \in S$ e $S \cap P = \emptyset$, segue $x \in P \lor y \in P$ e quindi $\frac{x}{s} \in S^{-1}P \lor \frac{y}{t} \in S^{-1}P$.
     
     Consideriamo ora l'immersione $f : A \hookrightarrow S^{-1}A$ data da $f(a \mapsto \frac{a}{1})$.
     Siano $\mathcal{P} = \{P \tri A \text{ primo} : P \cap S = \emptyset\}$ e $\mathcal{Q} = \{Q \tri S^{-1}A : Q \text{ primo}\}$.
     Consideriamo le due funzioni $\alpha: \mathcal{P} \rightarrow \mathcal{Q}$ definita da $\alpha(P \mapsto S^{-1}P)$ e $\beta: \mathcal{Q} \rightarrow \mathcal{P}$ definita da $\beta(Q \mapsto f^{-1}(Q) = Q \cap A)$. Per quanto sopra, $\alpha$ è ben definita. $\beta$ è ben definita perché la controimmagine di un ideale primo è un ideale primo e la controimmagine di ideali propri di $S^{-1}A$ ha intersezione banale con $S$.
-    $\alpha \circ \beta = id$ per quanto visto nel teorema precedente. Mostriamo anche $\beta \circ \alpha = id$, ossia $\forall P \in \mathcal{P} \ P = f^{-1}(S^{-1}P)$. Il contenimento $P \subseteq f^{-1}(S^{-1}P)$ segue da $x \in P \Rightarrow \frac{x}{1} \in S^{-1}P \Rightarrow x \in f^{-1}(S^{-1}P)$. Per quello inverso osserviamo che $x \in f^{-1}(S^{-1}P) \Rightarrow \exists s \in S \ \frac{x}{s} = \frac{p}{r} \in S^{-1}P$ con $p\in P, r \in S$, quindi $xr = ps \in P$ e, poiché $r \in S$ e $S \cap P = \emptyset$, necessariamente $x \in P$. Quindi $f^{-1}(S^{-1}P) \subseteq P$.
+    $\alpha \circ \beta = id$ per quanto visto nel teorema precedente. Mostriamo anche $\beta \circ \alpha = id$, ossia $\forall P \in \mathcal{P} \ P = f^{-1}(S^{-1}P)$. Il contenimento $P \subseteq f^{-1}(S^{-1}P)$ segue da $x \in P \Rightarrow \frac{x}{1} \in S^{-1}P \Rightarrow x \in f^{-1}(S^{-1}P)$. Per quello inverso osserviamo che $x \in f^{-1}(S^{-1}P) \Rightarrow  \ \frac{x}{1} = \frac{p}{r} \in S^{-1}P$ con $p\in P, r \in S$, quindi $uxr = up \in P$ e, poiché $r \in S$ e $S \cap P = \emptyset$, necessariamente $x \in P$. Quindi $f^{-1}(S^{-1}P) \subseteq P$.
 \end{proof}
 \begin{proposition}{ideali primi e parti moltiplicative}
     dato $P$ ideale $P$ è primo $\iff$ $A \setminus P$ è una parte moltiplicativa.
 \end{proposition}
 \begin{proof}
     Sia $S = A \setminus P$. Da $0 \in P$ e $1 \notin P$ seguono $0 \notin S$ e $1 \in S$.
-    $P$ è primo $\iff \forall x,y \in A \ (xy \in P \Rightarrow x \in P$ o $y \in P) \iff \forall x,y \in A \ (x \not \in P \text{ e } y \not \in P \Rightarrow xy \not \in P) \iff \forall x,y \in A \ (x \in S \text{ e } y \in S \Rightarrow xy \in S) \iff \forall x,y \in A \ (x \in S \text{ e } y \in S \Rightarrow xy \in S) \iff S$ è un semigruppo moltiplicativo, quindi sse $S$ è una parte moltiplicativa. 
+    $P$ è primo $\iff \forall x,y \in A \ (xy \in P \Rightarrow x \in P$ o $y \in P) \iff \forall x,y \in A \ (x \not \in P \text{ e } y \not \in P \Rightarrow xy \not \in P) \iff \forall x,y \in A \ (x \in S \text{ e } y \in S \Rightarrow xy \in S) \iff S$ è un semigruppo moltiplicativo, quindi sse $S$ è una parte moltiplicativa. 
 \end{proof}
 \begin{definition}{localizzazione}
     se $P$ è un ideale primo, $S = A \setminus P$ allora $A_P = S^{-1}A$ è detto il localizzato di $A$ a $P$; $A_P$ è un anello locale, ossia ha un solo ideale massimale.
@@ -292,12 +292,12 @@ Si noti la monotonia del radicale $I_1 \subseteq I_2 \implies \sqrt{I_1} \subset
     Per $PID \Rightarrow UFD$ usiamo la caratterizzazione degli $UFD$ vista prima. 
     \begin{itemize}
         \item[$(i)$] Sia $x$ irriducibile, allora $(x)$ massimale nella classe degli ideali principali di $A$ PID, dunque massimale, quindi $x$ primo.
-        \item[$(ii)$] Sia $(a_1) \subseteq (a_2) \subseteq \dots$ una catena ascendente di ideali. Allora $I = \bigcup_{ns \in \N} a_n$ è un ideale. Poiché $A$ è PID, è principale $I = (x)$ con $x \in A$. Poiché $x$ appartiene all'unione degli $(a_n)$ esiste un $n_0$ per cui $x \in (a_{n_0})$. Ma allora $(x) \subseteq (a_{n_0}) \subseteq (x) \Rightarrow (a_{n_0}) = (x)$ e quindi la catena è stazionaria da $n_0$ in poi, infatti $\forall n \ge n_0 \ (x) = (a_{n_0}) \subseteq (a_n) \subseteq (x)$.
+        \item[$(ii)$] Sia $(a_1) \subseteq (a_2) \subseteq \dots$ una catena ascendente di ideali. Allora $I = \bigcup_{n \in \N} (a_n)$ è un ideale. Poiché $A$ è PID, è principale $I = (x)$ con $x \in A$. Poiché $x$ appartiene all'unione degli $(a_n)$ esiste un $n_0$ per cui $x \in (a_{n_0})$. Ma allora $(x) \subseteq (a_{n_0}) \subseteq (x) \Rightarrow (a_{n_0}) = (x)$ e quindi la catena è stazionaria da $n_0$ in poi, infatti $\forall n \ge n_0 \ (x) = (a_{n_0}) \subseteq (a_n) \subseteq (x)$.
     \end{itemize}
     Per $ED \Rightarrow PID$ consideriamo un generico ideale $I$ di $A$ e dimostriamo che è generato da un qualsiasi suo elemento di grado minimo in $I$, sia esso $x$. Dato $y \in I$, per divisione euclidea esistono $q,r \in A$ tali che $y = qx+r$ con $r = 0 \lor d(r) < d(x)$, ma $r = y-qx \in I$ non può avere grado minore di $x$, dunque $r = 0$, ossia $y \in (x)$. Quindi $I \subseteq (x) \subseteq I$, cioè $I = (x)$.
 \end{proof}
 \begin{definition}{massimo comune divisore}
-    Siano $a, b \in A$ non entrambi nulli. Un elemento $d \in A$ si dice ``massimo comune divisore'' $MCD(a, b)$ di $a$ e $b$ se per ogni $c$ vale l'implicazione $c \mid a \land c \mid b \implies c \mid d$. Si noti che l'MCD è definito a meno di associati.
+    Siano $a, b \in A$ non entrambi nulli. Un elemento $d \in A$ si dice ``massimo comune divisore'' $MCD(a, b)$ di $a$ e $b$ se per ogni $c$ vale l'implicazione $c \mid a \land c \mid b \iff c \mid d$. Si noti che l'MCD è definito a meno di associati.
 
     Altre formulazioni equivalenti si adattano alla struttura con cui stiamo lavorando, si dimostra che sono tutte consistenti.
     \begin{itemize}
@@ -308,9 +308,9 @@ Si noti la monotonia del radicale $I_1 \subseteq I_2 \implies \sqrt{I_1} \subset
 \end{definition}
 \begin{proof}
     \underline{sono consistenti.} 
-    Sia $A$ PID; per quanto visto prima $A$ è anche UFD. Consideriamo $d = MCD(a,b)$ secondo la definizione negli UFD. Dobbiamo dimostrare che vale anche $(d) = (a,b)$ e quindi $d$ coincide con quello trovato dalla definizione per i PID. Guardiamo la fattorizzazione degli elementi in $(a,b) = \{ax+by : x,y \in A\}$. Possiamo sicuramente isolare dai due addendi $\prod_{i=1}^s p_i^{\min\{\alpha_i,\beta_i\}}$, da cui segue che $(a,b) \subseteq (d)$. Per l'altro contenimento, osserviamo che $A$ PID $\Rightarrow \exists d' \in A \ (a,b) = (d') \subseteq (d) \Rightarrow d' \mid \prod_{i=1}^s p_i^{\min\{\alpha_i,\beta_i\}}$. Se però almeno uno degli esponenti fosse più piccolo, diciamo quello di $p_1$ avrei un assurdo perché esisterebbero $x,y \in A$ $d' = ax+by$ e basta allora guardare l'equazione modulo $p_1^{\min\{\alpha_1,\beta_1\}}$. Quindi $d' = d$.
+    Sia $A$ PID; per quanto visto prima $A$ è anche UFD. Consideriamo $d = MCD(a,b)$ secondo la definizione negli UFD. Dobbiamo dimostrare che vale anche $(d) = (a,b)$ e quindi $d$ coincide con quello trovato dalla definizione per i PID. Guardiamo la fattorizzazione degli elementi in $(a,b) = \{ax+by : x,y \in A\}$. Possiamo sicuramente isolare dai due addendi $\prod_{i=1}^s p_i^{\min\{\alpha_i,\beta_i\}}$, da cui segue che $(a,b) \subseteq (d)$. Per l'altro contenimento, osserviamo che $A$ PID $\Rightarrow \exists d' \in A \ (a,b) = (d') \subseteq (d) \Rightarrow \prod_{i=1}^s p_i^{\min\{\alpha_i,\beta_i\}}\mid d'$. Se però almeno uno degli esponenti fosse più grande, diciamo quello di $p_1$ avrei un assurdo perché, supponendo senza perdità di generalità $\alpha_i\leq \beta_i$, $p_1^{\min(\alpha_1,\beta_1)+1}\mid d'\mid a$ che è assurdo.
     
-    Sia ora $A$ ED; per quanto visto prima $A$ è anche PID. Sia $d$ tale che $(d) = (a,b)$. Se l'algoritmo di Euclide termina subito (cioè se $a = qb$), allora è chiaro $(b) = (a, b) = (d)$. Se invece $a = qb + r$ con $r \neq 0$, induciamo sul numero di passi dell'algoritmo. Per ogni $x$ vale $(x \mid b \land x \mid r) \iff (x \mid b \land x \mid a)$. Sia allora $\tilde d$ l'elemento trovato dall'algoritmo applicato a $b$ e $r$, per ipotesi induttiva $(\tilde d) = (b, r)$. Allora $\tilde d \mid a \land \tilde d \mid b$, da cui $\tilde d \mid d$, ma anche $d \mid b \land d \mid r$, da cui $d \mid \tilde d$, dunque $(d) = (\tilde d)$.
+    Sia ora $A$ ED; per quanto visto prima $A$ è anche PID. Sia $d$ tale che $(d) = (a,b)$. Induciamo sul numero di passi dell'algoritmo di Euclide. Se l'algoritmo termina subito (cioè se $a = qb$), allora è chiaro $(b) = (a, b) = (d)$. Se invece $a = qb + r$ con $r \neq 0$ sia $\tilde d$ l'elemento trovato dall'algoritmo applicato a $b$ e $r$, per ipotesi induttiva $(\tilde d) = (b, r)$. Per ogni $x$ vale $(x \mid b \land x \mid r) \iff (x \mid b \land x \mid a)$. Allora $\tilde d \mid a \land \tilde d \mid b$, da cui $\tilde d \mid d$, ma anche $d \mid b \land d \mid r$, da cui $d \mid \tilde d$, dunque $(d) = (\tilde d)$.
 \end{proof}
 \begin{theorem}{Bezout} 
     Dato $A$ PID $\forall a,b \in A \ \exists x,y \in A$ tali che $ax + by = MCD(a,b)$.
@@ -330,7 +330,7 @@ Si noti la monotonia del radicale $I_1 \subseteq I_2 \implies \sqrt{I_1} \subset
 \end{example2}
 
 \begin{proposition}{(*) MCD ed estensioni}
-    Siano $A \subset B$ due UFD e $(a, b) \in A$. Indichiamo con $d_A = MCD_A(a, b)$ il massimo comun divisore di $a$ e $b$ su $A$, con $d_B$ quello su $B$. Vale sempre $d_B \mid_B d_A$. Se inoltre su $A$ o su $B$ vale Bezout, allora anche $d_A \mid_B d_B$, ma l'ultima divisibilità è falsa in generale.
+    Siano $A \subset B$ due UFD e $(a, b) \in A$. Indichiamo con $d_A = MCD_A(a, b)$ il massimo comun divisore di $a$ e $b$ su $A$, con $d_B$ quello su $B$. Vale sempre $d_A \mid_B d_B$. Se inoltre su $A$ vale Bezout, allora anche $d_B \mid_B d_A$, ma l'ultima divisibilità è falsa in generale.
 \end{proposition}
 \begin{proof}
     Siano $a = d_A x$ e $b = d_A y$ con $x, y \in A$. Allora $MCD_B(a, b) = MCD_B(d_A x, d_A y) = d_A MCD_B(x, y)$, che è multiplo di $d_A$. Se in $A$ vale Bezout, esistono $\alpha, \beta \in A \ \alpha a + \beta b = d_A$. Da $d_B \mid_B a, b$ allora segue anche $d_B \mid_B d_A$, cioè $d_B$ e $d_A$ sono associati in $B$.
@@ -360,9 +360,9 @@ Si noti la monotonia del radicale $I_1 \subseteq I_2 \implies \sqrt{I_1} \subset
     
     \textbf{Lemma}: $\sqrt{(0)}[x] \subseteq \sqrt{(0)[x]}$
     \begin{proof}
-        sia $f(x) \in \sqrt{(0)}[x]$. Poiché $f(x)$ ha finiti coefficienti tutti nilpotenti, esiste un esponente $M$ tale che tutti i coefficienti elevati a quel numero diano $0$. Allora sviluppando con il multinomio di Newton si ha che $f(x)$ elevato alla $\text{deg}(f)M$ fa il polinomio nullo, da cui segue $f(x) \in \sqrt{(0)[x]}$. 
+        sia $f(x) \in \sqrt{(0)}[x]$. Poiché $f(x)$ ha finiti coefficienti tutti nilpotenti, esiste un esponente $M$ tale che tutti i coefficienti elevati a quel numero diano $0$. Allora sviluppando con il multinomio di Newton si ha che $f(x)$ elevato alla $(\text{deg}(f)+1)M$ fa il polinomio nullo, da cui segue $f(x) \in \sqrt{(0)[x]}$. 
     \end{proof}
-    Sia $f(x) = \sum_{i= 0}^n a_ix^i \in A[x] $ tale che $a_0 \in A^\times, \ a_1,\dots,a_n \in \sqrt{(0)}$. Allora $f(x) = a_0 - xg(x)$ dove $g(x) \in \sqrt{(0)}[x] \subseteq \sqrt{(0)[x]}$. Quindi esiste un esponente $M \in \N$ tale che $g(x)^M = 0$. Scegliamo senza perdita di generalità $M$ dispari (se un esponente funziona, chiaramente funzionano tutti quelli maggiori o uguli a lui). Sia $h(x) = a_0^{-1}xg(x)$. Chiaramente anche $h(x)^M = 0$ Da $1 = 1- h(x)^M = (1-h(x))(1+h(x)+ \dots + h(x)^{M-1})$ segue che $f(x)a_0^{-1}(1+h(x)+ \dots + h(x)^{M-1}) = (a_0 +a_0h(x))a_0^{-1}(1+h(x)+ \dots + h(x)^{M-1})=(1+h(x))(1+h(x)+ \dots + h(x)^{M-1})=1$ e quindi $f(x)$ è invertibile. Ciò dimostra $A[x]^\times \supseteq \{f(x) = \sum_{i= 0}^n a_ix^i \in A[x] : a_0 \in A^\times, \ a_1,\dots,a_n \in \sqrt{(0)}$.
+    Sia $f(x) = \sum_{i= 0}^n a_ix^i \in A[x] $ tale che $a_0 \in A^\times, \ a_1,\dots,a_n \in \sqrt{(0)}$. Allora $f(x) = a_0 - xg(x)$ dove $g(x) \in \sqrt{(0)}[x] \subseteq \sqrt{(0)[x]}$. Quindi esiste un esponente $M \in \N$ tale che $g(x)^M = 0$. Scegliamo senza perdita di generalità $M$ dispari (se un esponente funziona, chiaramente funzionano tutti quelli maggiori o uguli a lui). Sia $h(x) = a_0^{-1}xg(x)$. Chiaramente anche $h(x)^M = 0$ Da $1 = 1- h(x)^M = (1-h(x))(1+h(x)+ \dots + h(x)^{M-1})$ segue che $f(x)a_0^{-1}(1+h(x)+ \dots + h(x)^{M-1}) = (a_0 -a_0h(x))a_0^{-1}(1+h(x)+ \dots + h(x)^{M-1})=(1-h(x))(1+h(x)+ \dots + h(x)^{M-1})=1$ e quindi $f(x)$ è invertibile. Ciò dimostra $A[x]^\times \supseteq \{f(x) = \sum_{i= 0}^n a_ix^i \in A[x] : a_0 \in A^\times, \ a_1,\dots,a_n \in \sqrt{(0)}$.
     
 	Per l'altro contenimento consideriamo $r$ tale che $f(x)r(x) = 1$. Allora $f(0)r(0) = 1$ e quindi $a_0 \in A^\times$. Prendiamo ora un qualsiasi ideale primo $P$ di $A$.  $P[x]$ è primo per il lemma precedente e $\frac{A[x]}{P[x]} \cong \frac{A}{P}[x]$. Consideriamo l'uguaglianza $f(x)r(x) = 1$ in $\frac{A}{P}[x]$. Poichè quest'ultimo è un dominio, si ha che $\overline f(x) \overline r(x) = \overline 1 \Rightarrow \overline f(x) \in (\frac{A}{P}[x])^\times \Rightarrow \overline f(x) \in (\frac{A}{P})^\times$ e quindi $\overline f(x)$ è una costante. Da ciò segue che tutti i coefficienti diversi da $a_0$ sono in $P$, ossia $f(x) - a_0 \in P[x]$. Ma allora $f(x) - a_0 \in \bigcap_{P \tri A \text{ primo}} P[x] = \sqrt{(0)}[x]$. Da ciò segue $A[x]^\times \subseteq \{f(x) = \sum_{i= 0}^n a_ix^i \in A[x] : a_0 \in A^\times, \ a_1,\dots,a_n \in \sqrt{(0)} \}$.
 \end{proof}
@@ -390,7 +390,7 @@ Si noti la monotonia del radicale $I_1 \subseteq I_2 \implies \sqrt{I_1} \subset
     Sia $A$ UFD, $K$ il suo campo dei quozienti, $f \in A[x]$ e $g,h \in K[x]$ tali che $f(x) = g(x)h(x)$. Allora $\exists g_1, h_1 \in A[x]$ con $\text{deg}(g_1) = \text{deg}(g)$, $\text{deg}(h_1) = \text{deg}(h)$, e $f(x) = g_1(x)h_1(x)$.
 \end{corollary}
 \begin{proof}
-    Come prima siano $a,b\in A, g_0,h_0 \in A[x]$ tali che $ag(x) = g_0(x)$. Sia $g_0(x) = c(g_0)g_1(x)$ con $g_1(x)$ primitivo. Allora $g_1(x) \mid f(x)$  in $K[x]$ e siamo nelle ipotesi del corollario 1, e quindi $g_1(x) \mid f(x)  in A[x]$. Da $af(x) = ag(x)h(x) = c(g_0)g_1(x)h(x)$ segue che allora possiamo definire $h_1(x) := a^{-1}c(g_0)h(x) \in A[x]$ e abbiamo la tesi.
+    Come prima siano $a\in A, g_0 \in A[x]$ tali che $ag(x) = g_0(x)$. Sia $g_0(x) = c(g_0)g_1(x)$ con $g_1(x)$ primitivo. Allora $g_1(x) \mid f(x)$  in $K[x]$ e siamo nelle ipotesi del corollario 1, e quindi $g_1(x) \mid f(x) \in A[x]$. Da $af(x) = ag(x)h(x) = c(g_0)g_1(x)h(x)$ segue che allora possiamo definire $h_1(x) := a^{-1}c(g_0)h(x) \in A[x]$ e abbiamo la tesi.
 \end{proof}
 \begin{theorem}{equivalenza interessante}
     $A$ campo $\iff A[x]$ PID.
@@ -408,7 +408,7 @@ Si noti la monotonia del radicale $I_1 \subseteq I_2 \implies \sqrt{I_1} \subset
     Chiaramente $f(x) = g(x)h(x)$ con $g(x)h(x) \in A[x]$ $\Rightarrow \text{deg}(g),\text{deg}(h) \leq \text{deg}(f)$.
     Quindi se $\text{deg}(f) = 0$ per forza se si fattorizza $f$ in $A[x]$ la fattorizzazione deve contenere solo costanti, ossia elementi di $A$, e quindi è irriducibile se e solo se è irriducibile in $A$.
     
-    Se invece $\text{deg}(f) \geq 1$ distinguiamo i casi. Se $c(f) \neq 1$ allora $f(x) = c(f)f_1(x)$ con $f_1(x)$ primitivo non costante. Nessuno dei due termini è invertibile e quindi $f$ non è irriducibile. Se invece $c(f) = 1$ notiamo intanto che $f$ irriducibile in $K[x] \Rightarrow f(x)$ irriducibile in $A[x]$ (una fattorizzazione in $A[x]$ è valida anche in $K[x]$). Dimostriamo ora che irriducibile in $A[x] \Rightarrow$ irriducibile in $K[x]$. Se $f$ riducibile in $K[x]$ esistono $g,h \in K[x]$ tali che $\ \leq \text{deg}(g)\text{deg}(h) < \text{deg}(f)$ e $f = gh$ e quindi , per il secondo corollario del lemma di Gauss esisterebbero $g_1,h_1 \in A[x]$ tali che $\text{deg}(g_1) = \text{deg}(g)$, $\text{deg}(h_1) = \text{deg}(h)$, e $f(x) = g_1(x)h_1(x)$, da cui $f$ è riducibile anche in $A[x]$. Quindi se $f$ è un polinomio primitivo non costante, è irriducibile in $A[x]$ se e solo se lo è in $K[x]$. 
+    Se invece $\text{deg}(f) \geq 1$ distinguiamo i casi. Se $c(f) \neq 1$ allora $f(x) = c(f)f_1(x)$ con $f_1(x)$ primitivo non costante. Nessuno dei due termini è invertibile e quindi $f$ non è irriducibile. Se invece $c(f) = 1$ notiamo intanto che $f$ irriducibile in $K[x] \Rightarrow f(x)$ irriducibile in $A[x]$ (una fattorizzazione in $A[x]$ è valida anche in $K[x]$). Dimostriamo ora che irriducibile in $A[x] \Rightarrow$ irriducibile in $K[x]$. Se $f$ riducibile in $K[x]$ esistono $g,h \in K[x]$ tali che $1 \leq \text{deg}(g)\text{deg}(h) < \text{deg}(f)$ e $f = gh$ e quindi , per il secondo corollario del lemma di Gauss esisterebbero $g_1,h_1 \in A[x]$ tali che $\text{deg}(g_1) = \text{deg}(g)$, $\text{deg}(h_1) = \text{deg}(h)$, e $f(x) = g_1(x)h_1(x)$, da cui $f$ è riducibile anche in $A[x]$. Quindi se $f$ è un polinomio primitivo non costante, è irriducibile in $A[x]$ se e solo se lo è in $K[x]$. 
 \end{proof}
 \begin{theorem}{polinomi UFD}
     $A$ UFD $\Rightarrow A[x]$ UFD.
@@ -432,7 +432,7 @@ Si noti la monotonia del radicale $I_1 \subseteq I_2 \implies \sqrt{I_1} \subset
 \begin{proof}
     Sia $M \subseteq \Z[x]$ un ideale massimale. Notiamo che massimale $\Rightarrow$ primo quindi caratterizziamo prima gli ideali primi, poi vediamo se possono essere massimali. Consideriamo l'immersione $\iota: \Z \rightarrow \Z[x]$. $\iota$ è un omomorfismo, quindi controimmagine di ideale primo è ideale primo: $\iota^{-1}(M) = M \cap \Z \subseteq \Z$ è ideale primo. Poiché $\Z$ è PID, gli ideali primi sono $(0)$ e i massimali, dove i massimali sono della forma $(p)$ con $p$ primo. Distinguiamo i casi.
     \begin{itemize}
-        \item $M\cap \Z = (p)$: proiettiamo $M$ in $ \Fp [x]$ (usiamo che $\frac{\Z[x]}{(p)[x]} \cong \frac{\Z}{(p)}[x] = \Zp[x] = \Fp[x]$). Poiché la proiezione, che indichiamo con $\pi_p$, è un omomorfismo suriettivo, immagine di ideale primo è ideale primo. $\Fp [x]$ è PID, dunque vale una tra $\pi(M) = (0)$ e $\pi_p(M) = (\overline{\mu(x)}) $ con $\mu(x)$ irriducibile in $\Fp[x]$. Nel primo caso l'ideale è primo ma non massimale perché contenuto certamente in un ideale del secondo tipo, per esempio $(\overline{x})$. Nel secondo caso invece $M = \pi_p^{-1}(\pi_p(M)) = \pi_p^{-1}((\overline{\mu(x)})) = \mu[x] + \ker(\pi_p) = \mu[x]+(p) = (p,\mu(x))$. 
+        \item $M\cap \Z = (p)$: proiettiamo $M$ in $ \Fp [x]$ (usiamo che $\frac{\Z[x]}{(p)[x]} \cong \frac{\Z}{(p)}[x] = \Zp[x] = \Fp[x]$). Poiché la proiezione, che indichiamo con $\pi_p$, è un omomorfismo suriettivo, immagine di ideale primo è ideale primo. $\Fp [x]$ è PID, dunque vale una tra $\pi_p(M) = (0)$ e $\pi_p(M) = (\overline{\mu(x)}) $ con $\mu(x)$ irriducibile in $\Fp[x]$. Nel primo caso l'ideale è primo ma non massimale perché contenuto certamente in un ideale del secondo tipo, per esempio $(\overline{x})$. Nel secondo caso invece $M = \pi_p^{-1}(\pi_p(M)) = \pi_p^{-1}((\overline{\mu(x)})) = \mu[x] + \ker(\pi_p) = \mu[x]+(p) = (p,\mu(x))$. 
         \item $M\cap \Z = (0)$: prendiamo il campo dei quozienti di $\Z$, $\Q$. Dalla teoria sappiamo che $M$ ideale primo in $\Z[x]$ corrisponde a $S^{-1}M$ ideale primo in $\Q[x]$, dove $S=\Z\setminus \{0\}$. Quindi, poiché $\Q[x]$ è PID, $S^{-1}M = (\lambda(x))$ con $\lambda(x) \in \Q[x]$ irriducibile. Notiamo ora che per il lemma di Gauss $\forall p(x) \in \Z[x]$ primitivo si ha (indichiamo $(p(x))A[x]$ l'ideale generato da $p(x)$ in $A[x]$) $((p(x))\Q[x]) \cap \Z[x] = (p(x))\Z[x]$. Il lemma di Gauss ci dice infatti che se un polinomio a coefficienti interi è divisibile in $\Q$ per $p$, allora lo è anche in $\Z$: l'equazione riflette insiemisticamente questo enunciato.
         Scegliendo allora un rappresentante a coefficienti interi e primitivo $\lambda(x)$ si ha $M = ((\lambda(x))\Q[x]) \cap \Z[x] = (\lambda(x))\Z[x]$. Dimostriamo ora che gli ideali di questa forma non sono massimali. Sia $p$ un primo che non divide il coefficiente direttore di $\lambda(x)$. Allora $(\lambda(x)) \subsetneq (p, \lambda(x)) \subsetneq \Z[x]$, infatti $p \notin (\lambda(x))$ e $\frac{\Z[x]}{(p, \lambda(x))} \cong \frac{\Fp[x]}{(\overline{\lambda(x)})}$ non è l'anello banale poiché $\deg \overline{\lambda(x)} = \deg \lambda(x) > 0$. Dunque $(\lambda(x))$ non è massimale.
         % $(\lambda(x))$ è massimale $\iff \frac{\Z[x]}{(\lambda(x))}$ è campo. Poiché $\lambda(x)$ deve essere non costante, esiste un valore $x_0$ tale che $\lambda(x_0)\neq 0,\pm 1$. Esiste allora $q$ un primo che divide $x_0$. Se $\frac{\Z[x]}{(\lambda(x))}$ campo, allora esisterebbero $a(x),b(x) \in \Z[x]$ tali che $qa(x) + \lambda(x) b(x) = 1$. Ma valutando questa relazione in $x = x_0$ si avrebbe allora un assurdo guardando la divisibilità per $q$. 
@@ -470,7 +470,7 @@ Si noti la monotonia del radicale $I_1 \subseteq I_2 \implies \sqrt{I_1} \subset
 \begin{solution}
     Dato un generico $f \in \Q[x, y]$ si ha $f(x, y) = \sum_k a_k x^{\alpha_k}y^{\beta_k} = \sum_k x^{\alpha_k} (x - (x - y))^{\beta_k} = f(x, x) + r(x, y)$ con $r \in (x - y)$. Consideriamo l'omomorfismo di anelli $\varphi : \Q[x, y] \to \Q[x]$ dato da $\varphi(f(x, y) \mapsto f(x, x))$, si verifica $\ker(\varphi) = (x - y)$, inoltre $\varphi$ è chiaramente surgettivo. Per il primo teorema di omomorfismo allora $\Q[x, y]/(x - y) \cong \Q[x]$. Dunque anche
     \[
-        \frac{\Q[x, y]}{(x - y, x^3 + y^3 - x)} = \frac{\Q[x, y]}{(x - y, 2x^3 - x)} \cong \frac{\Q[x, y]/(x - y)}{(x - y, 2x^3 - x)/(x - y)} \cong \frac{\Q[x]}{(x(2x^2 - 1)}
+        \frac{\Q[x, y]}{(x - y, x^3 + y^3 - x)} = \frac{\Q[x, y]}{(x - y, 2x^3 - x)} \cong \frac{\Q[x, y]/(x - y)}{(x - y, 2x^3 - x)/(x - y)} \cong \frac{\Q[x]}{(x(2x^2 - 1))}
     \]
     per il secondo teorema di omomorfismo. $(x)$ e $(2x^2 - 1)$ sono ideali coprimi di $\Q[x]$, dunque $(x) \cap (2x^2 - 1) = (x(2x^2 - 1))$, per il teorema cinese del resto e il primo teorema di omomorfismo allora $\Q[x]/(x(2x^2 - 1)) \cong \Q[x]/(x) \times \Q[x]/(2x^2 - 1) \cong \Q \times \Q[x]/(2x^2 - 1)$, che sono due campi poiché $2x^2 - 1$ è irriducibile in $\Q[x]$.
 \end{solution}
